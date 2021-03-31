@@ -3,44 +3,44 @@ package Logic;
 
 public class Ticket {
 
-  private String id;
-  private String scolum;
-  private String srow;
-  private String purchaseid;
+  private int id;
+  private int scolum;
+  private int srow;
+  private int purchaseid;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
 
-  public String getScolum() {
+  public int getScolum() {
     return scolum;
   }
 
-  public void setScolum(String scolum) {
+  public void setScolum(int scolum) {
     this.scolum = scolum;
   }
 
 
-  public String getSrow() {
+  public int getSrow() {
     return srow;
   }
 
-  public void setSrow(String srow) {
+  public void setSrow(int srow) {
     this.srow = srow;
   }
 
 
-  public String getPurchaseid() {
+  public int getPurchaseid() {
     return purchaseid;
   }
 
-  public void setPurchaseid(String purchaseid) {
+  public void setPurchaseid(int purchaseid) {
     this.purchaseid = purchaseid;
   }
 

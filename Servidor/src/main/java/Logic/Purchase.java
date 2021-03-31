@@ -3,26 +3,26 @@ package Logic;
 
 public class Purchase {
 
-  private String id;
-  private String flightid;
+  private int id;
+  private int flightid;
   private String userid;
   private double totalprice;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
 
-  public String getFlightid() {
+  public int getFlightid() {
     return flightid;
   }
 
-  public void setFlightid(String flightid) {
+  public void setFlightid(int flightid) {
     this.flightid = flightid;
   }
 

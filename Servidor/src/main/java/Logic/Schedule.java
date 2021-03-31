@@ -3,36 +3,36 @@ package Logic;
 
 public class Schedule {
 
-  private String id;
-  private String planeid;
-  private String routeid;
+  private int id;
+  private int planeid;
+  private int routeid;
   private java.sql.Date stime;
   private java.sql.Date sdate;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
 
-  public String getPlaneid() {
+  public int getPlaneid() {
     return planeid;
   }
 
-  public void setPlaneid(String planeid) {
+  public void setPlaneid(int planeid) {
     this.planeid = planeid;
   }
 
 
-  public String getRouteid() {
+  public int getRouteid() {
     return routeid;
   }
 
-  public void setRouteid(String routeid) {
+  public void setRouteid(int routeid) {
     this.routeid = routeid;
   }
 

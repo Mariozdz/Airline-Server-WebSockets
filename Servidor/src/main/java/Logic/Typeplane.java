@@ -3,18 +3,18 @@ package Logic;
 
 public class Typeplane {
 
-  private String id;
+  private int id;
   private String model;
   private String brand;
-  private String numberrow;
-  private String numbercolums;
+  private int numberrow;
+  private int numbercolums;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -37,20 +37,20 @@ public class Typeplane {
   }
 
 
-  public String getNumberrow() {
+  public int getNumberrow() {
     return numberrow;
   }
 
-  public void setNumberrow(String numberrow) {
+  public void setNumberrow(int numberrow) {
     this.numberrow = numberrow;
   }
 
 
-  public String getNumbercolums() {
+  public int getNumbercolums() {
     return numbercolums;
   }
 
-  public void setNumbercolums(String numbercolums) {
+  public void setNumbercolums(int numbercolums) {
     this.numbercolums = numbercolums;
   }
 

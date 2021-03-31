@@ -4,7 +4,7 @@ package Logic;
 public class Plane {
 
   private String id;
-  private String typeplaneid;
+  private int typeplaneid;
 
 
   public String getId() {
@@ -16,11 +16,11 @@ public class Plane {
   }
 
 
-  public String getTypeplaneid() {
+  public int getTypeplaneid() {
     return typeplaneid;
   }
 
-  public void setTypeplaneid(String typeplaneid) {
+  public void setTypeplaneid(int typeplaneid) {
     this.typeplaneid = typeplaneid;
   }
 

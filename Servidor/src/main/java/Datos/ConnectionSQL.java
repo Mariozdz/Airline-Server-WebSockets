@@ -37,6 +37,4 @@ public class ConnectionSQL {
         if (instance == null) instance = new ConnectionSQL();
         return instance;
     }
-
-    /*jdbc:sqlserver://aerolineadbserver.database.windows.net:1433;database=Aerolinea;user=Brario@aerolineadbserver;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;*/
 }

@@ -3,46 +3,46 @@ package Logic;
 
 public class Route {
 
-  private String id;
-  private String duration;
-  private double origen;
-  private double destino;
+  private int id;
+  private int duration;
+  private int origenId;
+  private int destinoId;
   private double price;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
 
-  public String getDuration() {
+  public int getDuration() {
     return duration;
   }
 
-  public void setDuration(String duration) {
+  public void setDuration(int duration) {
     this.duration = duration;
   }
 
 
-  public double getOrigen() {
-    return origen;
+  public int getOrigen() {
+    return origenId;
   }
 
-  public void setOrigen(double origen) {
-    this.origen = origen;
+  public void setOrigen(int origen) {
+    this.origenId = origen;
   }
 
 
-  public double getDestino() {
-    return destino;
+  public int getDestino() {
+    return destinoId;
   }
 
-  public void setDestino(double destino) {
-    this.destino = destino;
+  public void setDestino(int destino) {
+    this.destinoId = destino;
   }
 
 

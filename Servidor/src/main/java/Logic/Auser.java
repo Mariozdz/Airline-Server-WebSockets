@@ -7,7 +7,8 @@ public class Auser {
   private String password;
   private String name;
   private String surnames;
-  private String address;
+  private double latitud;
+  private double longitud;
   private String cellphone;
 
 
@@ -47,14 +48,21 @@ public class Auser {
   }
 
 
-  public String getAddress() {
-    return address;
+  public Double getLatitud() {
+    return latitud;
   }
 
-  public void setAddress(String address) {
-    this.address = address;
+  public void setLatitud(Double latitud) {
+    this.latitud = latitud;
   }
 
+  public Double getLongitud() {
+    return longitud;
+  }
+
+  public void setLongitud(Double address) {
+    this.longitud = address;
+  }
 
   public String getCellphone() {
     return cellphone;

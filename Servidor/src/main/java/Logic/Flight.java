@@ -3,34 +3,34 @@ package Logic;
 
 public class Flight {
 
-  private String id;
-  private String leave;
-  private String arrive;
+  private int id;
+  private int leave;
+  private int arrive;
 
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
 
-  public String getLeave() {
+  public int getLeave() {
     return leave;
   }
 
-  public void setLeave(String leave) {
+  public void setLeave(int leave) {
     this.leave = leave;
   }
 
 
-  public String getArrive() {
+  public int getArrive() {
     return arrive;
   }
 
-  public void setArrive(String arrive) {
+  public void setArrive(int arrive) {
     this.arrive = arrive;
   }
 
