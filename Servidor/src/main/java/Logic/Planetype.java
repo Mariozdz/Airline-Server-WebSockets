@@ -1,7 +1,7 @@
 package Logic;
 
 
-public class Typeplane {
+public class Planetype {
 
   private int id;
   private String model;

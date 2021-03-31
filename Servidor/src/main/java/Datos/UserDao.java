@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao extends InterfaceDao<Auser,Integer> {
+public class UserDao extends InterfaceDao<Auser,String> {
 
 
     public UserDao()
@@ -54,10 +54,10 @@ public class UserDao extends InterfaceDao<Auser,Integer> {
     }
 
     @Override
-    public void delete(Integer id) throws Throwable {
+    public void delete(String id) throws Throwable {
         String sp = "{CALL prc_delete_user(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.setString(1, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to delete the user.");
@@ -65,10 +65,10 @@ public class UserDao extends InterfaceDao<Auser,Integer> {
     }
 
     @Override
-    public Auser get(Integer id) throws Throwable {
+    public Auser get(String id) throws Throwable {
         String sp = "{CALL fn_getone_user(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.setString(1, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the user.");

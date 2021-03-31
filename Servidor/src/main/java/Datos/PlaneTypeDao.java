@@ -1,7 +1,6 @@
 package Datos;
 
-import Logic.Country;
-import Logic.Typeplane;
+import Logic.Planetype;
 import oracle.jdbc.OracleTypes;
 
 import java.sql.CallableStatement;
@@ -10,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
+public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
 
 
     public PlaneTypeDao()
@@ -18,7 +17,7 @@ public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
         super();
     }
     @Override
-    public void insert(Typeplane t) throws Throwable {
+    public void insert(Planetype t) throws Throwable {
         String sp = "{CALL prc_insert_typeplane(?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setString(1, t.getModel());
@@ -32,7 +31,7 @@ public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
     }
 
     @Override
-    public void update(Typeplane t) throws Throwable {
+    public void update(Planetype t) throws Throwable {
         String sp = "{CALL prc_update_typeplane(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, t.getId());
@@ -58,7 +57,7 @@ public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
     }
 
     @Override
-    public Typeplane get(Integer id) throws Throwable {
+    public Planetype get(Integer id) throws Throwable {
         String sp = "{CALL fn_getone_typeplane(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, id);
@@ -74,9 +73,9 @@ public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
     }
 
     @Override
-    public Typeplane instance(ResultSet rs) throws Throwable {
+    public Planetype instance(ResultSet rs) throws Throwable {
         try {
-            Typeplane t= new Typeplane();
+            Planetype t= new Planetype();
 
             t.setId(rs.getInt("ID"));
             t.setBrand(rs.getString("Brand"));
@@ -92,8 +91,8 @@ public class PlaneTypeDao extends InterfaceDao<Typeplane, Integer>{
     }
 
     @Override
-    public List<Typeplane> search() throws Throwable {
-        List<Typeplane> result = new ArrayList();
+    public List<Planetype> search() throws Throwable {
+        List<Planetype> result = new ArrayList();
         try {
             String sp = "{CALL fn_get_typeplane()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
