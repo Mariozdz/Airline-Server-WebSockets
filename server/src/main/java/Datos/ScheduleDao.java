@@ -23,7 +23,7 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
         pstmt.setInt(1, s.getPlaneid());
         pstmt.setInt(2, s.getRouteid());
         pstmt.setDate(3, s.getStime());
-        pstmt.setDate(4, s.getSdate());
+        pstmt.setInt(4, s.getSdate());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -39,7 +39,7 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
         pstmt.setInt(2, s.getPlaneid());
         pstmt.setInt(3, s.getRouteid());
         pstmt.setDate(4, s.getStime());
-        pstmt.setDate(5, s.getSdate());
+        pstmt.setInt(5, s.getSdate());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the schedule");
@@ -59,8 +59,9 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
 
     @Override
     public Schedule get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_schedule(?)}";
+        String sp = "{? = call fn_getone_schedule(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
         pstmt.setInt(1, id);
         boolean flag = pstmt.execute();
         if (flag) {
@@ -82,7 +83,7 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
             s.setPlaneid(rs.getInt("PlaneId"));
             s.setRouteid(rs.getInt("RouteId"));
             s.setStime(rs.getDate("STime"));
-            s.setSdate(rs.getDate("SDate"));
+            s.setSdate(rs.getInt("SDate"));
 
             return s;
         } catch (SQLException ex) {
@@ -95,7 +96,7 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
     public List<Schedule> search() throws Throwable {
         List<Schedule> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_schedule()}";
+            String sp = "{? = call fn_get_schedule()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

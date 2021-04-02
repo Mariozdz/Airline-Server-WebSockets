@@ -7,7 +7,7 @@ public class Schedule {
   private int planeid;
   private int routeid;
   private java.sql.Date stime;
-  private java.sql.Date sdate;
+  private int sdate;
 
 
   public int getId() {
@@ -46,11 +46,11 @@ public class Schedule {
   }
 
 
-  public java.sql.Date getSdate() {
+  public int getSdate() {
     return sdate;
   }
 
-  public void setSdate(java.sql.Date sdate) {
+  public void setSdate(int date) {
     this.sdate = sdate;
   }
 

@@ -1,11 +1,15 @@
 package Logic;
 
 
+import java.sql.Date;
+
 public class Flight {
 
   private int id;
   private int leave;
+  private java.sql.Date ltime;
   private int arrive;
+  private java.sql.Date Atime;
 
 
   public int getId() {
@@ -34,4 +38,19 @@ public class Flight {
     this.arrive = arrive;
   }
 
+  public java.sql.Date getLtime() {
+    return ltime;
+  }
+
+  public java.sql.Date getAtime() {
+    return Atime;
+  }
+
+  public void setLtime(Date ltime) {
+    this.ltime = ltime;
+  }
+
+  public void setAtime(Date latime) {
+    this.Atime = latime;
+  }
 }

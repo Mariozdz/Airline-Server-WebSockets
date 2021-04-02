@@ -47,9 +47,10 @@ public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
 
     @Override
     public void delete(Integer id) throws Throwable {
-        String sp = "{CALL prc_delete_typeplane(?)}";
+        String sp = "{? = call prc_delete_typeplane(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to delete the typeplane.");
@@ -94,7 +95,7 @@ public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
     public List<Planetype> search() throws Throwable {
         List<Planetype> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_typeplane()}";
+            String sp = "{? = call fn_get_typeplane()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

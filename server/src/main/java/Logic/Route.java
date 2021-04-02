@@ -8,6 +8,7 @@ public class Route {
   private int origenId;
   private int destinoId;
   private double price;
+  private int discount;
 
 
   public int getId() {
@@ -54,4 +55,11 @@ public class Route {
     this.price = price;
   }
 
+  public int getDiscount() {
+    return discount;
+  }
+
+  public void setDiscount(int discount) {
+    this.discount = discount;
+  }
 }

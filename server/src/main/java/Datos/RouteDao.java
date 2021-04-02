@@ -17,12 +17,13 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
     }
     @Override
     public void insert(Route r) throws Throwable {
-        String sp = "{CALL prc_insert_route(?,?,?,?)}";
+        String sp = "{CALL prc_insert_route(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, r.getDuration());
         pstmt.setInt(2, r.getOrigen());
         pstmt.setInt(3, r.getDestino());
         pstmt.setDouble(4, r.getPrice());
+        pstmt.setDouble(5, r.getDiscount());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -39,6 +40,7 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
         pstmt.setInt(3, r.getOrigen());
         pstmt.setInt(4, r.getDestino());
         pstmt.setDouble(5, r.getPrice());
+        pstmt.setDouble(5, r.getDiscount());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the route");
@@ -58,9 +60,10 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
 
     @Override
     public Route get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_route(?)}";
+        String sp = "{? = call fn_getone_route(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the route.");
@@ -82,6 +85,7 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
             r.setOrigen(rs.getInt("Origen"));
             r.setDestino(rs.getInt("Destino"));
             r.setPrice(rs.getDouble("Price"));
+            r.setDiscount(rs.getInt("Discount"));
 
             return r;
         } catch (SQLException ex) {
@@ -94,7 +98,7 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
     public List<Route> search() throws Throwable {
         List<Route> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_route()}";
+            String sp = "{? = call fn_get_route()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

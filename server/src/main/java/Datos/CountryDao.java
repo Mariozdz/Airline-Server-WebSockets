@@ -18,11 +18,14 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
     }
     @Override
     public void insert(Country c) throws Throwable {
+
+        System.out.println("intento de insertar...");
         String sp = "{CALL prc_insert_country(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setString(1, c.getName());
+        System.out.println("Llega aqui xdxd");
         boolean flag = pstmt.execute();
-        if (flag) {
+        if (!flag) {
             throw new Exception("Impossible to insert the country");
         }
     }
@@ -52,9 +55,10 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
 
     @Override
     public Country get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_country(?)}";
+        String sp = "{? = call fn_getone_country(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the country.");
@@ -85,7 +89,7 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
     public List<Country> search() throws Throwable {
         List<Country> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_country()}";
+            String sp = "{?= call fn_get_country()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

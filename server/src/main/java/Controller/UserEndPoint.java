@@ -1,14 +1,20 @@
 package Controller;
 
 
+import Auxiliar.DecoderJson;
+import Auxiliar.EnconderJson;
+import com.google.gson.JsonObject;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-@ServerEndpoint(value = "/User")
+@ServerEndpoint(value = "/user",
+encoders = {EnconderJson.class},
+decoders = {DecoderJson.class})
 public class UserEndPoint {
 
     private static Set<Session> sessions = new HashSet<>();
@@ -20,11 +26,15 @@ public class UserEndPoint {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(JSONObject message, Session session) {
         System.out.println("Message received: " + message + " from " + session.getId());
         try {
+
+
             session.getBasicRemote().sendObject(message);
             session.getBasicRemote().sendObject(message);
+
+
         } catch ( EncodeException | IOException e) {
             e.printStackTrace();
         }

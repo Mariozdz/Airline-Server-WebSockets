@@ -54,9 +54,10 @@ public class PlaneDao extends Datos.InterfaceDao<Plane,String> {
 
     @Override
     public Plane get(String id) throws Throwable {
-        String sp = "{CALL fn_getone_plane(?)}";
+        String sp = "{? = call fn_getone_plane(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setString(1, id);
+        pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+        pstmt.setString(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the plane.");
@@ -87,7 +88,7 @@ public class PlaneDao extends Datos.InterfaceDao<Plane,String> {
     public List<Plane> search() throws Throwable {
         List<Plane> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_plane()}";
+            String sp = "{? = call fn_get_plane()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

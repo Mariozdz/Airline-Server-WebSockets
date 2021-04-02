@@ -41,6 +41,17 @@ public class UserModel {
         return entity.search();
     }
 
+    public Boolean Login(String id, String password) throws Exception {
+        if (entity.login(id,password) > 0)
+            return true;
+        else
+            return false;
+    }
+
+    public Auser Loginget(String id, String password) throws Throwable {
+        return entity.Loginget(id,password);
+    }
+
 
 
 

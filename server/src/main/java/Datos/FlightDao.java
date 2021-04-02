@@ -19,10 +19,14 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
 
     @Override
     public void insert(Flight f) throws Throwable {
-        String sp = "{CALL prc_insert_flight(?,?)}";
+        String sp = "{CALL prc_insert_flight(?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, f.getArrive());
-        pstmt.setInt(2, f.getLeave());
+        pstmt.setInt(1, f.getLeave());
+        pstmt.setDate(2, f.getLtime());
+        pstmt.setInt(3, f.getArrive());
+        pstmt.setDate(4, f.getAtime());
+
+
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -32,11 +36,13 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
 
     @Override
     public void update(Flight f) throws Throwable {
-        String sp = "{CALL prc_update_flight(?,?,?)}";
+        String sp = "{CALL prc_update_flight(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, f.getId());
-        pstmt.setInt(2, f.getArrive());
-        pstmt.setInt(3, f.getLeave());
+        pstmt.setInt(2, f.getLeave());
+        pstmt.setDate(3, f.getLtime());
+        pstmt.setInt(4, f.getArrive());
+        pstmt.setDate(5, f.getAtime());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -57,9 +63,10 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
 
     @Override
     public Flight get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_flight(?)}";
+        String sp = "{? = call fn_getone_flight(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the flight.");
@@ -79,6 +86,8 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
             f.setId(rs.getInt("ID"));
             f.setArrive(rs.getInt("Arrive"));
             f.setLeave(rs.getInt("Leave"));
+            f.setLtime(rs.getDate("Ltime"));
+            f.setAtime(rs.getDate("Atime"));
 
 
             return f;
@@ -92,7 +101,7 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
     public List<Flight> search() throws Throwable {
         List<Flight> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_flight()}";
+            String sp = "{? = call fn_get_flight()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

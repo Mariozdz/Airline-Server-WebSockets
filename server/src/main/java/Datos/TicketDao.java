@@ -57,9 +57,10 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
 
     @Override
     public Ticket get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_ticket(?)}";
+        String sp = "{? = call fn_getone_ticket(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the ticket.");
@@ -92,7 +93,7 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
     public List<Ticket> search() throws Throwable {
         List<Ticket> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_ticket()}";
+            String sp = "{? = call fn_get_ticket()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

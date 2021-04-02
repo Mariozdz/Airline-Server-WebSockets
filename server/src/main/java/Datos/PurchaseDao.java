@@ -44,9 +44,10 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
 
     @Override
     public void delete(Integer id) throws Throwable {
-        String sp = "{CALL prc_delete_purchase(?)}";
+        String sp = "{? = call prc_delete_purchase(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to delete the purchase.");
@@ -90,7 +91,7 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
     public List<Purchase> search() throws Throwable {
         List<Purchase> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_purchase()}";
+            String sp = "{? = call fn_get_purchase()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();

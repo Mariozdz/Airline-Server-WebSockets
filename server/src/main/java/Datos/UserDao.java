@@ -54,9 +54,10 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
 
     @Override
     public void delete(String id) throws Throwable {
-        String sp = "{CALL prc_delete_user(?)}";
+        String sp = "{? = call prc_delete_user(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setString(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setString(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to delete the user.");
@@ -65,9 +66,10 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
 
     @Override
     public Auser get(String id) throws Throwable {
-        String sp = "{CALL fn_getone_user(?)}";
+        String sp = "{? = CALL fn_getone_user(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setString(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setString(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the user.");
@@ -103,7 +105,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
     public List<Auser> search() throws Throwable {
         List<Auser> result = new ArrayList();
         try {
-            String sp = "{CALL fn_get_user()}";
+            String sp = "{? = call fn_get_user()}";
             CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
             pstmt.registerOutParameter(1, OracleTypes.CURSOR);
             pstmt.execute();
@@ -114,6 +116,33 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
         } finally {
             return result;
         }
+    }
+
+    public int login(String id, String password) throws Exception {
+        String sp = "{? = call fn_login(?,?)}";
+        CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.INTEGER);
+        pstmt.setString(2, id);
+        pstmt.setString(3,password);
+        pstmt.execute();
+        return pstmt.getInt(1);
+    }
+
+    public Auser Loginget(String id, String password) throws Throwable {
+        String sp = "{? = call fn_login_get(?,?)}";
+        CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setString(2, id);
+        pstmt.setString(3,password);
+        boolean flag = pstmt.execute();
+        if (flag) {
+            throw new Exception("Impossible to read the user.");
+        }
+        ResultSet rs = (ResultSet) pstmt.getObject(1);
+        if (rs.next()) {
+            return instance(rs);
+        }
+        return null;
     }
 
 }
