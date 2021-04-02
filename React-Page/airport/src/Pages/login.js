@@ -1,19 +1,7 @@
 import React,{Component} from "react"
 import {Card,Button} from "react-bootstrap";
-
-
-const webSocket = new WebSocket('ws://localhost:9080/server/user');
-
-webSocket.onerror = function (event) {
-    onError(event)
-};
-webSocket.onopen = function (event) {
-    onOpen(event)
-};
-webSocket.onmessage = function (event) {
-    onMessage(event)
-};
-
+import swal from 'sweetalert';
+import "../css/card.css"
 
 function onMessage(event) {
     const eventPayload = JSON.parse(event.data);
@@ -26,16 +14,38 @@ function onOpen(event) {
 }
 
 function onError(event) {
-    alert('An error occurred:' + event.data);
+    swal("Error",'An error occurred:' + event.data);
 }
 
-function send() {
-    const info = {
-        'stock':"x",
-        'price': "y"
-    };
 
-    webSocket.send(JSON.stringify(info));
+function prueba(){
+    const webSocket = new WebSocket('ws://localhost:9080/server/user');
+
+    webSocket.onerror = function (event) {
+        onError(event)
+    };
+    webSocket.onopen = function (event) {
+        onOpen(event)
+    };
+    webSocket.onmessage = function (event) {
+        onMessage(event)
+    };
+    //Request
+    let user ={
+        user:"Brazza",
+        name:"Braslyn",
+        surnames:"Rodriguez",
+        cellphone: "6003-2274",
+        email:"Braslynrrr999@gmail.com",
+        type:"admin"
+    }
+    if( document.getElementById("password").value="1")
+        user.type="customer";
+    //añadir al sessionStorage
+    sessionStorage.setItem("user",JSON.stringify(user));
+
+    window.location="/";
+    webSocket.close();
 }
 
 class Login extends Component {
@@ -44,12 +54,12 @@ class Login extends Component {
         document.body.style = 'background: rgb(53, 53, 53);'
 
         return (
-            <Card style={{width: '18rem', left: '40%', marginTop: '10%'}}>
+            <Card style={{width: '18rem'}}>
                 <Card.Body>
                     <Card.Title>Login</Card.Title>
                     <label>User: <input id='user' type="text" placeholder="user"/></label>
                     <label>password:<input id='password' type="password" placeholder="********"/></label>
-                    <Button id="Login" className="btn btn-primary btn-lg">Login</Button>
+                    <Button id="Login" onClick={ event => prueba()} className="btn btn-primary btn-lg">Login</Button>
                 </Card.Body>
             </Card>);
     }

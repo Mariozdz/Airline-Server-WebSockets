@@ -1,0 +1,11 @@
+.card{
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    color: black;
+    text-align: left;
+}
+.Message{
+    color: aliceblue;
+    text-align: center;
+}
