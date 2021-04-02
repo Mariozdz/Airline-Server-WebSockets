@@ -66,7 +66,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
 
     @Override
     public Auser get(String id) throws Throwable {
-        String sp = "{? = CALL fn_getone_user(?)}";
+        String sp = "{? = call fn_getone_user(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.registerOutParameter(1,OracleTypes.CURSOR);
         pstmt.setString(2, id);

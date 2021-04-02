@@ -11,6 +11,17 @@ public class Auser {
   private double longitud;
   private String cellphone;
 
+  public Auser(){};
+  public Auser(String id, String password, String name, String surnames,Double latitud, Double longitud, String cellphone)
+  {
+    this.id = id;
+    this.password = password;
+    this.name = name;
+    this.surnames = surnames;
+    this.latitud = latitud;
+    this.longitud = longitud;
+    this.cellphone = cellphone;
+  }
 
   public String getId() {
     return id;
