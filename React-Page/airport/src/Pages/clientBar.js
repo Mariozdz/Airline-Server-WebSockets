@@ -30,7 +30,7 @@ class ClientBar extends Component{
                         <Nav.Link href="#ss">My purchases</Nav.Link>
                     </Nav>
                     <Nav>
-                        <NavDropdown title={getUser().user} id="collasible-nav-dropdown">
+                        <NavDropdown title={getUser().id} id="collasible-nav-dropdown">
                             <NavDropdown.Item href="/CProfile">Profile</NavDropdown.Item>
                             <NavDropdown.Item onClick={Logout}>Logout</NavDropdown.Item>
                         </NavDropdown>

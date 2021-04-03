@@ -7,7 +7,7 @@ import CMenu from "./Pages/clientBar";
 import AMenu from "./Pages/adminBar";
 import NotAccess from "./Pages/acceso";
 import Cprofile from "./Pages/Cprofile";
-import editProfile from "./Pages/editProfile"
+import CeditProfile from "./Pages/CeditProfile"
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
 }
@@ -23,7 +23,7 @@ class App extends Component{
             <Route exact path='/Admin'  render={ ()=> getUser().type === "admin"? (<Redirect to="/" />):(<Redirect to="/access" />) } />
             <Route exact path='/customer'  component={CMenu} />
             <Route exact path="/CProfile" component={Cprofile}/>
-            <Route exact path="/CeditProfile" component={editProfile}/>
+            <Route exact path="/CeditProfile" component={CeditProfile}/>
             <Route exact path="/404" component={NotFound}/>
             <Route exact path="/NotAccess" component={NotAccess}/>
             <Redirect to="/404" />
