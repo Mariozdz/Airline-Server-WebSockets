@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import Bar from "../Pages/clientBar";
+import Bar from "../Pages/adminBar";
 import "../css/card.css"
 import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
