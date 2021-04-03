@@ -2,7 +2,7 @@ import React,{Component} from "react"
 import Bar from "../Pages/clientBar";
 import "../css/card.css"
 import {Button, Card} from "react-bootstrap";
-
+import gMap from "../Components/Map";
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
 }
@@ -15,16 +15,17 @@ class Cprofile extends Component{
                 <div className="Message">
                     <Card style={{width: '18rem'}}>
                         <Card.Body>
-                            <Card.Title> {getUser().user}'s Profile</Card.Title>
+                            <Card.Title> {getUser().id}'s Profile</Card.Title>
                             <label>Name: <input value={getUser().name} type="text" readOnly/></label>
                             <label>Surname:<input value={getUser().surnames} type="text" readOnly/></label>
                             <label>Cellphone:<input value={getUser().cellphone}  type="text" readOnly/></label>
-                            <label>email:<input value={getUser().email} type="text" readOnly/></label>
-                            <Button id="Login" onClick={()=>window.location="/"} variant="primary">Home</Button>
-                            <Button id="Login" onClick={()=>window.location="/editProfile"} variant="secunday">Edit Profile</Button>
+                            <Button  onClick={()=>window.location="/"} variant="primary">Home</Button>
+                            <Button  onClick={()=>window.location="/CeditProfile"} variant="secunday">Edit Profile</Button>
+
                         </Card.Body>
                     </Card>
                 </div>
+                <gMap></gMap>
             </div>
         );
     }
