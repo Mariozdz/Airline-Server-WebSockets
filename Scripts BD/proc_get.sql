@@ -5,7 +5,7 @@ AS
     user_cursor SYS_REFCURSOR;
 BEGIN
     OPEN user_cursor FOR
-        SELECT ID, Password, Name, Surnames, Latitud, Longitud, Cellphone FROM AUser;
+        SELECT ID, Password, Name, Surnames, Latitud, Longitud, Cellphone, UserType FROM AUser;
 RETURN user_cursor;
 END;
 /

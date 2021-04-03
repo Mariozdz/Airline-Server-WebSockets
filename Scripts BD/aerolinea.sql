@@ -9,6 +9,7 @@ drop table Purchase cascade constraint;
 drop table Ticket cascade constraint;
 drop table Country cascade constraint;
 
+
 drop sequence Ticket_sec;
 drop sequence TypePlane_sec;
 drop sequence Route_sec;
@@ -16,6 +17,7 @@ drop sequence Schedule_sec;
 drop sequence Flight_sec;
 drop sequence Purchase_sec;
 drop sequence Country_sec;
+drop sequence Plane_sec;
 
 
 create sequence Ticket_sec start with 1 increment by 1;
@@ -25,6 +27,7 @@ create sequence Schedule_sec start with 1 increment by 1;
 create sequence Flight_sec start with 1 increment by 1;
 create sequence Purchase_sec start with 1 increment by 1;
 create sequence Country_sec start with 100 increment by 1;
+create sequence Plane_sec start with 100 increment by 1;
 
 
 PROMPT users
@@ -35,7 +38,8 @@ create table AUser(
  Surnames varchar2(30) not null,
  Latitud Float not null,
  Longitud Float not null,
- Cellphone varchar(10) null
+ Cellphone varchar(10),
+ UserType number
 );
 
 PROMPT type
@@ -51,7 +55,7 @@ PROMPT brand model en typeplane latitud y longitud en usuario
 
 PROMPT plane
 create table Plane(
-	ID varchar2(10) PRIMARY KEY not null,
+	ID number PRIMARY KEY not null,
 	typePlaneid number(10) not null
 );
 alter table Plane add constraint FK_TypePlane FOREIGN KEY (typePlaneid) REFERENCES TypePlane(ID);
@@ -80,7 +84,7 @@ alter table Route add constraint FK_COUNTRY2 FOREIGN KEY (DestinoId) REFERENCES 
 PROMPT Schedule
 create table Schedule(
  ID number PRIMARY KEY NOT NULL,
- PlaneId varchar2(10) not null,
+ PlaneId number not null,
  RouteId number not null,
  STime number not null,
  Sdate date not null

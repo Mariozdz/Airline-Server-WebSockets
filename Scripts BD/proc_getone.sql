@@ -6,7 +6,7 @@ AS
     user_cursor SYS_REFCURSOR;
 BEGIN
     OPEN user_cursor FOR
-        SELECT ID, Password, Name, Surnames, Latitud, Longitud , Cellphone FROM AUser where ID = Pid;
+        SELECT ID, Password, Name, Surnames, Latitud, Longitud , Cellphone, UserType FROM AUser where ID = Pid;
 RETURN user_cursor;
 END;
 /
@@ -22,7 +22,7 @@ RETURN typeplane_cursor;
 END;
 /
 
-CREATE OR REPLACE FUNCTION fn_getone_plane(Pid in varchar2)
+CREATE OR REPLACE FUNCTION fn_getone_plane(Pid in number)
 RETURN SYS_REFCURSOR
 AS
     plane_cursor SYS_REFCURSOR;

@@ -5,9 +5,10 @@ create or replace procedure prc_update_user(Puser in varchar2,
  Psurnames in varchar2,
  Platitud in Float,
  Plongitud in FLOAT,
- Pcellphone in varchar2)
+ Pcellphone in varchar2,
+ Pusertype in number)
  is begin
-  update AUser set Password = Ppassword, Name= Pname, Surnames = Psurnames, Latitud = Platitud, Longitud = Plongitud, Cellphone = Pcellphone where ID = Puser;
+  update AUser set Password = Ppassword, Name= Pname, Surnames = Psurnames, Latitud = Platitud, Longitud = Plongitud, Cellphone = Pcellphone, UserType = Pusertype where ID = Puser;
   commit;
 end prc_update_user;
 /
@@ -25,7 +26,7 @@ end prc_update_typeplane;
 /
 show error
 
-create or replace procedure prc_update_plane(Pid in varchar2,
+create or replace procedure prc_update_plane(Pid in number,
  PtypePlane in number)
  is begin
   update Plane set typePlaneid = PtypePlane where ID = Pid;
@@ -48,7 +49,7 @@ end prc_update_route;
 show error
 
 create or replace procedure prc_update_schedule(Pid in number,
- Pplaneid in varchar2,
+ Pplaneid in number,
  Prouteid in number,
  Pstime in number,
  Pdate in date

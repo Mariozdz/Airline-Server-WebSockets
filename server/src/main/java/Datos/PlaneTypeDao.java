@@ -59,9 +59,10 @@ public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
 
     @Override
     public Planetype get(Integer id) throws Throwable {
-        String sp = "{CALL fn_getone_typeplane(?)}";
+        String sp = "{? call fn_getone_typeplane(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, id);
+        pstmt.registerOutParameter(1,OracleTypes.CURSOR);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the typeplane.");
