@@ -78,7 +78,6 @@ public class UserEndPoint {
             }
             case "UPDATE":{
                 Auser l = new Auser();
-                System.out.println("al menos aqui...");
                 l.setId(message.getString("id"));
                 l.setPassword( message.getString("password"));
                 l.setLongitud( message.getDouble("longitud"));
@@ -86,9 +85,23 @@ public class UserEndPoint {
                 l.setName( message.getString("name"));
                 l.setCellphone( message.getString("cellphone"));
                 l.setSurnames(message.getString("surnames"));
-                System.out.println("llega al menos antes ");
                 UserModel.getInstance().Update(l);
                 break;
+            }
+            case "CREATE":
+            {
+                Auser c = new Auser();
+                c.setId(message.getString("id"));
+                c.setPassword( message.getString("password"));
+                c.setLongitud( message.getDouble("longitud"));
+                c.setLatitud(message.getDouble("latitud"));
+                c.setName( message.getString("name"));
+                c.setCellphone( message.getString("cellphone"));
+                c.setSurnames(message.getString("surnames"));
+                System.out.println("llega al menos antes ");
+                UserModel.getInstance().Insert(c);
+                break;
+
             }
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(new String("{}"));

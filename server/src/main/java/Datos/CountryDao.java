@@ -19,13 +19,12 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
     @Override
     public void insert(Country c) throws Throwable {
 
-        System.out.println("intento de insertar...");
         String sp = "{CALL prc_insert_country(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setString(1, c.getName());
-        System.out.println("Llega aqui xdxd");
+
         boolean flag = pstmt.execute();
-        if (!flag) {
+        if (flag) {
             throw new Exception("Impossible to insert the country");
         }
     }
@@ -36,6 +35,8 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, c.getId());
         pstmt.setString(2, c.getName());
+
+        System.out.println("llega a capa datos");
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the country");

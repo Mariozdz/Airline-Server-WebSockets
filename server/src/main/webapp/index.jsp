@@ -7,13 +7,25 @@
 <%@ page import="com.google.gson.JsonObject" %>
 <%@ page import="com.google.gson.Gson" %>
 <%@ page import="org.json.JSONObject" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Model.CountryModel" %>
+<%@ page import="org.json.JSONArray" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% ConnectionSQL.getInstance();  %>
 
-<%  UserModel mode = UserModel.getInstance();
-   Auser u = mode.Loginget("User3","123");
+<%  CountryModel mode = CountryModel.getInstance();
+    List<Country> count = mode.search();
 
-   System.out.println("gg"+ u);
+    for (Country I : count)
+    {
+        System.out.println(I.getName());
+    }
+
+    JSONObject k = new JSONObject(count);
+    JSONArray o = new JSONArray(count);
+    System.out.println(k);
+    System.out.println(o);
 
 
 

@@ -95,7 +95,7 @@ end prc_update_ticket;
 show error
 
 create or replace procedure prc_update_country(Pid in number,
- Pname in number)
+ Pname in varchar2)
  is begin
   Update Country set Name = Pname where ID = Pid;
   commit;
