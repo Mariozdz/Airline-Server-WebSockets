@@ -77,7 +77,7 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
             Country c= new Country();
 
             c.setId(rs.getInt("ID"));
-            c.setCountry(rs.getString("Name"));
+            c.setName(rs.getString("Name"));
 
             return c;
         } catch (SQLException ex) {

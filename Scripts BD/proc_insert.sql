@@ -48,22 +48,23 @@ end prc_insert_route;
 show error
 
 create or replace procedure prc_insert_schedule(
- Pplaneid in number,
  Prouteid in number,
  Pstime in number,
  Pdate in date
  )
  is begin
-  insert into Schedule (ID, PlaneId,RouteId, STime,SDate) values(Schedule_sec.nextval,Pplaneid,Prouteid,Pstime,Pdate);
+  insert into Schedule (ID,RouteId, STime,SDate) values(Schedule_sec.nextval,Prouteid,Pstime,Pdate);
   commit;
 end prc_insert_schedule;
 /
 show error
 
-create or replace procedure prc_insert_flight(Pleave in number,
- Parrive in number, Pltime date, Patime date)
+create or replace procedure prc_insert_flight(Poutbound in number,
+ Poutbounddate in DATE,
+ PplaneId in number,
+ Parrivetime in date)
  is begin
-  insert into Flight (ID,Leave,Ltime,Arrive,Atime) values(Flight_sec.nextval,Pleave,Pltime,Parrive, Patime);
+  insert into Flight (ID,Outbound,OutboundDate, PlaneId,ArriveTime) values(Flight_sec.nextval,Poutbound,Poutbounddate,PplaneId,Parrivetime);
   commit;
 end prc_insert_flight;
 /
@@ -71,9 +72,11 @@ show error
 
 create or replace procedure prc_insert_purchase(Pflightid in number,
  Puserid in varchar2,
- Ptotalprice in Float)
+ Ptotalprice in Float,
+ Ptickets in number,
+ PreturnFlightid in number)
  is begin
-  insert into Purchase (ID, FlightId, UserId,TotalPrice) values(Purchase_sec.nextval,Pflightid,Puserid,Ptotalprice);
+  insert into Purchase (ID, FlightId, UserId,TotalPrice, Tickets, ReturnFlightId) values(Purchase_sec.nextval,Pflightid,Puserid,Ptotalprice,Ptickets,PreturnFlightid);
   commit;
 end prc_insert_purchase;
 /

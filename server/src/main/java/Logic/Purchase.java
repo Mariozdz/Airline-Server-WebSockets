@@ -7,6 +7,8 @@ public class Purchase {
   private int flightid;
   private String userid;
   private double totalprice;
+  private int tickets;
+  private int returnflightid;
 
 
   public int getId() {
@@ -42,6 +44,24 @@ public class Purchase {
 
   public void setTotalprice(double totalprice) {
     this.totalprice = totalprice;
+  }
+
+
+  public int getTickets() {
+    return tickets;
+  }
+
+  public void setTickets(int tickets) {
+    this.tickets = tickets;
+  }
+
+
+  public int getReturnflightid() {
+    return returnflightid;
+  }
+
+  public void setReturnflightid(int returnflightid) {
+    this.returnflightid = returnflightid;
   }
 
 }

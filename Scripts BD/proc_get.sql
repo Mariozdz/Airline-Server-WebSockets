@@ -49,7 +49,7 @@ AS
     schedule_cursor SYS_REFCURSOR;
 BEGIN
     OPEN schedule_cursor FOR
-        SELECT ID, Planeid, RouteId,Stime,Sdate FROM Schedule;
+        SELECT ID, RouteId,Stime,Sdate FROM Schedule;
 RETURN schedule_cursor;
 END;
 /
@@ -60,7 +60,7 @@ AS
     flight_cursor SYS_REFCURSOR;
 BEGIN
     OPEN flight_cursor FOR
-        SELECT ID, Leave, Arrive, Ltime, Atime FROM Flight;
+        SELECT ID, Outbound, OutBoundDate, PlaneID, ArriveTime FROM Flight;
 RETURN flight_cursor;
 END;
 /
@@ -71,7 +71,7 @@ AS
     purchase_cursor SYS_REFCURSOR;
 BEGIN
     OPEN purchase_cursor FOR
-        SELECT ID, FlightId , UserId, TotalPrice FROM Purchase;
+        SELECT ID, FlightId , UserId, TotalPrice, Tickets, ReturnFlightId FROM Purchase;
 RETURN purchase_cursor;
 END;
 /

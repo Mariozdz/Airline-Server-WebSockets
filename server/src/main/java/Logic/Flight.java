@@ -1,15 +1,13 @@
 package Logic;
 
 
-import java.sql.Date;
-
 public class Flight {
 
   private int id;
-  private int leave;
-  private java.sql.Date ltime;
-  private int arrive;
-  private java.sql.Date Atime;
+  private int outbound;
+  private java.sql.Date outbounddate;
+  private int planeid;
+  private java.sql.Date arrivetime;
 
 
   public int getId() {
@@ -21,36 +19,39 @@ public class Flight {
   }
 
 
-  public int getLeave() {
-    return leave;
+  public int getOutbound() {
+    return outbound;
   }
 
-  public void setLeave(int leave) {
-    this.leave = leave;
+  public void setOutbound(int outbound) {
+    this.outbound = outbound;
   }
 
 
-  public int getArrive() {
-    return arrive;
+  public java.sql.Date getOutbounddate() {
+    return outbounddate;
   }
 
-  public void setArrive(int arrive) {
-    this.arrive = arrive;
+  public void setOutbounddate(java.sql.Date outbounddate) {
+    this.outbounddate = outbounddate;
   }
 
-  public java.sql.Date getLtime() {
-    return ltime;
+
+  public int getPlaneid() {
+    return planeid;
   }
 
-  public java.sql.Date getAtime() {
-    return Atime;
+  public void setPlaneid(int planeid) {
+    this.planeid = planeid;
   }
 
-  public void setLtime(Date ltime) {
-    this.ltime = ltime;
+
+  public java.sql.Date getArrivetime() {
+    return arrivetime;
   }
 
-  public void setAtime(Date latime) {
-    this.Atime = latime;
+  public void setArrivetime(java.sql.Date arrivetime) {
+    this.arrivetime = arrivetime;
   }
+
 }

@@ -49,25 +49,27 @@ end prc_update_route;
 show error
 
 create or replace procedure prc_update_schedule(Pid in number,
- Pplaneid in number,
  Prouteid in number,
  Pstime in number,
  Pdate in date
  )
  is begin
-  Update Schedule set PlaneId = Pplaneid, RouteId = Prouteid, STime = Pstime, SDate = Pdate where ID = Pid;
+  Update Schedule set RouteId = Prouteid, STime = Pstime, SDate = Pdate where ID = Pid;
   commit;
 end prc_update_schedule;
 /
 show error
 
 create or replace procedure prc_update_flight(Pid in number,
-Pleave in number,
- Parrive in number,
- Patime in date,
- Pltime in date)
+ Poutbound in number,
+ Poutbounddate in date,
+ PplaneId in number,
+ Parrivetime in date)
  is begin
-  update Flight set Leave = Pleave, Arrive = Parrive, Atime = Patime, Ltime = Pltime where ID = Pid;
+  update Flight set Outbound = Poutbound,
+		 OutboundDate = Poutbounddate,
+		 PlaneId = PplaneId,
+		 ArriveTime = Parrivetime where ID = Pid;
   commit;
 end prc_update_flight;
 /
@@ -76,9 +78,15 @@ show error
 create or replace procedure prc_update_purchase(Pid in number,
  Pflightid in number,
  Puserid in varchar2,
- Ptotalprice in Float)
+ Ptotalprice in Float,
+ Ptickets in number,
+ Preturnflightid in number)
  is begin
-  Update Purchase set FlightId = Pflightid, UserId = Puserid, TotalPrice = Ptotalprice where ID = Pid;
+  Update Purchase set FlightId = Pflightid,
+		 UserId = Puserid,
+		 TotalPrice = Ptotalprice,
+		 Tickets = Ptickets,
+		 ReturnFlightId = Preturnflightid where ID = Pid;
   commit;
 end prc_update_purchase;
 /

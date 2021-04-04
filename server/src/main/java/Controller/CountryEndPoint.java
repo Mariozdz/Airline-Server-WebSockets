@@ -80,7 +80,7 @@ public class CountryEndPoint {
                 Country l = new Country();
                 System.out.println("al menos aqui...");
                 l.setId(message.getInt("id"));
-                l.setCountry( message.getString("name"));
+                l.setName( message.getString("name"));
                 System.out.println("also aqui...");
                 CountryModel.getInstance().Update(l);
                 break;
@@ -88,7 +88,7 @@ public class CountryEndPoint {
             case "CREATE":
             {
                 Country m = new Country();
-                m.setCountry(message.getString("name"));
+                m.setName(message.getString("name"));
                 CountryModel.getInstance().Insert(m);
                 break;
             }

@@ -84,34 +84,36 @@ alter table Route add constraint FK_COUNTRY2 FOREIGN KEY (DestinoId) REFERENCES 
 PROMPT Schedule
 create table Schedule(
  ID number PRIMARY KEY NOT NULL,
- PlaneId number not null,
  RouteId number not null,
  STime number not null,
  Sdate date not null
 );
-alter table Schedule add constraint FK_PLANEID FOREIGN KEY (PlaneId) REFERENCES Plane(ID);
 alter table Schedule add constraint FK_ROUTEID FOREIGN KEY (RouteId) REFERENCES Route(ID);
 
 
 PROMPT flight
 create table Flight(
  ID number PRIMARY KEY NOT NULL,
- Leave number not null,
- Ltime date not null,
- Arrive number,
- Atime date
+ Outbound number not null,
+ Outbounddate date not null,
+ PlaneId number not null,
+ ArriveTime date
 );
-alter table Flight add constraint fk_leave foreign key(leave) REFERENCES Schedule(ID)
-alter table Flight add constraint fk_arrive foreign key(arrive) REFERENCES Schedule(ID)
+alter table Flight add constraint FK_PLANEID FOREIGN KEY (PlaneId) REFERENCES Plane(ID);
+alter table Flight add constraint fk_leave foreign key(Outbound) REFERENCES Schedule(ID);
+
 
 PROMPT purchase
 create table Purchase(
  ID number PRIMARY KEY NOT NULL,
  FlightId number not null,
  UserId varchar2(12) not null,
- TotalPrice FLOAT not null
+ TotalPrice FLOAT not null,
+ Tickets number not null,
+ ReturnFlightId number
 );
 alter table Purchase add constraint fk_flight foreign key(FlightID) REFERENCES Flight(ID);
+alter table Purchase add constraint fk_returnflight foreign key(ReturnFlightID) REFERENCES Flight(ID);
 alter table Purchase add constraint fk_user foreign key(UserID) REFERENCES AUser(ID);
 
 PROMPT ticket

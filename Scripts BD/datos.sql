@@ -59,24 +59,24 @@ insert into Route(ID,Duration,OrigenId,DestinoId,Price,Discount)
  values (Route_sec.nextval, 1 , 101, 107, 90.0, 0.0);
  
 
-insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 107,  17, 3, TO_DATE('2003/05/03 15:30', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 108,  18, 2, TO_DATE('2003/05/03 21:00', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 109,  19, 4, TO_DATE('2003/05/03 7:30', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 110,  20, 5, TO_DATE('2003/05/03 10:40', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 111,  21, 7, TO_DATE('2003/05/03 12:00', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 112,  22, 1, TO_DATE('2003/05/03 13:30', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 113,  23, 3, TO_DATE('2003/05/03 19:30', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 107,  18, 2, TO_DATE('2003/05/03 20:30', 'yyyy/mm/dd hh24:mi'));
- insert into Schedule(ID,PlaneId,RouteId,STime,Sdate) 
- values(Schedule_sec.nextval, 107,  17, 4, TO_DATE('20:30', 'hh24:mi'));
+insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 1, 3, TO_DATE('2003/05/03 15:30', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 2, 2, TO_DATE('2003/05/03 21:00', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 3, 4, TO_DATE('2003/05/03 7:30', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval,  4, 5, TO_DATE('2003/05/03 10:40', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval,  5, 7, TO_DATE('2003/05/03 12:00', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval,  6, 1, TO_DATE('2003/05/03 13:30', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 7, 3, TO_DATE('2003/05/03 19:30', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 8, 2, TO_DATE('2003/05/03 20:30', 'yyyy/mm/dd hh24:mi'));
+ insert into Schedule(ID,RouteId,STime,Sdate) 
+ values(Schedule_sec.nextval, 2, 4, TO_DATE('20:30', 'hh24:mi'));
 
 
 commit;

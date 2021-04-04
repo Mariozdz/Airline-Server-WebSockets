@@ -20,8 +20,8 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
         String sp = "{CALL prc_insert_route(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, r.getDuration());
-        pstmt.setInt(2, r.getOrigen());
-        pstmt.setInt(3, r.getDestino());
+        pstmt.setInt(2, r.getOrigenid());
+        pstmt.setInt(3, r.getDestinoid());
         pstmt.setDouble(4, r.getPrice());
         pstmt.setDouble(5, r.getDiscount());
 
@@ -37,8 +37,8 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, r.getId());
         pstmt.setInt(2, r.getDuration());
-        pstmt.setInt(3, r.getOrigen());
-        pstmt.setInt(4, r.getDestino());
+        pstmt.setInt(3, r.getOrigenid());
+        pstmt.setInt(4, r.getDestinoid());
         pstmt.setDouble(5, r.getPrice());
         pstmt.setDouble(5, r.getDiscount());
         boolean flag = pstmt.execute();
@@ -82,8 +82,8 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
 
             r.setId(rs.getInt("ID"));
             r.setDuration(rs.getInt("Duration"));
-            r.setOrigen(rs.getInt("Origen"));
-            r.setDestino(rs.getInt("Destino"));
+            r.setOrigenid(rs.getInt("OrigenId"));
+            r.setDestinoid(rs.getInt("DestinoId"));
             r.setPrice(rs.getDouble("Price"));
             r.setDiscount(rs.getInt("Discount"));
 

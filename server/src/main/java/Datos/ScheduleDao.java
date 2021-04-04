@@ -18,12 +18,11 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
     }
     @Override
     public void insert(Schedule s) throws Throwable {
-        String sp = "{CALL prc_insert_schedule(?,?,?,?)}";
+        String sp = "{CALL prc_insert_schedule(?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, s.getPlaneid());
-        pstmt.setInt(2, s.getRouteid());
-        pstmt.setDate(3, s.getStime());
-        pstmt.setInt(4, s.getSdate());
+        pstmt.setInt(1, s.getRouteid());
+        pstmt.setInt(2, s.getStime());
+        pstmt.setDate(3, s.getSdate());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -33,13 +32,12 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
 
     @Override
     public void update(Schedule s) throws Throwable {
-        String sp = "{CALL prc_update_schedule(?,?,?,?,?)}";
+        String sp = "{CALL prc_update_schedule(?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, s.getId());
-        pstmt.setInt(2, s.getPlaneid());
-        pstmt.setInt(3, s.getRouteid());
-        pstmt.setDate(4, s.getStime());
-        pstmt.setInt(5, s.getSdate());
+        pstmt.setInt(2, s.getRouteid());
+        pstmt.setInt(3, s.getStime());
+        pstmt.setDate(4, s.getSdate());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the schedule");
@@ -80,10 +78,9 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
             Schedule s = new Schedule();
 
             s.setId(rs.getInt("ID"));
-            s.setPlaneid(rs.getInt("PlaneId"));
             s.setRouteid(rs.getInt("RouteId"));
-            s.setStime(rs.getDate("STime"));
-            s.setSdate(rs.getInt("SDate"));
+            s.setStime(rs.getInt("STime"));
+            s.setSdate(rs.getDate("SDate"));
 
             return s;
         } catch (SQLException ex) {

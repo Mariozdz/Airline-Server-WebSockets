@@ -17,11 +17,13 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
     }
     @Override
     public void insert(Purchase p) throws Throwable {
-        String sp = "{CALL prc_insert_purchase(?,?,?)}";
+        String sp = "{CALL prc_insert_purchase(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, p.getFlightid());
         pstmt.setString(2, p.getUserid());
         pstmt.setDouble(3, p.getTotalprice());
+        pstmt.setInt(4,p.getTickets());
+        pstmt.setInt(5,p.getReturnflightid());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to insert the purchase");
@@ -30,12 +32,14 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
 
     @Override
     public void update(Purchase p) throws Throwable {
-        String sp = "{CALL prc_update_purchase(?,?,?,?)}";
+        String sp = "{CALL prc_update_purchase(?,?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1,p.getId());
         pstmt.setInt(2, p.getFlightid());
         pstmt.setString(3, p.getUserid());
         pstmt.setDouble(4, p.getTotalprice());
+        pstmt.setInt(5,p.getTickets());
+        pstmt.setInt(6,p.getReturnflightid());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the purchase");
@@ -78,8 +82,9 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
             p.setId(rs.getInt("ID"));
             p.setFlightid(rs.getInt("FlightId"));
             p.setUserid(rs.getString("UserId"));
-            p.setTotalprice(Double.valueOf(rs.getString("TotalPrice")));
-
+            p.setTotalprice(rs.getDouble("TotalPrice"));
+            p.setTickets(rs.getInt("Tickets"));
+            p.setReturnflightid(rs.getInt("ReturnFlightId"));
             return p;
         } catch (SQLException ex) {
             System.out.println(ex.toString());

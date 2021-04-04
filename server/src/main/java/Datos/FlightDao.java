@@ -21,10 +21,10 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
     public void insert(Flight f) throws Throwable {
         String sp = "{CALL prc_insert_flight(?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
-        pstmt.setInt(1, f.getLeave());
-        pstmt.setDate(2, f.getLtime());
-        pstmt.setInt(3, f.getArrive());
-        pstmt.setDate(4, f.getAtime());
+        pstmt.setInt(1, f.getOutbound());
+        pstmt.setDate(2, f.getOutbounddate());
+        pstmt.setInt(3, f.getPlaneid());
+        pstmt.setDate(4, f.getArrivetime());
 
 
 
@@ -39,10 +39,10 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
         String sp = "{CALL prc_update_flight(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, f.getId());
-        pstmt.setInt(2, f.getLeave());
-        pstmt.setDate(3, f.getLtime());
-        pstmt.setInt(4, f.getArrive());
-        pstmt.setDate(5, f.getAtime());
+        pstmt.setInt(2, f.getOutbound());
+        pstmt.setDate(3, f.getOutbounddate());
+        pstmt.setInt(4, f.getPlaneid());
+        pstmt.setDate(5, f.getArrivetime());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -84,10 +84,10 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
             Flight f = new Flight();
 
             f.setId(rs.getInt("ID"));
-            f.setArrive(rs.getInt("Arrive"));
-            f.setLeave(rs.getInt("Leave"));
-            f.setLtime(rs.getDate("Ltime"));
-            f.setAtime(rs.getDate("Atime"));
+            f.setOutbound(rs.getInt("Outbound"));
+            f.setOutbounddate(rs.getDate("OutboundDate"));
+            f.setPlaneid(rs.getInt("PlaneId"));
+            f.setArrivetime(rs.getDate("ArriveTime"));
 
 
             return f;

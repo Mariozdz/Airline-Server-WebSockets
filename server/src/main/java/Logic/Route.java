@@ -5,10 +5,10 @@ public class Route {
 
   private int id;
   private int duration;
-  private int origenId;
-  private int destinoId;
+  private int origenid;
+  private int destinoid;
   private double price;
-  private int discount;
+  private double discount;
 
 
   public int getId() {
@@ -29,21 +29,21 @@ public class Route {
   }
 
 
-  public int getOrigen() {
-    return origenId;
+  public int getOrigenid() {
+    return origenid;
   }
 
-  public void setOrigen(int origen) {
-    this.origenId = origen;
+  public void setOrigenid(int origenid) {
+    this.origenid = origenid;
   }
 
 
-  public int getDestino() {
-    return destinoId;
+  public int getDestinoid() {
+    return destinoid;
   }
 
-  public void setDestino(int destino) {
-    this.destinoId = destino;
+  public void setDestinoid(int destinoid) {
+    this.destinoid = destinoid;
   }
 
 
@@ -55,11 +55,13 @@ public class Route {
     this.price = price;
   }
 
-  public int getDiscount() {
+
+  public double getDiscount() {
     return discount;
   }
 
-  public void setDiscount(int discount) {
+  public void setDiscount(double discount) {
     this.discount = discount;
   }
+
 }

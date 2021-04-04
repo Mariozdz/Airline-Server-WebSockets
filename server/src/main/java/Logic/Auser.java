@@ -12,17 +12,6 @@ public class Auser {
   private String cellphone;
   private int usertype;
 
-  public Auser(){};
-  public Auser(String id, String password, String name, String surnames,Double latitud, Double longitud, String cellphone)
-  {
-    this.id = id;
-    this.password = password;
-    this.name = name;
-    this.surnames = surnames;
-    this.latitud = latitud;
-    this.longitud = longitud;
-    this.cellphone = cellphone;
-  }
 
   public String getId() {
     return id;
@@ -60,21 +49,23 @@ public class Auser {
   }
 
 
-  public Double getLatitud() {
+  public double getLatitud() {
     return latitud;
   }
 
-  public void setLatitud(Double latitud) {
+  public void setLatitud(double latitud) {
     this.latitud = latitud;
   }
 
-  public Double getLongitud() {
+
+  public double getLongitud() {
     return longitud;
   }
 
-  public void setLongitud(Double address) {
-    this.longitud = address;
+  public void setLongitud(double longitud) {
+    this.longitud = longitud;
   }
+
 
   public String getCellphone() {
     return cellphone;
@@ -84,6 +75,7 @@ public class Auser {
     this.cellphone = cellphone;
   }
 
+
   public int getUsertype() {
     return usertype;
   }
@@ -91,4 +83,5 @@ public class Auser {
   public void setUsertype(int usertype) {
     this.usertype = usertype;
   }
+
 }

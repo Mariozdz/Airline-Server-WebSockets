@@ -4,10 +4,9 @@ package Logic;
 public class Schedule {
 
   private int id;
-  private int planeid;
   private int routeid;
-  private java.sql.Date stime;
-  private int sdate;
+  private int stime;
+  private java.sql.Date sdate;
 
 
   public int getId() {
@@ -16,15 +15,6 @@ public class Schedule {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-
-  public int getPlaneid() {
-    return planeid;
-  }
-
-  public void setPlaneid(int planeid) {
-    this.planeid = planeid;
   }
 
 
@@ -37,20 +27,20 @@ public class Schedule {
   }
 
 
-  public java.sql.Date getStime() {
+  public int getStime() {
     return stime;
   }
 
-  public void setStime(java.sql.Date stime) {
+  public void setStime(int stime) {
     this.stime = stime;
   }
 
 
-  public int getSdate() {
+  public java.sql.Date getSdate() {
     return sdate;
   }
 
-  public void setSdate(int date) {
+  public void setSdate(java.sql.Date sdate) {
     this.sdate = sdate;
   }
 
