@@ -60,12 +60,12 @@ class countryManage extends Component{
     renderShowsTotal(start, to, total) {
         return (
             <p style={ { color: 'blue' } }>
-                From { start } to { to }, totals is { total }&nbsp;&nbsp;(its a customize text)
+                From { start } to { to }, totals is { total }
             </p>
         );
     }
 
-    handleRowSelect(row, isSelected, e) {
+    handleRowSelect(row) {
         sessionStorage.setItem("row",JSON.stringify(row));
         document.getElementById("country").value=row.name;
     }

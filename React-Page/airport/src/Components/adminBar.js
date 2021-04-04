@@ -24,7 +24,10 @@ class AdminBar extends Component{
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto ml-auto">
-                        <Nav.Link href="#features">Planes</Nav.Link>
+                        <NavDropdown title="Planes" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="/Plane">Plane</NavDropdown.Item>
+                            <NavDropdown.Item href="/Admin/Plane/Type">Types</NavDropdown.Item>
+                        </NavDropdown>
                         <Nav.Link href="#pricing">Flights</Nav.Link>
                         <Nav.Link href="/Admin/Country">Countries</Nav.Link>
                         <Nav.Link href="#ss">Users</Nav.Link>

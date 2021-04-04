@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function onMessage(event,client) {
         let user= JSON.parse(event.data);
-        user.type="admin";
+        alert(user.usertype)
         sessionStorage.setItem("user",JSON.stringify(user));
         client.close();
         window.location="/";

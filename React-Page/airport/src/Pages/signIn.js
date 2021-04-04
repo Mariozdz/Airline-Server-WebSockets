@@ -37,7 +37,8 @@ function signIn(){
                 cellphone:document.getElementById("cell").value,
                 surnames:document.getElementById("surname").value,
                 longitud:12.3,
-                latitud:33.1
+                latitud:33.1,
+                usertype:1
             }
             setTimeout( ()=> client.send(JSON.stringify(message)),1000);
 
