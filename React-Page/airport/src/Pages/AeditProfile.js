@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import Bar from "../Pages/adminBar";
+import Bar from "../Components/adminBar";
 import "../css/card.css"
 import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
@@ -49,7 +49,8 @@ function update(){
                     cellphone:document.getElementById("cell").value,
                     surnames:document.getElementById("surname").value,
                     longitud:12.3,
-                    latitud:33.1
+                    latitud:33.1,
+                    usertype: getUser().usertype
                 }
 
                 setTimeout( ()=> client.send(JSON.stringify(message)),1000);
@@ -73,7 +74,7 @@ class CeditProfile extends Component{
         return(<div>
             <Bar></Bar>
             <div className="Message">
-                <Card style={{width: '18rem'}}>
+                <Card className="mx-auto" style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title> {getUser().id}'s Profile</Card.Title>
                         <label>Name: <input id="name" value={getUser().name} type="text" /></label>
@@ -82,8 +83,14 @@ class CeditProfile extends Component{
                         <label>Current password:<input id="password" type="password" /></label>
                         <label> New password: <input id="npassword" type="password" /></label>
                         <label> Confirm new password: <input id="npassword2" type="password"/></label>
-                        <Button onClick={exitEditProfile} variant="primary">Cancel</Button>
-                        <Button onClick={update} variant="success">Update</Button>
+                        <div className="row">
+                            <div className="col-5">
+                                <Button onClick={exitEditProfile} variant="primary">Cancel</Button>
+                            </div>
+                            <div className="col-5">
+                                <Button onClick={update} variant="success">Update</Button>
+                            </div>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>

@@ -3,12 +3,17 @@ import {BrowserRouter  as Router,Route,Switch,Redirect} from "react-router-dom";
 import NotFound from "./Pages/404";
 import Login from "./Pages/login";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CMenu from "./Pages/clientBar";
-import AMenu from "./Pages/adminBar";
+import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
+import CMenu from "./Components/clientBar";
+import AMenu from "./Components/adminBar";
 import NotAccess from "./Pages/acceso";
 import Cprofile from "./Pages/Cprofile";
+import AProfile from "./Pages/AProfile";
 import CeditProfile from "./Pages/CeditProfile"
+import AeditProfile from "./Pages/AeditProfile";
 import signIn from  "./Pages/signIn"
+import countryManage from "./Pages/countryManage";
+import typeplane from "./Pages/type";
 
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
@@ -21,13 +26,18 @@ class App extends Component{
     return(
         <Router>
           <Switch>
-            <Route exact path="/" component={  getUser()===null? Login : getUser().type==="admin"? AMenu : CMenu } />
+            <Route exact path="/" component={  getUser()===null? Login : getUser().usertype===0? AMenu : CMenu } />
             <Route exact path="/Register" component={ getUser()===null? signIn : CMenu } />
-            <Route exact path='/Admin'  render={ ()=> getUser().type === "admin"? (<Redirect to="/" />):(<Redirect to="/access" />) } />
-            <Route exact path='/customer'  component={CMenu} />
-            <Route exact path="/CProfile" component={Cprofile}/>
-            <Route exact path="/CeditProfile" component={CeditProfile}/>
+            <Route exact path='/Admin'  render={ ()=> getUser()===null? (<Redirect to="/"/>): getUser().usertype === 0? (<Redirect to="/" />):(<Redirect to="/NotAccess" />) } />
+            <Route exact path='/customer'  component={getUser()===null?Login:CMenu} />
+            <Route exact path="/CProfile" component={getUser()===null?Login: Cprofile}/>
+            <Route exact path="/AProfile" component={ getUser()===null?Login:getUser().usertype===0? AProfile: NotAccess }/>
+            <Route exact path="/CeditProfile" component={getUser()===null?Login:CeditProfile}/>
+            <Route exact path="/AeditProfile" component={ getUser()===null? Login: getUser().usertype===0?AeditProfile:NotAccess}/>
+            <Route exact path="/Admin/Country" component={getUser()===null? Login: getUser().usertype===0? countryManage:NotAccess}/>
+            <Route exact path="/Admin/Plane/Type" component={getUser()===null? Login: getUser().usertype===0? typeplane:NotAccess}/>
             <Route exact path="/404" component={NotFound}/>
+            <Route exact path="/Test" component={AProfile}/>
             <Route exact path="/NotAccess" component={NotAccess}/>
             <Redirect to="/404" />
           </Switch>

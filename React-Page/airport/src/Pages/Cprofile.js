@@ -1,5 +1,5 @@
 import React,{Component} from "react"
-import Bar from "../Pages/clientBar";
+import Bar from "../Components/clientBar";
 import "../css/card.css"
 import {Button, Card} from "react-bootstrap";
 import gMap from "../Components/Map";
@@ -13,7 +13,7 @@ class Cprofile extends Component{
             <div>
                 <Bar></Bar>
                 <div className="Message">
-                    <Card style={{width: '18rem'}}>
+                    <Card className="mx-auto" style={{width: '18rem'}}>
                         <Card.Body>
                             <Card.Title> {getUser().id}'s Profile</Card.Title>
                             <label>Name: <input value={getUser().name} type="text" readOnly/></label>

@@ -1,11 +1,30 @@
 .card{
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
     color: black;
     text-align: left;
 }
 .Message{
     color: aliceblue;
     text-align: center;
+}
+
+input[type=text] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 25px;
+    border-radius: 5px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+input[type=password] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 25px;
+    border-radius: 5px;
+}
+
+input[type=password]:focus {
+    border-color:#333;
 }
