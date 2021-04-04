@@ -6,9 +6,10 @@ create or replace procedure prc_insert_user(Puser in varchar2,
  Psurnames in varchar2,
  Platitud in Float,
  Plongitud in Float,
- Pcellphone in varchar2)
+ Pcellphone in varchar2,
+ Pusertype in number)
  is begin
-  insert into AUser (ID, Password,Name, Surnames,Latitud,Longitud,Cellphone) values(Puser,Ppassword,Pname,Psurnames,Platitud,Plongitud,Pcellphone);
+  insert into AUser (ID, Password,Name, Surnames,Latitud,Longitud,Cellphone, UserType) values(Puser,Ppassword,Pname,Psurnames,Platitud,Plongitud,Pcellphone, Pusertype);
   commit;
 end prc_insert_user;
 /
@@ -25,10 +26,10 @@ end prc_insert_typeplane;
 /
 show error
 
-create or replace procedure prc_insert_plane(Pid in varchar2,
+create or replace procedure prc_insert_plane(Pid in number,
  PtypePlane in number)
  is begin
-  insert into Plane(ID, typePlaneid) values(Pid,Ptypeplane);
+  insert into Plane(ID, typePlaneid) values(Plane_sec.nextval,Ptypeplane);
   commit;
 end prc_insert_plane;
 /
@@ -47,7 +48,7 @@ end prc_insert_route;
 show error
 
 create or replace procedure prc_insert_schedule(
- Pplaneid in varchar2,
+ Pplaneid in number,
  Prouteid in number,
  Pstime in number,
  Pdate in date

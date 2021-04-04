@@ -31,10 +31,10 @@ public class PlaneModel {
     public void Update(Plane u) throws Throwable {
         entity.update(u);
     }
-    public void Delete(String id) throws Throwable {
+    public void Delete(int id) throws Throwable {
         entity.delete(id);
     }
-    public Plane Get(String id) throws Throwable {
+    public Plane Get(int id) throws Throwable {
         return entity.get(id);
     }
     public List<Plane> search() throws Throwable {

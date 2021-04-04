@@ -19,7 +19,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
 
     @Override
     public void insert(Auser r) throws Throwable {
-        String sp = "{CALL prc_insert_user(?,?,?,?,?,?,?)}";
+        String sp = "{CALL prc_insert_user(?,?,?,?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setString(1, r.getId());
         pstmt.setString(2, r.getPassword());
@@ -28,6 +28,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
         pstmt.setDouble(5, r.getLatitud());
         pstmt.setDouble(6, r.getLongitud());
         pstmt.setString(7, r.getCellphone());
+        pstmt.setInt(8, r.getUsertype());
 
         boolean flag = pstmt.execute();
         if (flag) {
@@ -37,7 +38,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
 
     @Override
     public void update(Auser r) throws Throwable {
-        String sp = "{CALL prc_update_user(?,?,?,?,?,?,?)}";
+        String sp = "{CALL prc_update_user(?,?,?,?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setString(1, r.getId());
         pstmt.setString(2, r.getPassword());
@@ -46,6 +47,7 @@ public class UserDao extends Datos.InterfaceDao<Auser,String> {
         pstmt.setDouble(5, r.getLatitud());
         pstmt.setDouble(6, r.getLongitud());
         pstmt.setString(7, r.getCellphone());
+        pstmt.setInt(8, r.getUsertype() );
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the user");

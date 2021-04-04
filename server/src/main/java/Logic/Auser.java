@@ -10,6 +10,7 @@ public class Auser {
   private double latitud;
   private double longitud;
   private String cellphone;
+  private int usertype;
 
   public Auser(){};
   public Auser(String id, String password, String name, String surnames,Double latitud, Double longitud, String cellphone)
@@ -83,4 +84,11 @@ public class Auser {
     this.cellphone = cellphone;
   }
 
+  public int getUsertype() {
+    return usertype;
+  }
+
+  public void setUsertype(int usertype) {
+    this.usertype = usertype;
+  }
 }
