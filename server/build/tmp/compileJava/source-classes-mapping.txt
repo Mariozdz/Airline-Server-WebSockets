@@ -6,14 +6,14 @@ Controller/TypePlaneEndPoint.java
  Controller.TypePlaneEndPoint
 Datos/PurchaseDao.java
  Datos.PurchaseDao
-Datos/CountryDao.java
- Datos.CountryDao
+org/una/server/HelloServlet.java
+ org.una.server.HelloServlet
 Datos/InterfaceDao.java
  Datos.InterfaceDao
 Controller/FlightEndPoint.java
  Controller.FlightEndPoint
-Model/CountryModel.java
- Model.CountryModel
+Logic/Plane.java
+ Logic.Plane
 Model/PurchaseModel.java
  Model.PurchaseModel
 Logic/Country.java
@@ -48,10 +48,10 @@ Logic/Route.java
  Logic.Route
 Auxiliar/EncoderArrayJson.java
  Auxiliar.EncoderArrayJson
-Controller/UserEndPoint.java
- Controller.UserEndPoint
-Controller/CountryEndPoint.java
- Controller.CountryEndPoint
+Model/TicketModel.java
+ Model.TicketModel
+Model/PlaneModel.java
+ Model.PlaneModel
 Logic/Ticket.java
  Logic.Ticket
 Datos/Dao.java
@@ -74,11 +74,11 @@ Logic/Flight.java
  Logic.Flight
 Model/UserModel.java
  Model.UserModel
-Logic/Plane.java
- Logic.Plane
-org/una/server/HelloServlet.java
- org.una.server.HelloServlet
-Model/PlaneModel.java
- Model.PlaneModel
-Model/TicketModel.java
- Model.TicketModel
+Controller/UserEndPoint.java
+ Controller.UserEndPoint
+Model/CountryModel.java
+ Model.CountryModel
+Datos/CountryDao.java
+ Datos.CountryDao
+Controller/CountryEndPoint.java
+ Controller.CountryEndPoint

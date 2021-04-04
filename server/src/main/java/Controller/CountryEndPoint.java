@@ -60,6 +60,14 @@ public class CountryEndPoint {
         sessions.remove(session);
     }
 
+    public void broadcast(JSONObject message) throws IOException, EncodeException {
+        for (Session s : sessions)
+        {
+
+            s.getBasicRemote().sendObject(message);
+        }
+    }
+
     public void interpretar(JSONObject message, Session session) throws Throwable {
         String action = message.getString("Action").toUpperCase(Locale.ROOT);
 
@@ -78,11 +86,11 @@ public class CountryEndPoint {
             }
             case "UPDATE":{
                 Country l = new Country();
-                System.out.println("al menos aqui...");
                 l.setId(message.getInt("id"));
                 l.setName( message.getString("name"));
-                System.out.println("also aqui...");
                 CountryModel.getInstance().Update(l);
+
+                broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
             case "CREATE":
@@ -90,6 +98,7 @@ public class CountryEndPoint {
                 Country m = new Country();
                 m.setName(message.getString("name"));
                 CountryModel.getInstance().Insert(m);
+                broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT");

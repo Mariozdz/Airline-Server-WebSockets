@@ -36,7 +36,6 @@ public class CountryDao extends InterfaceDao<Country,Integer>{
         pstmt.setInt(1, c.getId());
         pstmt.setString(2, c.getName());
 
-        System.out.println("llega a capa datos");
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the country");
