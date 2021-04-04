@@ -52,20 +52,28 @@ function signIn(){
 class SignIn extends Component{
 
         render() {
-            document.body.style = 'background: rgb(53, 53, 53);'
+            document.body.style = 'background: rgb(53, 53, 53);';
             return(
                 <div className="Message">
-                <Card style={{width: '18rem'}}>
+                <Card className="mx-auto" style={{width: '18rem'}}>
                     <Card.Body>
-                        <Card.Title> Sign In </Card.Title>
+                        <Card.Title > Sign In </Card.Title>
                         <label>User: <input id="user" type="text" /></label>
                         <label>Name:<input id="name" type="text" /></label>
                         <label>Surname:<input id="surname" type="text" /></label>
                         <label>Cellphone:<input id="cell" type="text" /></label>
                         <label>Password:<input id="pass" type="password" /></label>
                         <label>Confirm Password:<input id="npass" type="password"/></label>
-                        <Button  onClick={()=>window.location="/"} variant="outline-danger">Back</Button>
-                        <Button  onClick={signIn} variant="outline-primary">Register</Button>
+                        <div className="row">
+                            <div className="col-5">
+                                <Button  onClick={()=>window.location="/"} variant="outline-danger">Back</Button>
+                            </div>
+                            <div className="col-4">
+                                <Button  onClick={signIn} variant="outline-primary">Register</Button>
+                            </div>
+                        </div>
+
+
                     </Card.Body>
                 </Card>
             </div>
