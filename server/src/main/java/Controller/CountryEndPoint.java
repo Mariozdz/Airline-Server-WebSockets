@@ -39,9 +39,6 @@ public class CountryEndPoint {
         try {
             System.out.println(message.getString("Action"));
             interpretar(message,session);
-            /*session.getBasicRemote().sendObject(message);
-            session.getBasicRemote().sendObject(message);*/
-
 
         } catch ( EncodeException | IOException e) {
             e.printStackTrace();

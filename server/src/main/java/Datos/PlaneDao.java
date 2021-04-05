@@ -2,6 +2,8 @@ package Datos;
 
 import Logic.Plane;
 import oracle.jdbc.OracleTypes;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -18,7 +20,7 @@ public class PlaneDao extends Datos.InterfaceDao<Plane,Integer> {
     }
     @Override
     public void insert(Plane p) throws Throwable {
-        String sp = "{CALL prc_insert_planet(?)}";
+        String sp = "{CALL prc_insert_plane(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, p.getTypeplaneid());
 
@@ -94,6 +96,30 @@ public class PlaneDao extends Datos.InterfaceDao<Plane,Integer> {
             ResultSet rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
                 result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
+
+    public JSONArray getCompletePlane()
+    {
+        JSONArray result = new JSONArray();
+        try {
+            String sp = "{? = call fn_get_planeandtype()}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                JSONObject temp = new JSONObject();
+                temp.put("id",rs.getInt("ID"));
+                temp.put("typeplaneid",rs.getInt("TypePlaneId"));
+                temp.put("model",rs.getString("Model"));
+                temp.put("brand",rs.getString("Brand"));
+                temp.put("numberrow",rs.getInt("NumberRow"));
+                temp.put("numbercolums",rs.getInt("NumberColums"));
+                result.put(temp);
             }
         } finally {
             return result;

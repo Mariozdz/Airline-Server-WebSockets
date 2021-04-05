@@ -26,3 +26,22 @@ RETURN login_cursor;
 END;
 /
 
+
+create or replace view rep_country as 
+select p.ID, p.TypePlaneId, T.Model, T.Brand, T.NumberRow, T.NumberColums 
+from Plane p, TypePlane T
+where p.TypePlaneId = T.ID;
+
+
+CREATE OR REPLACE FUNCTION fn_get_planeandtype
+RETURN SYS_REFCURSOR
+AS
+    get_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN get_cursor FOR
+        SELECT * from rep_country;
+RETURN get_cursor;
+END;
+/
+
+

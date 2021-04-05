@@ -42,16 +42,16 @@ Auxiliar/DecoderJson.java
  Auxiliar.DecoderJson
 Controller/RouteEndPoint.java
  Controller.RouteEndPoint
-Controller/PlaneEndPoint.java
- Controller.PlaneEndPoint
+Datos/CountryDao.java
+ Datos.CountryDao
 Logic/Route.java
  Logic.Route
 Auxiliar/EncoderArrayJson.java
  Auxiliar.EncoderArrayJson
 Model/TicketModel.java
  Model.TicketModel
-Model/PlaneModel.java
- Model.PlaneModel
+Model/CountryModel.java
+ Model.CountryModel
 Logic/Ticket.java
  Logic.Ticket
 Datos/Dao.java
@@ -66,8 +66,8 @@ Controller/PurchaseEndPoint.java
  Controller.PurchaseEndPoint
 Logic/Auser.java
  Logic.Auser
-Datos/PlaneDao.java
- Datos.PlaneDao
+Controller/CountryEndPoint.java
+ Controller.CountryEndPoint
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
 Logic/Flight.java
@@ -76,9 +76,9 @@ Model/UserModel.java
  Model.UserModel
 Controller/UserEndPoint.java
  Controller.UserEndPoint
-Model/CountryModel.java
- Model.CountryModel
-Datos/CountryDao.java
- Datos.CountryDao
-Controller/CountryEndPoint.java
- Controller.CountryEndPoint
+Controller/PlaneEndPoint.java
+ Controller.PlaneEndPoint
+Datos/PlaneDao.java
+ Datos.PlaneDao
+Model/PlaneModel.java
+ Model.PlaneModel

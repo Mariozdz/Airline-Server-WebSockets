@@ -26,7 +26,7 @@ end prc_insert_typeplane;
 /
 show error
 
-create or replace procedure prc_insert_plane(Pid in number,
+create or replace procedure prc_insert_plane(
  PtypePlane in number)
  is begin
   insert into Plane(ID, typePlaneid) values(Plane_sec.nextval,Ptypeplane);

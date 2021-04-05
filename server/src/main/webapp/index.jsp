@@ -11,23 +11,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Model.CountryModel" %>
 <%@ page import="org.json.JSONArray" %>
+<%@ page import="Model.PlaneModel" %>
+<%@ page import="Datos.PlaneDao" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% ConnectionSQL.getInstance();  %>
 
-<%  CountryModel mode = CountryModel.getInstance();
-    List<Country> count = mode.search();
-
-    for (Country I : count)
-    {
-        System.out.println(I.getName());
-    }
-
-    JSONObject k = new JSONObject(count);
-    JSONArray o = new JSONArray(count);
-    System.out.println(k);
-    System.out.println(o);
-
-
+<%  System.out.println(new PlaneDao().getCompletePlane());
 
 %>
 <!DOCTYPE html>

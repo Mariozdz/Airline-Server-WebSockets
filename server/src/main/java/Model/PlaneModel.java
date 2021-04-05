@@ -2,6 +2,7 @@ package Model;
 
 import Datos.PlaneDao;
 import Logic.Plane;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class PlaneModel {
     }
     public List<Plane> search() throws Throwable {
         return entity.search();
+    }
+    public JSONArray GetCompletePlane()
+    {
+        return entity.getCompletePlane();
     }
 
 }
