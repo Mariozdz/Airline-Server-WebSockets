@@ -1,6 +1,8 @@
 package Logic;
 
 
+import java.sql.Date;
+
 public class Flight {
 
   private int id;
@@ -28,11 +30,11 @@ public class Flight {
   }
 
 
-  public java.sql.Date getOutbounddate() {
+  public Date getOutbounddate() {
     return outbounddate;
   }
 
-  public void setOutbounddate(java.sql.Date outbounddate) {
+  public void setOutbounddate(Date outbounddate) {
     this.outbounddate = outbounddate;
   }
 
@@ -46,11 +48,11 @@ public class Flight {
   }
 
 
-  public java.sql.Date getArrivetime() {
+  public Date getArrivetime() {
     return arrivetime;
   }
 
-  public void setArrivetime(java.sql.Date arrivetime) {
+  public void setArrivetime(Date arrivetime) {
     this.arrivetime = arrivetime;
   }
 

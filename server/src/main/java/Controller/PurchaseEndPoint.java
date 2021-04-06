@@ -1,16 +1,30 @@
 package Controller;
 
+import Auxiliar.DecoderJson;
+import Auxiliar.EncoderArrayJson;
+import Auxiliar.EnconderJson;
+import Logic.Country;
+import Logic.Purchase;
+import Logic.Ticket;
+import Model.PurchaseModel;
+import Model.TicketModel;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
-@ServerEndpoint(value = "/purchase")
+@ServerEndpoint(value = "/purchase",
+        encoders = {EnconderJson.class, EncoderArrayJson.class},
+        decoders = {DecoderJson.class})
 public class PurchaseEndPoint {
 
     private static Set<Session> sessions = new HashSet<>();
+    private static JSONObject nullobj = new JSONObject("{ none : \"none\"}");
 
     @OnOpen
     public void onOpen(Session session) {
@@ -19,11 +33,11 @@ public class PurchaseEndPoint {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) {
+    public void onMessage(JSONObject message, Session session) throws Throwable {
         System.out.println("Message received: " + message + " from " + session.getId());
         try {
-            session.getBasicRemote().sendObject(message);
-            session.getBasicRemote().sendObject(message);
+            System.out.println(message.getString("Action"));
+            interpretar(message,session);
 
 
         } catch ( EncodeException | IOException e) {
@@ -41,6 +55,71 @@ public class PurchaseEndPoint {
         System.out.println("WebSocket closed for " + session.getId()
                 + " with reason " + closeReason.getCloseCode());
         sessions.remove(session);
+    }
+
+    public void broadcast(JSONObject message) throws IOException, EncodeException {
+        for (Session s : sessions)
+        {
+
+            s.getBasicRemote().sendObject(message);
+        }
+    }
+
+    public void interpretar(JSONObject message, Session session) throws Throwable {
+        String action = message.getString("Action").toUpperCase(Locale.ROOT);
+
+        switch(action)
+        {
+            case "GET": {
+                int id = message.getInt("id");
+                JSONObject g = new JSONObject(PurchaseModel.getInstance().Get(id));
+                session.getBasicRemote().sendObject(g);
+                break;
+            }
+            case "GET_ALL": {
+                JSONArray u = new JSONArray(PurchaseModel.getInstance().search());
+                session.getBasicRemote().sendObject(u);
+                break;
+            }
+            case "UPDATE":{
+                Purchase l = new Purchase();
+                l.setId(message.getInt("id"));
+                l.setUserid( message.getString("userid"));
+                PurchaseModel.getInstance().Update(l);
+
+                broadcast(new JSONObject("{action: \"update\"}"));
+                break;
+            }
+            case "CREATE":
+            {
+                int id = message.getInt("id");
+
+                JSONArray temp = message.getJSONArray("asientos");
+
+                for (short i = 0; i < temp.length(); i++)
+                {
+                    JSONObject ticket = temp.getJSONObject(i);
+                    Ticket t = new Ticket();
+
+                    t.setPurchaseid(id);
+                    t.setSrow(ticket.getInt("x"));
+                    t.setScolum(ticket.getInt("y"));
+                    /*TicketModel.getInstance().Insert(t);*/
+                    System.out.print(ticket);
+
+                }
+
+                JSONObject asientos = new JSONObject("{action: \"update\",}");
+                asientos.put("asientos",temp);
+
+                broadcast(asientos);
+                break;
+            }
+            default: System.out.println("LLEGA AL DEFAULT");
+                session.getBasicRemote().sendObject(nullobj);
+                break;
+        }
+
     }
 
 }

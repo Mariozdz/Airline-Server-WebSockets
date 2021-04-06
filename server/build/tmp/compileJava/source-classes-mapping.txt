@@ -1,7 +1,7 @@
 Model/PlaneTypeModel.java
  Model.PlaneTypeModel
-Model/FlightModel.java
- Model.FlightModel
+Model/PlaneModel.java
+ Model.PlaneModel
 Controller/TypePlaneEndPoint.java
  Controller.TypePlaneEndPoint
 Datos/PurchaseDao.java
@@ -10,16 +10,16 @@ org/una/server/HelloServlet.java
  org.una.server.HelloServlet
 Datos/InterfaceDao.java
  Datos.InterfaceDao
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Controller/UserEndPoint.java
+ Controller.UserEndPoint
 Logic/Plane.java
  Logic.Plane
 Model/PurchaseModel.java
  Model.PurchaseModel
 Logic/Country.java
  Logic.Country
-Datos/FlightDao.java
- Datos.FlightDao
+Datos/PlaneDao.java
+ Datos.PlaneDao
 Auxiliar/EnconderJson.java
  Auxiliar.EnconderJson
 Logic/Planetype.java
@@ -28,8 +28,8 @@ Logic/Schedule.java
  Logic.Schedule
 Model/RouteModel.java
  Model.RouteModel
-Model/ScheduleModel.java
- Model.ScheduleModel
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Auxiliar/DecoderArrayJson.java
  Auxiliar.DecoderArrayJson
 Datos/RouteDao.java
@@ -56,29 +56,31 @@ Logic/Ticket.java
  Logic.Ticket
 Datos/Dao.java
  Datos.Dao
-Datos/ScheduleDao.java
- Datos.ScheduleDao
+Model/FlightModel.java
+ Model.FlightModel
 Datos/TicketDao.java
  Datos.TicketDao
 Logic/Purchase.java
  Logic.Purchase
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Controller/PlaneEndPoint.java
+ Controller.PlaneEndPoint
 Logic/Auser.java
  Logic.Auser
 Controller/CountryEndPoint.java
  Controller.CountryEndPoint
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
-Logic/Flight.java
- Logic.Flight
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
 Model/UserModel.java
  Model.UserModel
-Controller/UserEndPoint.java
- Controller.UserEndPoint
-Controller/PlaneEndPoint.java
- Controller.PlaneEndPoint
-Datos/PlaneDao.java
- Datos.PlaneDao
-Model/PlaneModel.java
- Model.PlaneModel
+Datos/FlightDao.java
+ Datos.FlightDao
+Logic/Flight.java
+ Logic.Flight
+Auxiliar/ConvertDate.java
+ Auxiliar.ConvertDate
+Model/ScheduleModel.java
+ Model.ScheduleModel
+Datos/ScheduleDao.java
+ Datos.ScheduleDao

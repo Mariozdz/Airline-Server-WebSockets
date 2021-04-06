@@ -60,7 +60,7 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
         String sp = "{? = call fn_getone_schedule(?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.registerOutParameter(1,OracleTypes.CURSOR);
-        pstmt.setInt(1, id);
+        pstmt.setInt(2, id);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to read the schedule.");
