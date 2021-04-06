@@ -5,6 +5,7 @@ import Auxiliar.EncoderArrayJson;
 import Auxiliar.EnconderJson;
 import Logic.Country;
 import Logic.Plane;
+import Logic.Planetype;
 import Model.CountryModel;
 import Model.PlaneModel;
 import Model.PlaneTypeModel;
@@ -83,7 +84,6 @@ public class PlaneEndPoint {
                 l.setId(message.getInt("id"));
                 l.setTypeplaneid(message.getInt("typeplaneid"));
                 PlaneModel.getInstance().Update(l);
-
                 broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
@@ -94,7 +94,33 @@ public class PlaneEndPoint {
                 broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
+            case "CREATE_TYPE":
+            {
+                Planetype k = new Planetype();
+                System.out.println("al menos aqui...");
+                k.setBrand( message.getString("brand"));
+                k.setModel(message.getString("model"));
+                k.setNumbercolums(message.getInt("Numbercolums"));
+                k.setNumberrow(message.getInt("Numberrow"));
+                PlaneTypeModel.getInstance().Insert(k);
+                System.out.println("also aqui...");
+                broadcast(new JSONObject("{action: \"update\"}"));
+                break;
+            }
 
+            case "UPDATE_TYPE":{
+                Planetype l = new Planetype();
+                System.out.println("al menos aqui...");
+                l.setId(message.getInt("id"));
+                l.setBrand( message.getString("brand"));
+                l.setModel(message.getString("model"));
+                l.setNumbercolums(message.getInt("numbercolums"));
+                l.setNumberrow(message.getInt("numberrow"));
+                System.out.println("also aqui...");
+                PlaneTypeModel.getInstance().Update(l);
+                broadcast(new JSONObject("{action: \"update\"}"));
+                break;
+            }
             case "GET_COMPLETE":
             {
                 session.getBasicRemote().sendObject(PlaneModel.getInstance().GetCompletePlane());
