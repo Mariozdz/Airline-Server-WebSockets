@@ -92,6 +92,18 @@ public class PurchaseEndPoint {
             }
             case "CREATE":
             {
+                Purchase p = new Purchase();
+
+                p.setTickets(message.getInt("tickets"));
+                p.setUserid(message.getString("userid"));
+                p.setFlightid(message.getInt("flightid"));
+
+                if (message.getBoolean("returnflightid")) {
+                    p.setReturnflightid(message.getInt("returnflightid"));
+                }
+            }
+            case "CREATE_TICKETS":
+            {
                 int id = message.getInt("id");
 
                 JSONArray temp = message.getJSONArray("asientos");

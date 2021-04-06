@@ -98,6 +98,12 @@ public class CountryEndPoint {
                 broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
+            case "DELETE":
+            {
+                CountryModel.getInstance().Delete(message.getInt("id"));
+                broadcast(new JSONObject("{action: \"update\"}"));
+                break;
+            }
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(nullobj);
                 break;

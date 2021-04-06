@@ -35,20 +35,23 @@ public class FlightModel {
 
 
         Schedule temp = ScheduleModel.getInstance().Get(u.getOutbound());
-        System.out.println("paso el schedule");
         Route tempr = RouteModel.getInstance().Get(temp.getRouteid());
-        System.out.println("paso el route");
-
         Calendar cal = Calendar.getInstance();
         cal.setTime(temp.getSdate());
-
         cal.add(Calendar.HOUR_OF_DAY, tempr.getDuration());
-
         u.setArrivetime(new java.sql.Date(cal.getTime().getTime()));
 
         entity.insert(u);
     }
     public void Update(Flight u) throws Throwable {
+
+        Schedule temp = ScheduleModel.getInstance().Get(u.getOutbound());
+        Route tempr = RouteModel.getInstance().Get(temp.getRouteid());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(temp.getSdate());
+        cal.add(Calendar.HOUR_OF_DAY, tempr.getDuration());
+        u.setArrivetime(new java.sql.Date(cal.getTime().getTime()));
+
         entity.update(u);
     }
     public void Delete(int id) throws Throwable {

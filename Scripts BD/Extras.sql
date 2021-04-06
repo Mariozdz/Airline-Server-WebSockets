@@ -73,3 +73,21 @@ begin
   
 end fn_cantida_espacios;
 /
+
+
+create or replace view rep_schedule as 
+select to_char(s.Sdate,'hh24:mi') Sdate, r.Duration,r.price,r.Discount, c1.name origen, c2.name destino
+from Schedule s, Route r, Country c1, Country c2, Plane p, TypePlane t
+where s.RouteId = r.ID and r.OrigenId = c1.ID and r.DestinoId = c2.ID;
+
+
+CREATE OR REPLACE FUNCTION fn_horarios
+RETURN SYS_REFCURSOR
+AS
+    get_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN get_cursor FOR
+        SELECT * from rep_schedule;
+RETURN get_cursor;
+END;
+/

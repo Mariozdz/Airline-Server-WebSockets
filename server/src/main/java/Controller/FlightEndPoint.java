@@ -90,7 +90,6 @@ public class FlightEndPoint {
                 l.setOutbound(message.getInt("outboundid"));
                 l.setOutbounddate(java.sql.Date.valueOf(message.getString("outbounddate")));
                 l.setPlaneid( message.getInt("planeid"));
-                l.setArrivetime(java.sql.Date.valueOf(message.getString("arrivetime")));
 
                 FlightModel.getInstance().Update(l);
 

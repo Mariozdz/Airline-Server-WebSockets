@@ -2,7 +2,10 @@ package Model;
 
 
 import Datos.PurchaseDao;
+import Logic.Flight;
 import Logic.Purchase;
+import Logic.Route;
+import Logic.Schedule;
 
 import java.util.List;
 
@@ -26,6 +29,12 @@ public class PurchaseModel {
     }
 
     public void Insert(Purchase u) throws Throwable {
+
+        Flight f = FlightModel.getInstance().Get(u.getFlightid());
+        Schedule s = ScheduleModel.getInstance().Get(f.getOutbound());
+        Route r = RouteModel.getInstance().Get(s.getRouteid());
+        u.setTotalprice(u.getTickets() * r.getPrice());
+
         entity.insert(u);
     }
     public void Update(Purchase u) throws Throwable {
