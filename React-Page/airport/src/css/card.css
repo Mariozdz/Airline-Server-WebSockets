@@ -28,3 +28,10 @@ input[type=password] {
 input[type=password]:focus {
     border-color:#333;
 }
+
+.select{
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 25px;
+    border-radius: 5px;
+}

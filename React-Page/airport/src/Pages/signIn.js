@@ -5,8 +5,14 @@ import swal from "sweetalert";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
 
-function onMessage(event) {
-    swal("New User","Your user has been created","info").then(()=> window.location="/");
+function onMessage(event,client) {
+    let message= JSON.parse(event.data);
+    if(message.estado==="Correcto") {
+        client.close();
+        swal("New User", "Your user has been created", "info").then(() => window.location = "/");
+    }else{
+        swal("Error","Something fail , user can't be created","error");
+    }
 }
 
 function onError(event) {
@@ -27,7 +33,7 @@ function signIn(){
                 onError(event)
             };
             client.onmessage = function (event) {
-                onMessage(event)
+                onMessage(event,client)
             };
             let message={
                 Action:"CREATE",

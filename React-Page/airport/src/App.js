@@ -14,6 +14,8 @@ import AeditProfile from "./Pages/AeditProfile";
 import signIn from  "./Pages/signIn"
 import countryManage from "./Pages/countryManage";
 import typeplane from "./Pages/type";
+import plane from "./Pages/plane";
+
 
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
@@ -36,6 +38,7 @@ class App extends Component{
             <Route exact path="/AeditProfile" component={ getUser()===null? Login: getUser().usertype===0?AeditProfile:NotAccess}/>
             <Route exact path="/Admin/Country" component={getUser()===null? Login: getUser().usertype===0? countryManage:NotAccess}/>
             <Route exact path="/Admin/Plane/Type" component={getUser()===null? Login: getUser().usertype===0? typeplane:NotAccess}/>
+            <Route exact path="/Admin/Plane/Plane" component={getUser()===null? Login: getUser().usertype===0? plane:NotAccess}/>
             <Route exact path="/404" component={NotFound}/>
             <Route exact path="/Test" component={AProfile}/>
             <Route exact path="/NotAccess" component={NotAccess}/>

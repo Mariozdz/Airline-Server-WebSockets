@@ -7,7 +7,13 @@ import {w3cwebsocket as W3CWebSocket} from "websocket/lib/websocket";
 
 
 function onMessage(event) {
-    swal("User updated","Your user has been updated","info").then(()=> window.location="/");
+    let message= JSON.parse(event.data)
+    if(message.estado==="Correcto"){
+        swal("User updated","Your user has been updated","info").then(()=> window.location="/");
+    }else if(message.none==="none"){
+        swal("error","User can't be updated","error");
+    }
+
 }
 
 function onError(event) {

@@ -7,10 +7,14 @@ import { Link } from 'react-router-dom';
 
 function onMessage(event,client) {
         let user= JSON.parse(event.data);
-        alert(user.usertype)
-        sessionStorage.setItem("user",JSON.stringify(user));
-        client.close();
-        window.location="/";
+        if(user.none==="none"){
+            swal("Fail","Your credentials are incorrect","error");
+            client.close();
+        }else{
+            sessionStorage.setItem("user",JSON.stringify(user));
+            client.close();
+            window.location="/";
+        }
 }
 
 function onError(event) {
