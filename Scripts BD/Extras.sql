@@ -60,3 +60,16 @@ BEGIN
 RETURN get_cursor;
 END;
 /
+
+
+create or replace function fn_cantida_espacios(Pid in number) return number as
+Vcant number;
+begin
+	select sum(Tickets)
+	into Vcant
+	from Purchase
+	where FlightId =  pid;
+	return Vcant;
+  
+end fn_cantida_espacios;
+/

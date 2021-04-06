@@ -25,7 +25,6 @@ public class PurchaseModel {
         return instance;
     }
 
-
     public void Insert(Purchase u) throws Throwable {
         entity.insert(u);
     }
@@ -40,5 +39,13 @@ public class PurchaseModel {
     }
     public List<Purchase> search() throws Throwable {
         return entity.search();
+    }
+
+    public List<Purchase> getbyflight(int id) throws Throwable {
+        return entity.getbyflight(id);
+    }
+
+    public int getCantTickets(int id) throws Exception {
+        return entity.ticketsComprados(id);
     }
 }

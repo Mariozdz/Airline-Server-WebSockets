@@ -109,4 +109,31 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
         }
     }
 
+    public List<Purchase> getbyflight(int id) throws Throwable {
+        List<Purchase> result = new ArrayList();
+        try {
+            String sp = "{? = call fn_get_purchasebyfligh(?)}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setInt(2, id);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
+
+    public int ticketsComprados(int id) throws Exception {
+        String sp = "{? = call fn_cantida_espacios(?)}";
+        CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.INTEGER);
+        pstmt.setInt(2, id);
+        pstmt.execute();
+        return pstmt.getInt(1);
+    }
+
+
 }

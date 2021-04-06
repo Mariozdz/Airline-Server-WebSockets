@@ -64,6 +64,15 @@ public class FlightModel {
     public JSONArray getCompleteFlight() throws Throwable {
 
         JSONArray response = entity.getCompleteFlight();
+
+        JSONArray response2 = new JSONArray();
+
+        for (int i= 0; i < response.length();i++) {
+            JSONObject j = response.getJSONObject(i);
+            int total = j.getInt("cantidadasientos") - PurchaseModel.getInstance().getCantTickets(j.getInt("id"));
+            j.put("disponibles",total);
+            response2.put(j);
+        }
         return response;
     }
 

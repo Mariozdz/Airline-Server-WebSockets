@@ -98,3 +98,14 @@ BEGIN
 RETURN country_cursor;
 END;
 /
+
+create or replace Function fn_get_purchasebyfligh(Pid in number)
+RETURN SYS_REFCURSOR
+AS
+    purchase_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN purchase_cursor FOR
+        SELECT * FROM Purchase where FlightId = Pid;
+RETURN purchase_cursor;
+END;
+/

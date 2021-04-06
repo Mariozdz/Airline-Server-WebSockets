@@ -84,5 +84,9 @@ insert into Schedule(ID,RouteId,STime,Sdate)
  insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,19,TO_DATE('2003/05/03', 'yyyy/mm/dd'),102, TO_DATE('1:30', 'hh24:mi'));
  insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,20,TO_DATE('2003/05/03', 'yyyy/mm/dd'),103, TO_DATE('16:40', 'hh24:mi'));
  insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,21,TO_DATE('2003/05/03', 'yyyy/mm/dd'),104, TO_DATE('01:30', 'hh24:mi'));
+ 
+ insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
+ insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
+ insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
 
 commit;
