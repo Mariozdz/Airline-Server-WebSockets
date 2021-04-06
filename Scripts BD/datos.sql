@@ -79,11 +79,11 @@ insert into Schedule(ID,RouteId,STime,Sdate)
  values(Schedule_sec.nextval, 2, 4, TO_DATE('20:30', 'hh24:mi'));
 
 
- insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,17,TO_DATE('2003/05/03', 'yyyy/mm/dd'),100, TO_DATE('18:30', 'hh24:mi'));
- insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,18,TO_DATE('2003/05/10', 'yyyy/mm/dd'),101, TO_DATE('23:59', 'hh24:mi'));
- insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,19,TO_DATE('2003/05/03', 'yyyy/mm/dd'),102, TO_DATE('1:30', 'hh24:mi'));
- insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,20,TO_DATE('2003/05/03', 'yyyy/mm/dd'),103, TO_DATE('16:40', 'hh24:mi'));
- insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,21,TO_DATE('2003/05/03', 'yyyy/mm/dd'),104, TO_DATE('01:30', 'hh24:mi'));
+ insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,1,TO_DATE('2003/05/03', 'yyyy/mm/dd'),100, TO_DATE('18:30', 'hh24:mi'));
+ insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,2,TO_DATE('2003/05/10', 'yyyy/mm/dd'),101, TO_DATE('23:59', 'hh24:mi'));
+ insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,3,TO_DATE('2003/05/03', 'yyyy/mm/dd'),102, TO_DATE('1:30', 'hh24:mi'));
+ insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,4,TO_DATE('2003/05/03', 'yyyy/mm/dd'),103, TO_DATE('16:40', 'hh24:mi'));
+ insert into Flight(ID, outbound, OutboundDate,PlaneId,ArriveTime) values (Flight_sec.nextval,5,TO_DATE('2003/05/03', 'yyyy/mm/dd'),104, TO_DATE('01:30', 'hh24:mi'));
  
  insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
  insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );

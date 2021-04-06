@@ -27,10 +27,12 @@ client.onmessage = async function (event) {
     }else if(message.none==="none"){
         swal("fail","execution failed","error")
     }else if(message!==undefined && message!==null){
+        let div=document.getElementById("update table");
         sessionStorage.setItem("countries",JSON.stringify(message));
-        if(document.getElementById("update table")!==null) {
-            //document.getElementById("update table").removeChild();
-            ReactDOM.render(await renderTable(selectRow,options),document.getElementById("update table"));
+        if(div!==null) {
+            ReactDOM.unmountComponentAtNode(document.getElementById("update table"));
+            let table=await renderTable(selectRow,options);
+            ReactDOM.render(table,div);
         }
     }
 
