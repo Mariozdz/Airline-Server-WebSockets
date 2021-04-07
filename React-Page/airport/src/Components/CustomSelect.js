@@ -2,9 +2,6 @@ import React,{Component} from "react";
 import "../css/card.css";
 
 class CustomSelect extends Component{
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return<select id={this.props.id}>

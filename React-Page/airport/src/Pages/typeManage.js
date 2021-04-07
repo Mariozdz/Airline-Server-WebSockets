@@ -27,8 +27,7 @@ client.onmessage = function (event) {
             if(message.action==="update"){
                 swal("Excecution successfull","","success");
                 setTimeout( ()=> client.send("{Action:'get_all_typeplane'}"),100)
-            }else if(message[0]!==null){
-                if(message[0].brand!==undefined)
+            }else if(message!==null){
                     sessionStorage.setItem("typeplanes", event.data);
                 if (document.getElementById("update typetable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("update typetable"));
@@ -104,8 +103,8 @@ function renderTypeTable(selecRow,options){
     let data=JSON.parse(sessionStorage.getItem("typeplanes"));
    return( <BootstrapTable data={data} hover={true} cellEdit={ cellEditProp } pagination={ true } options={ options } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
+       <TableHeaderColumn dataField="model"filter={ { type: 'TextFilter', delay: 500 }}>Model</TableHeaderColumn>
         <TableHeaderColumn dataField="brand" filter={ { type: 'TextFilter', delay: 500 }}>Brand</TableHeaderColumn>
-        <TableHeaderColumn dataField="model"filter={ { type: 'TextFilter', delay: 500 }}>Model</TableHeaderColumn>
         <TableHeaderColumn dataField="numbercolums" filter={ { type: 'TextFilter', delay: 500 }}>Number of columns</TableHeaderColumn>
         <TableHeaderColumn dataField="numberrow" filter={ { type: 'TextFilter', delay: 500 }}>Number of rows</TableHeaderColumn>
     </BootstrapTable>);

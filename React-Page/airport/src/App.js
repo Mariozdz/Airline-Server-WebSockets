@@ -15,7 +15,9 @@ import signIn from  "./Pages/signIn"
 import countryManage from "./Pages/countryManage";
 import typeplane from "./Pages/typeManage";
 import planeManage from "./Pages/planeManage";
-
+import FlightsManage from "./Pages/FlightsManage";
+import ScheduleManage from "./Pages/ScheduleManage";
+import RouteManage from "./Pages/RouteManage";
 
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
@@ -39,6 +41,9 @@ class App extends Component{
             <Route exact path="/Admin/Country" component={getUser()===null? Login: getUser().usertype===0? countryManage:NotAccess}/>
             <Route exact path="/Admin/Plane/Type" component={getUser()===null? Login: getUser().usertype===0? typeplane:NotAccess}/>
             <Route exact path="/Admin/Plane/Plane" component={getUser()===null? Login: getUser().usertype===0? planeManage:NotAccess}/>
+            <Route exact path="/Admin/Flights/Flights" component={getUser()===null? Login: getUser().usertype===0? FlightsManage:NotAccess}/>
+            <Route exact path="/Admin/Flights/Route" component={getUser()===null? Login: getUser().usertype===0? RouteManage:NotAccess}/>
+            <Route exact path="/Admin/Flights/Schedule" component={getUser()===null? Login: getUser().usertype===0? ScheduleManage:NotAccess}/>
             <Route exact path="/404" component={NotFound}/>
             <Route exact path="/Test" component={AProfile}/>
             <Route exact path="/NotAccess" component={NotAccess}/>

@@ -25,10 +25,14 @@ class AdminBar extends Component{
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto ml-auto">
                         <NavDropdown title="Planes" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="/Admin/Plane/Plane">Plane</NavDropdown.Item>
                             <NavDropdown.Item href="/Admin/Plane/Type">Types</NavDropdown.Item>
+                            <NavDropdown.Item href="/Admin/Plane/Plane">Plane</NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#pricing">Flights</Nav.Link>
+                        <NavDropdown title="Flights" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="/Admin/Flights/Route">Routes</NavDropdown.Item>
+                            <NavDropdown.Item href="/Admin/Flights/Schedule">Schedules</NavDropdown.Item>
+                            <NavDropdown.Item href="/Admin/Flights/Flights">Flights</NavDropdown.Item>
+                        </NavDropdown>
                         <Nav.Link href="/Admin/Country">Countries</Nav.Link>
                         <Nav.Link href="#ss">Users</Nav.Link>
                         <Nav.Link href="/customer">Go to shop</Nav.Link>
