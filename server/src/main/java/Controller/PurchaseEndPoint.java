@@ -100,6 +100,8 @@ public class PurchaseEndPoint {
 
                 if (message.has("returnflightid")) {
                     p.setReturnflightid(message.getInt("returnflightid"));
+                }else {
+                    p.setReturnflightid(0);
                 }
                 System.out.println("VA ENTRAR");
                 PurchaseModel.getInstance().Insert(p);

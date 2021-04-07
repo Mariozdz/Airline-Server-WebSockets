@@ -35,6 +35,16 @@ public class PurchaseModel {
         Route r = RouteModel.getInstance().Get(s.getRouteid());
         u.setTotalprice(u.getTickets() * r.getPrice());
 
+        if (u.getReturnflightid() != 0)
+        {
+            f = FlightModel.getInstance().Get(u.getReturnflightid());
+            s = ScheduleModel.getInstance().Get(f.getOutbound());
+            r = RouteModel.getInstance().Get(s.getRouteid());
+            double total = (u.getTickets() * r.getPrice());
+            u.setTotalprice(u.getTotalprice()+ total);
+        }
+
+
         entity.insert(u);
     }
     public void Update(Purchase u) throws Throwable {
