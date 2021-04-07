@@ -77,6 +77,7 @@ public class FlightEndPoint {
                 int id = message.getInt("id");
                 JSONObject g = new JSONObject(FlightModel.getInstance().Get(id));
                 session.getBasicRemote().sendObject(g);
+
                 break;
             }
             case "GET_ALL": {

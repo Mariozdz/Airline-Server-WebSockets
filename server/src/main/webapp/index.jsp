@@ -17,16 +17,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <% ConnectionSQL.getInstance();  %>
 
-<% /* FlightDao dao = new FlightDao();
+<%  FlightDao dao = new FlightDao();
 
     Flight f = new Flight();
 
-    f.setOutbound(17);
+   /* f.setOutbound(17);
     f.setOutbounddate(ConvertDate.getInstance().getDate("2018-04-23 15:30"));
     f.setPlaneid(107);
-    f.setArrivetime(ConvertDate.getInstance().getDate("2018-04-23 15:57"));
+    f.setArrivetime(ConvertDate.getInstance().getDate("2018-04-23 15:57"));*/
 
-    dao.insert(f);*/
 
 
 %>

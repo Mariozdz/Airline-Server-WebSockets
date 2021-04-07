@@ -98,9 +98,12 @@ public class PurchaseEndPoint {
                 p.setUserid(message.getString("userid"));
                 p.setFlightid(message.getInt("flightid"));
 
-                if (message.getBoolean("returnflightid")) {
+                if (message.has("returnflightid")) {
                     p.setReturnflightid(message.getInt("returnflightid"));
                 }
+                System.out.println("VA ENTRAR");
+                PurchaseModel.getInstance().Insert(p);
+                break;
             }
             case "CREATE_TICKETS":
             {

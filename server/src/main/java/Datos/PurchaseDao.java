@@ -23,7 +23,11 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
         pstmt.setString(2, p.getUserid());
         pstmt.setDouble(3, p.getTotalprice());
         pstmt.setInt(4,p.getTickets());
-        pstmt.setInt(5,p.getReturnflightid());
+        System.out.println(p.getReturnflightid());
+        if (p.getReturnflightid() != 0) {
+            pstmt.setInt(5, p.getReturnflightid());
+        }else
+            pstmt.setNull(5, OracleTypes.INTEGER);
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to insert the purchase");

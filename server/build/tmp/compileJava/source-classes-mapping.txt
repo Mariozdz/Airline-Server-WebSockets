@@ -62,25 +62,25 @@ Datos/TicketDao.java
  Datos.TicketDao
 Logic/Purchase.java
  Logic.Purchase
-Controller/PlaneEndPoint.java
- Controller.PlaneEndPoint
+Model/FlightModel.java
+ Model.FlightModel
 Logic/Auser.java
  Logic.Auser
-Controller/CountryEndPoint.java
- Controller.CountryEndPoint
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
 Datos/ScheduleDao.java
  Datos.ScheduleDao
 Datos/FlightDao.java
  Datos.FlightDao
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Controller/PlaneEndPoint.java
+ Controller.PlaneEndPoint
 Model/PurchaseModel.java
  Model.PurchaseModel
+Controller/CountryEndPoint.java
+ Controller.CountryEndPoint
 Datos/PurchaseDao.java
  Datos.PurchaseDao
-Model/FlightModel.java
- Model.FlightModel
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
