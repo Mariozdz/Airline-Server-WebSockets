@@ -22,10 +22,6 @@ client.onerror = function (event) {
 function onError(event){
     swal("Connection Error:"+event.data);
 }
-const  cellEditProp = {
-    mode: 'dbclick'
-};
-
 
 client.onmessage = function (event) {
     let message = JSON.parse(event.data);
@@ -37,8 +33,7 @@ client.onmessage = function (event) {
             if (message.action === "update") {
                 swal("Excecution successfull", "", "success");
                 setTimeout(() => client.send("{Action:'get_all'}"), 100)
-            } else if (message[0] !== null) {
-                if (message[0].typeplaneid !== undefined)
+            } else if (message !== null) {
                 sessionStorage.setItem("planes", event.data);
                 if (document.getElementById("update planetable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("update planetable"));
@@ -101,7 +96,7 @@ function renderShowsTotal(start, to, total) {
 function ParceText(data,id){
    let list=JSON.parse(sessionStorage.typeplanes);
    let out=data.map(ele=>{
-      let obj=list.find(x=>x.id==ele.typeplaneid);
+      let obj=list.find(x=>x.id===ele.typeplaneid);
        return {id:ele.id,typeplaneid:obj.model+" "+obj.brand+" col: "+obj.numbercolums+" row: "+obj.numberrow}
    });
    return out;
