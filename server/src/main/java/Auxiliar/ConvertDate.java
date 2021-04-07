@@ -24,6 +24,7 @@ public class ConvertDate {
 
     public Date timetodate(String time)
     {
+
         String fecha = "2015-05-05 "+time;
         Calendar dat = Calendar.getInstance();
         dat.set(Calendar.YEAR, Integer.valueOf(fecha.substring(0,4)));

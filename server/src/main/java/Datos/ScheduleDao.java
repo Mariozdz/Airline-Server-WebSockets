@@ -2,6 +2,8 @@ package Datos;
 
 import Logic.Schedule;
 import oracle.jdbc.OracleTypes;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -105,4 +107,30 @@ public class ScheduleDao extends InterfaceDao<Schedule, Integer>{
             return result;
         }
     }
+
+    public JSONArray getCompleteSchedule() throws Throwable {
+        JSONArray result = new JSONArray();
+        try {
+            String sp = "{? = call fn_schedule()}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                JSONObject temp = new JSONObject();
+                temp.put("id",rs.getInt("ID"));
+                temp.put("sdate",rs.getString("Sdate"));
+                temp.put("stime",rs.getInt("Stime"));
+                temp.put("duration",rs.getInt("Duration"));
+                temp.put("price",rs.getDouble("Price"));
+                temp.put("discount",rs.getDouble("Discount"));
+                temp.put("origen",rs.getString("Origen"));
+                temp.put("destino", rs.getString("Destino"));
+                result.put(temp);
+            }
+        } finally {
+            return result;
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ package Model;
 
 import Datos.ScheduleDao;
 import Logic.Schedule;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -41,4 +42,8 @@ public class ScheduleModel {
     public List<Schedule> search() throws Throwable {
         return entity.search();
     }
+    public JSONArray getCompleteSchedule() throws Throwable {
+        return entity.getCompleteSchedule();
+    }
+
 }
