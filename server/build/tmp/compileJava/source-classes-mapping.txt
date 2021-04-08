@@ -10,8 +10,8 @@ Datos/CountryDao.java
  Datos.CountryDao
 Datos/InterfaceDao.java
  Datos.InterfaceDao
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Datos/ScheduleDao.java
+ Datos.ScheduleDao
 Model/CountryModel.java
  Model.CountryModel
 Logic/Flight.java
@@ -50,8 +50,8 @@ Auxiliar/EncoderArrayJson.java
  Auxiliar.EncoderArrayJson
 Controller/UserEndPoint.java
  Controller.UserEndPoint
-Auxiliar/ConvertDate.java
- Auxiliar.ConvertDate
+Model/ScheduleModel.java
+ Model.ScheduleModel
 Controller/CountryEndPoint.java
  Controller.CountryEndPoint
 Logic/Ticket.java
@@ -80,9 +80,9 @@ Logic/Schedule.java
  Logic.Schedule
 Model/PurchaseModel.java
  Model.PurchaseModel
+Auxiliar/ConvertDate.java
+ Auxiliar.ConvertDate
 Controller/ScheduleEndPoint.java
  Controller.ScheduleEndPoint
-Model/ScheduleModel.java
- Model.ScheduleModel
-Datos/ScheduleDao.java
- Datos.ScheduleDao
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint

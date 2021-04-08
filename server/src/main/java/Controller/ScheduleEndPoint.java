@@ -89,11 +89,18 @@ public class ScheduleEndPoint {
             }
             case "UPDATE_SCHEDULE":{
                 Schedule p = new Schedule();
+
+
+
                 p.setId(message.getInt("id"));
-                p.setSdate(ConvertDate.getInstance().timetodate("sdate")); /*Aqui me tiene que llegar la hora de salida "3:30" formato 24h*/
+                System.out.println("falla en fecha");
+                p.setSdate(ConvertDate.getInstance().timetodate(message.getString("sdate"))); /*Aqui me tiene que llegar la hora de salida "3:30" formato 24h*/
+                System.out.println("o no falla ahbi");
                 p.setRouteid(message.getInt("routeid"));
                 p.setStime(message.getInt("stime")); /*Numero del 1 alñ 7 que representa un dia*/
 
+
+                System.out.println("pasa estos carepingas");
                 ScheduleModel.getInstance().Update(p);
 
                 broadcast(new JSONObject("{action: \"update\"}"));
@@ -104,7 +111,7 @@ public class ScheduleEndPoint {
                 Schedule m = new Schedule();
                 System.out.println(message.getString("sdate"));
                 System.out.println(ConvertDate.getInstance().timetodate(message.getString("sdate")));
-                m.setSdate(ConvertDate.getInstance().timetodate(message.getString("sdate"))); /*Aqui me tiene que llegar la hora de salida "03:30" formato 24h* si es antes de las 12, agregar un 0 ejem 01:30,02:43,03:90/
+                m.setSdate(ConvertDate.getInstance().timetodate(message.getString("sdate"))); /*Aqui me tiene que llegar la hora de salida "03:30" formato 24h* si es antes de las 12, agregar un 0 ejem 01:30,02:43,03:90*/
                 m.setRouteid(message.getInt("routeid"));
                 m.setStime(message.getInt("stime")); /*Numero del 1 alñ 7 que representa un dia*/
 

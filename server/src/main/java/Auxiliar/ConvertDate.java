@@ -27,6 +27,7 @@ public class ConvertDate {
     {
 
         String fecha = "2015-05-05 "+time;
+
         Calendar dat = Calendar.getInstance();
         dat.set(Calendar.YEAR, Integer.valueOf(fecha.substring(0,4)));
         dat.set(Calendar.MONTH, Integer.valueOf(fecha.substring(5,7)));
