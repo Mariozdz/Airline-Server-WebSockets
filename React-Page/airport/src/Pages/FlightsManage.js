@@ -4,6 +4,8 @@ import {Card} from "react-bootstrap";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
+const Week=[{day:1,name:"Monday"},{day:2,name:"Tuesday"},{day:3,name:"Wednesday"},
+    {day:4,name:"Thursday"},{day:5,name:"Friday"},{day:6,name:"Saturday"},{day:7,name:"Sunday"}]
 
 const client = new WebSocket("ws://localhost:8089/server/flight");
 
@@ -21,7 +23,6 @@ function onError(event){
 client.onmessage = function (event) {
     let message = JSON.parse(event.data);
     if (message !== null && message !== undefined) {
-
         if (message.none === "none") {
             swal("Error", "Something fails", "error");
         } else {
@@ -32,7 +33,6 @@ client.onmessage = function (event) {
                 sessionStorage.setItem("flights", event.data);
 
                 if (document.getElementById("update flightTable") !== null) {
-                    alert("si esta")
                     ReactDOM.unmountComponentAtNode(document.getElementById("update flightTable"));
                     ReactDOM.render(renderflightsTable(selectRow, options), document.getElementById("update flightTable"));
                 }
@@ -93,14 +93,15 @@ function renderShowsTotal(start, to, total) {
 }
 function renderflightsTable(selectRow,options){
     let data=JSON.parse(sessionStorage.flights);
-    alert(sessionStorage.flights);
+    data.forEach(x=>x.stime=Week.find(y=>y.day===x.stime).name);
     return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="origen" filter={ { type: 'TextFilter', delay: 500 }}>Origen</TableHeaderColumn>
         <TableHeaderColumn dataField="destino" filter={ { type: 'TextFilter', delay: 500 }}>Destination</TableHeaderColumn>
         <TableHeaderColumn dataField="stime" filter={ { type: 'TextFilter', delay: 500 }}>week's day</TableHeaderColumn>
+        <TableHeaderColumn dataField="sdate" filter={ { type: 'TextFilter', delay: 500 }}>arrive hour</TableHeaderColumn>
         <TableHeaderColumn dataField="planeid" >Plane</TableHeaderColumn>
-        <TableHeaderColumn dataField="cantidadasientos" >available seats</TableHeaderColumn>
+        <TableHeaderColumn dataField="cantidadasientos" >Number of seats</TableHeaderColumn>
     </BootstrapTable>);
 
 }
@@ -109,11 +110,10 @@ class FlightsManage extends Component{
     render() {
      return(<div>
          <Bar></Bar>
-         <Card className="mx-auto" style={{width: '46rem'}}>
+         <Card className="mx-auto" style={{width: '70rem'}}>
              <Card.Body>
-                 <Card.Title className="text-center">Add Fligth</Card.Title>
                  <Card.Title className="text-center">Fligth List</Card.Title>
-                 <div className="update flightTable">
+                 <div id="update flightTable">
 
                  </div>
 

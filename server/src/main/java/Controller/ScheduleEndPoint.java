@@ -91,6 +91,7 @@ public class ScheduleEndPoint {
             }
             case "UPDATE_SCHEDULE":{
                 Schedule p = new Schedule();
+                p.setId(message.getInt("id"));
                 p.setSdate(ConvertDate.getInstance().timetodate("sdate")); /*Aqui me tiene que llegar la hora de salida "3:30" formato 24h*/
                 p.setRouteid(message.getInt("routeid"));
                 p.setStime(message.getInt("stime")); /*Numero del 1 alñ 7 que representa un dia*/
@@ -132,7 +133,7 @@ public class ScheduleEndPoint {
             case "UPDATE_ROUTE":
             {
                 Route t = new Route();
-
+                t.setId(message.getInt("id"));
                 t.setPrice(message.getFloat("price"));
                 t.setDuration(message.getInt("duration"));
                 t.setDestinoid(message.getInt("destinoid"));
