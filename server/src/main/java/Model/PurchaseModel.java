@@ -2,10 +2,10 @@ package Model;
 
 
 import Datos.PurchaseDao;
-import Logic.Flight;
-import Logic.Purchase;
-import Logic.Route;
-import Logic.Schedule;
+import Logic.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -67,4 +67,33 @@ public class PurchaseModel {
     public int getCantTickets(int id) throws Exception {
         return entity.ticketsComprados(id);
     }
+
+    public Boolean createTickets(JSONObject message) throws Throwable {
+
+        int id = message.getInt("purchaseid");
+
+        JSONArray temp = message.getJSONArray("asientos");
+
+        Purchase ptemp = this.Get(id);
+
+        if (temp.length() > ptemp.getTickets())
+        {
+            return false;
+        }
+
+        for (short i = 0; i < temp.length(); i++)
+        {
+            JSONObject ticket = temp.getJSONObject(i);
+            Ticket t = new Ticket();
+
+            t.setPurchaseid(id);
+            t.setSrow(ticket.getInt("x"));
+            t.setScolum(ticket.getInt("y"));
+            TicketModel.getInstance().Insert(t);
+            System.out.print(ticket);
+
+        }
+        return true;
+    }
+
 }
