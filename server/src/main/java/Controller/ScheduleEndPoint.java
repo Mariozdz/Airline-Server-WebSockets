@@ -78,9 +78,7 @@ public class ScheduleEndPoint {
                 break;
             }
             case "GET_ALL_SCHEDULE": {
-                JSONArray u = new JSONArray(ScheduleModel.getInstance().search());
-
-                session.getBasicRemote().sendObject(u);
+                session.getBasicRemote().sendObject(ScheduleModel.getInstance().searchWithHour());
                 break;
             }
             case "GET_ALL_ROUTE":{

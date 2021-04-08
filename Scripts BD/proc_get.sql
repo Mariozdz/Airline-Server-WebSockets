@@ -49,7 +49,7 @@ AS
     schedule_cursor SYS_REFCURSOR;
 BEGIN
     OPEN schedule_cursor FOR
-        SELECT ID, RouteId,to_char(Sdate, 'hh24:mi'),Sdate FROM Schedule;
+        SELECT ID, RouteId,Stime,to_char(Sdate, 'hh24:mi') Sdate FROM Schedule;
 RETURN schedule_cursor;
 END;
 /

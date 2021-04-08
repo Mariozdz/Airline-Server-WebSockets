@@ -46,4 +46,9 @@ public class ScheduleModel {
         return entity.getCompleteSchedule();
     }
 
+    public JSONArray searchWithHour() throws Throwable
+    {
+        return entity.searchWithHour();
+    }
+
 }
