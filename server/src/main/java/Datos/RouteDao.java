@@ -33,14 +33,14 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
 
     @Override
     public void update(Route r) throws Throwable {
-        String sp = "{CALL prc_update_route(?,?,?,?,?)}";
+        String sp = "{CALL prc_update_route(?,?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, r.getId());
         pstmt.setInt(2, r.getDuration());
         pstmt.setInt(3, r.getOrigenid());
         pstmt.setInt(4, r.getDestinoid());
         pstmt.setDouble(5, r.getPrice());
-        pstmt.setDouble(5, r.getDiscount());
+        pstmt.setDouble(6, r.getDiscount());
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the route");

@@ -4,6 +4,7 @@ import Datos.CountryDao;
 import Model.CountryModel;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ConvertDate {
@@ -48,4 +49,16 @@ public class ConvertDate {
         return new java.sql.Date(dat.getTime().getTime());
     }
 
+
+    public String getHour(Date date)
+    {
+
+        long val = date.getTime();
+        Date dal = new Date(val);
+        SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
+        String dateText = df2.format(dal);
+        System.out.println(dateText);
+
+        return "";
+    }
 }

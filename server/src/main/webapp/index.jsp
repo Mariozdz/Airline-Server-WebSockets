@@ -19,7 +19,7 @@
 
 <%  FlightDao dao = new FlightDao();
 
-    Flight f = new Flight();
+
 
    /* f.setOutbound(17);
     f.setOutbounddate(ConvertDate.getInstance().getDate("2018-04-23 15:30"));

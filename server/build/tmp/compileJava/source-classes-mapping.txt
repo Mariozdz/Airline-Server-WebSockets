@@ -26,14 +26,14 @@ Logic/Planetype.java
  Logic.Planetype
 Logic/Schedule.java
  Logic.Schedule
-Model/RouteModel.java
- Model.RouteModel
+Controller/ScheduleEndPoint.java
+ Controller.ScheduleEndPoint
 Controller/CountryEndPoint.java
  Controller.CountryEndPoint
 Auxiliar/DecoderArrayJson.java
  Auxiliar.DecoderArrayJson
-Datos/RouteDao.java
- Datos.RouteDao
+Auxiliar/ConvertDate.java
+ Auxiliar.ConvertDate
 Datos/UserDao.java
  Datos.UserDao
 Datos/PlaneTypeDao.java
@@ -74,15 +74,15 @@ Controller/PlaneEndPoint.java
  Controller.PlaneEndPoint
 Model/ScheduleModel.java
  Model.ScheduleModel
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Controller/PurchaseEndPoint.java
  Controller.PurchaseEndPoint
 Model/FlightModel.java
  Model.FlightModel
-Auxiliar/ConvertDate.java
- Auxiliar.ConvertDate
-Controller/ScheduleEndPoint.java
- Controller.ScheduleEndPoint
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Model/RouteModel.java
+ Model.RouteModel
+Datos/RouteDao.java
+ Datos.RouteDao
 Model/PurchaseModel.java
  Model.PurchaseModel
