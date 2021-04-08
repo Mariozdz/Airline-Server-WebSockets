@@ -82,7 +82,7 @@ class CeditProfile extends Component{
                 <Card className="mx-auto" style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title> {getUser().id}'s Profile</Card.Title>
-                        <label>Name: <input id="name" value={getUser().name} type="text" /></label>
+                        <label>Name: <input id="name" value={getUser().name} type="text" readOnly="false"/></label>
                         <label>Surname:<input id="surname" value={getUser().surnames} type="text" /></label>
                         <label>Cellphone:<input id="cell" value={getUser().cellphone}  type="text" /></label>
                         <label>Current password:<input id="password" type="password" /></label>

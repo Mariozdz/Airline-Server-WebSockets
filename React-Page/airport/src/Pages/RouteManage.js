@@ -121,7 +121,7 @@ function manageRouteResp(resp,row){
 
 }
 
-function parceCountries(countries){
+function parceCountriesSelect(countries){
     let out=countries.map(ele=>({value:ele.id,text:ele.name}));
     return out;
 }
@@ -174,10 +174,10 @@ class RouteManage extends Component{
                             ID:<label id="routeid"></label>
                         </div>
                         <div className="col">
-                            <label>Origin from: <CustomSelect id="originR" data={parceCountries(JSON.parse(sessionStorage.countries))} /></label>
+                            <label>Origin from: <CustomSelect id="originR" data={parceCountriesSelect(JSON.parse(sessionStorage.countries))} /></label>
                         </div>
                         <div className="col">
-                            <label>Destination to: <CustomSelect id="destinationR" data={parceCountries(JSON.parse(sessionStorage.countries))} /></label>
+                            <label>Destination to: <CustomSelect id="destinationR" data={parceCountriesSelect(JSON.parse(sessionStorage.countries))} /></label>
                         </div>
                     </div>
                     <div  className="row">
