@@ -109,27 +109,18 @@ public class PurchaseEndPoint {
             }
             case "CREATE_TICKETS":
             {
-                int id = message.getInt("id");
+                if (PurchaseModel.getInstance().createTickets(message)) {
 
-                JSONArray temp = message.getJSONArray("asientos");
+                    JSONObject asientos = new JSONObject("{action: \"update\",}");
+                    asientos.put("asientos", message.getJSONArray("asientos"));
 
-                for (short i = 0; i < temp.length(); i++)
+                    broadcast(asientos);
+                }
+                else
                 {
-                    JSONObject ticket = temp.getJSONObject(i);
-                    Ticket t = new Ticket();
-
-                    t.setPurchaseid(id);
-                    t.setSrow(ticket.getInt("x"));
-                    t.setScolum(ticket.getInt("y"));
-                    /*TicketModel.getInstance().Insert(t);*/
-                    System.out.print(ticket);
-
+                    session.getBasicRemote().sendObject(nullobj);
                 }
 
-                JSONObject asientos = new JSONObject("{action: \"update\",}");
-                asientos.put("asientos",temp);
-
-                broadcast(asientos);
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT");
