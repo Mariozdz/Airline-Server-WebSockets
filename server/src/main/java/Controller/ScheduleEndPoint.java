@@ -89,13 +89,8 @@ public class ScheduleEndPoint {
             }
             case "UPDATE_SCHEDULE":{
                 Schedule p = new Schedule();
-
-
-
                 p.setId(message.getInt("id"));
-                System.out.println("falla en fecha");
                 p.setSdate(ConvertDate.getInstance().timetodate(message.getString("sdate"))); /*Aqui me tiene que llegar la hora de salida "3:30" formato 24h*/
-                System.out.println("o no falla ahbi");
                 p.setRouteid(message.getInt("routeid"));
                 p.setStime(message.getInt("stime")); /*Numero del 1 alñ 7 que representa un dia*/
 

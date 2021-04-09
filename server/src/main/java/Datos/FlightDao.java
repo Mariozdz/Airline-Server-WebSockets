@@ -129,6 +129,7 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
                 JSONObject temp = new JSONObject();
                 temp.put("id",rs.getInt("ID"));
                 temp.put("planeid",rs.getInt("PlaneId"));
+                temp.put("outbound", rs.getInt("Outbound"));
                 temp.put("stime",rs.getInt("Stime"));
                 temp.put("sdate",rs.getString("Sdate"));
                 temp.put("duration",rs.getInt("Duration"));

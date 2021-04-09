@@ -18,8 +18,8 @@ Logic/Flight.java
  Logic.Flight
 Logic/Country.java
  Logic.Country
-Datos/FlightDao.java
- Datos.FlightDao
+Controller/ScheduleEndPoint.java
+ Controller.ScheduleEndPoint
 Auxiliar/EnconderJson.java
  Auxiliar.EnconderJson
 Logic/Planetype.java
@@ -74,15 +74,15 @@ Datos/PlaneDao.java
  Datos.PlaneDao
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
-Model/FlightModel.java
- Model.FlightModel
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Logic/Schedule.java
  Logic.Schedule
 Model/PurchaseModel.java
  Model.PurchaseModel
 Auxiliar/ConvertDate.java
  Auxiliar.ConvertDate
-Controller/ScheduleEndPoint.java
- Controller.ScheduleEndPoint
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Datos/FlightDao.java
+ Datos.FlightDao
+Model/FlightModel.java
+ Model.FlightModel
