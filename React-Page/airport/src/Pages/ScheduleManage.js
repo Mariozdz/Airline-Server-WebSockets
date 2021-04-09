@@ -113,7 +113,7 @@ client.onmessage = function (event) {
             if (message.action === "update") {
                 setTimeout(() => client.send("{Action:'get_all_schedule'}"), 100)
             } else if (message !== null) {
-                sessionStorage.setItem("schedules", event.data);
+                sessionStorage.setItem("schedules", JSON.stringify(JSON.parse(event.data).sort((x,y)=>x.id-y.id)));
                 if (document.getElementById("update ScheduleTable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("update ScheduleTable"));
                     ReactDOM.render(renderScheduleTable(selectRow, options), document.getElementById("update ScheduleTable"))
@@ -132,19 +132,21 @@ function refresh(){
     document.getElementById("startday").value="";
     document.getElementById("weekselectSch").value="1";
     document.getElementById("rowselectid").value="1";
-    document.getElementById("idchedule").value="";
+    document.getElementById("idchedule").innerText="";
 }
 
-function isValidDate(s) {
-    let bits = s.split('-');
-    let d = new Date(bits[0], bits[1] - 1, bits[2]);
-    return d && (d.getMonth() + 1) === bits[1];
+function validateTime(s) {
+    var t = s.split(':');
+
+    return /^\d\d:\d\d$/.test(s) &&
+        t[0] >= 0 && t[0] < 25 &&
+        t[1] >= 0 && t[1] < 60
 }
 
 function actionschedule(){
-    let date=document.getElementById("startday").value;
-    if(date!==""){
-        if(isValidDate(date)){
+    let time=document.getElementById("startday").value;
+    if(time!==""){
+        if(validateTime(time)){
 
             let message={
                 id:document.getElementById("idchedule").innerText,
@@ -161,11 +163,11 @@ function actionschedule(){
                 setTimeout(()=>client.send(JSON.stringify(message)),100)
             }
         }else{
-            swal("date is invalid","Digit a valid date","info")
+            swal("Time is invalid","Digit a valid time","info")
         }
 
     }else{
-        swal("date is empty","Digit a initial date","info")
+        swal("Time is empty","Digit a time","info")
     }
 
 
@@ -189,7 +191,7 @@ class ScheduleManage extends Component{
                         <div className="col" id="selectedroute">
                         </div>
                         <div className="col">
-                            <label>start day:<input placeholder="YYYY-MM-DD" id="startday"/></label>
+                            <label>start day:<input placeholder="HH:MM" id="startday"/></label>
                         </div>
                         <div className="col">
                             <label>Day of the Week:<CustomSelect id="weekselectSch" data={Week.map(x=>({value:x.day,text:x.name}))} /></label>
