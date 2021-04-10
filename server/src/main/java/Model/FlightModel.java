@@ -33,7 +33,7 @@ public class FlightModel {
 
     public void Insert(Flight u) throws Throwable {
 
-
+        System.out.println(u.getOutbounddate());
         Schedule temp = ScheduleModel.getInstance().Get(u.getOutbound());
         Route tempr = RouteModel.getInstance().Get(temp.getRouteid());
         Calendar cal = Calendar.getInstance();
