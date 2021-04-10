@@ -131,6 +131,7 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
                 temp.put("planeid",rs.getInt("PlaneId"));
                 temp.put("outbound", rs.getInt("Outbound"));
                 temp.put("stime",rs.getInt("Stime"));
+                temp.put("outbounddate", rs.getDate("OutboundDate"));
                 temp.put("sdate",rs.getString("Sdate"));
                 temp.put("duration",rs.getInt("Duration"));
                 temp.put("price",rs.getDouble("Price"));
