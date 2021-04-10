@@ -25,7 +25,7 @@ client.onmessage = function (event) {
             swal("Error","Something fails","error");
         }else{
             if(message.action==="update"){
-                swal("Excecution successfull","","success");
+                //swal("Excecution successfull","","success");
                 setTimeout( ()=> client.send("{Action:'get_all_typeplane'}"),100)
             }else if(message!==null){
                     sessionStorage.setItem("typeplanes", event.data);
