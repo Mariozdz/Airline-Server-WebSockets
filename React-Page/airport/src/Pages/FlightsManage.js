@@ -1,4 +1,4 @@
-import React, {Component, useLayoutEffect} from "react";
+import React, {Component} from "react";
 import Bar from "../Components/adminBar";
 import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";

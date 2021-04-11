@@ -26,7 +26,7 @@ class ClientBar extends Component{
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto ml-auto">
                         <Nav.Link href="#features">Purchase</Nav.Link>
-                        <Nav.Link href="#pricing">Flights</Nav.Link>
+                        <Nav.Link href="/Customer/Flights">Flights</Nav.Link>
                         <Nav.Link href="#ss">My purchases</Nav.Link>
                     </Nav>
                     <Nav>
