@@ -1,6 +1,6 @@
 import React, {Component, useLayoutEffect} from "react";
 import Bar from "../Components/clientBar";
-import {Button, Card} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
