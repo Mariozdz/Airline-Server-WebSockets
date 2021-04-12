@@ -1,11 +1,11 @@
 Model/PlaneTypeModel.java
  Model.PlaneTypeModel
-Model/TicketModel.java
- Model.TicketModel
+Logic/Schedule.java
+ Logic.Schedule
 Controller/TypePlaneEndPoint.java
  Controller.TypePlaneEndPoint
-Datos/PurchaseDao.java
- Datos.PurchaseDao
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Datos/CountryDao.java
  Datos.CountryDao
 Datos/InterfaceDao.java
@@ -60,29 +60,29 @@ Datos/Dao.java
  Datos.Dao
 Logic/Plane.java
  Logic.Plane
-Datos/TicketDao.java
- Datos.TicketDao
+Auxiliar/ConvertDate.java
+ Auxiliar.ConvertDate
 Logic/Purchase.java
  Logic.Purchase
 Model/UserModel.java
  Model.UserModel
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Datos/FlightDao.java
+ Datos.FlightDao
 Logic/Auser.java
  Logic.Auser
 Datos/PlaneDao.java
  Datos.PlaneDao
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
-Datos/FlightDao.java
- Datos.FlightDao
-Logic/Schedule.java
- Logic.Schedule
-Auxiliar/ConvertDate.java
- Auxiliar.ConvertDate
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
 Model/FlightModel.java
  Model.FlightModel
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Datos/PurchaseDao.java
+ Datos.PurchaseDao
+Datos/TicketDao.java
+ Datos.TicketDao
+Model/TicketModel.java
+ Model.TicketModel
 Model/PurchaseModel.java
  Model.PurchaseModel
