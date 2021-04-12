@@ -105,6 +105,7 @@ public class PurchaseEndPoint {
                 }
                 System.out.println("VA ENTRAR");
                 PurchaseModel.getInstance().Insert(p);
+                session.getBasicRemote().sendObject(new JSONObject("{ state: \"ok\" }"));
                 break;
             }
             case "CREATE_TICKETS":
