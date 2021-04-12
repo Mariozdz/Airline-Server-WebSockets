@@ -42,4 +42,8 @@ public class TicketModel {
         return entity.search();
     }
 
+    public List<Ticket> getbypurchase(int id) throws Throwable {
+        return entity.getbypurchase(id);
+    }
+
 }

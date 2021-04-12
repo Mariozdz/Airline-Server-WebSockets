@@ -91,3 +91,25 @@ BEGIN
 RETURN get_cursor;
 END;
 /
+
+CREATE OR REPLACE FUNCTION fn_getbyuser_purchase(Pid in varchar2)
+RETURN SYS_REFCURSOR
+AS
+    purchase_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN purchase_cursor FOR
+        SELECT ID ,FlightId, UserId, TotalPrice, Tickets, ReturnFlightId FROM Purchase where UserId = Pid;
+RETURN purchase_cursor;
+END;
+/
+
+CREATE OR REPLACE FUNCTION fn_getbypurchase_ticket(Pid in number)
+RETURN SYS_REFCURSOR
+AS
+    ticket_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN ticket_cursor FOR
+        SELECT ID, Scolum, Srow, PurchaseId FROM Ticket where PurchaseId = Pid;
+RETURN ticket_cursor;
+END;
+/

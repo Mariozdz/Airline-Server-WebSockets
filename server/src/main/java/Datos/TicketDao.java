@@ -106,6 +106,21 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
         }
     }
 
-
+    public List<Ticket> getbypurchase(int id) throws Throwable {
+        List<Ticket> result = new ArrayList();
+        try {
+            String sp = "{? = call fn_getbypurchase_ticket(?)}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setInt(2, id);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
 
 }

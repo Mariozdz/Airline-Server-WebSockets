@@ -96,4 +96,29 @@ public class PurchaseModel {
         return true;
     }
 
+    public JSONArray getbyuser(String userid) throws Throwable {
+
+        JSONArray result = new JSONArray();
+
+        List<Purchase> purchases = entity.getbyuser(userid);
+
+        for (Purchase p : purchases)
+        {
+            JSONObject temp = new JSONObject(p);
+
+            if(TicketModel.getInstance().getbypurchase(p.getId()).isEmpty())
+            {
+                temp.put("isselected",false);
+            }
+            else
+            {
+                temp.put("isselected",true);
+            }
+
+            result.put(temp);
+        }
+
+        return result;
+    }
+
 }

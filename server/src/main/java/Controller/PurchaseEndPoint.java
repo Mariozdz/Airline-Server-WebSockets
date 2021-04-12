@@ -123,6 +123,10 @@ public class PurchaseEndPoint {
 
                 break;
             }
+            case "GET_BY_USER":
+            {
+                session.getBasicRemote().sendObject(PurchaseModel.getInstance().getbyuser(message.getString("userid")));
+            }
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(nullobj);
                 break;

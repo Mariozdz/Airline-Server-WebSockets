@@ -140,5 +140,21 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
         return pstmt.getInt(1);
     }
 
+    public List<Purchase> getbyuser(String id) throws Throwable {
+        List<Purchase> result = new ArrayList();
+        try {
+            String sp = "{? = call fn_getbyuser_purchase(?)}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setString(2, id);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
 
 }
