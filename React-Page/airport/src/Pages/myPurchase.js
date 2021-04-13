@@ -8,7 +8,8 @@ import ReactDOM from "react-dom";
 const client = new WebSocket("ws://localhost:8089/server/purchase");
 
 client.onopen = function (event){
-    setTimeout( ()=> client.send(`{Action:'get_by_user',userid:"${JSON.parse(sessionStorage.user).id}"}`),100)
+    if(sessionStorage.user!==undefined)
+        setTimeout( ()=> client.send(`{ Action:"get_by_user",userid:"${JSON.parse(sessionStorage.user).id}" }`),1000)
 }
 
 client.onerror = function (event) {
@@ -54,7 +55,7 @@ const options = {
 function ManageRep(resp,row){
     if (resp){
         sessionStorage.setItem("purchase",JSON.stringify(row))
-        window.location="/";
+        window.location="/Customer/MyPurchase/CheckIn";
     }
 }
 
