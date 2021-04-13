@@ -18,12 +18,12 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
     }
     @Override
     public void insert(Ticket t) throws Throwable {
-        String sp = "{CALL prc_insert_ticket(?,?,?)}";
+        String sp = "{CALL prc_insert_ticket(?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, t.getScolum());
         pstmt.setInt(2, t.getSrow());
         pstmt.setInt(3, t.getPurchaseid());
-
+        pstmt.setInt(4, t.getIsreturn() );
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to insert the ticket");
@@ -38,6 +38,7 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
         pstmt.setInt(1, t.getScolum());
         pstmt.setInt(2, t.getSrow());
         pstmt.setInt(3, t.getPurchaseid());
+
         boolean flag = pstmt.execute();
         if (flag) {
             throw new Exception("Impossible to update the ticket");
@@ -81,6 +82,7 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
             t.setScolum(rs.getInt("Scolum"));
             t.setSrow(rs.getInt("Srow"));
             t.setPurchaseid(rs.getInt("PurchaseId"));
+            t.setIsreturn(rs.getInt("IsReturn"));
 
             return t;
         } catch (SQLException ex) {

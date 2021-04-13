@@ -7,6 +7,7 @@ public class Ticket {
   private int scolum;
   private int srow;
   private int purchaseid;
+  private int isreturn;
 
 
   public int getId() {
@@ -44,4 +45,11 @@ public class Ticket {
     this.purchaseid = purchaseid;
   }
 
+  public int getIsreturn() {
+    return isreturn;
+  }
+
+  public void setIsreturn(int isreturn) {
+    this.isreturn = isreturn;
+  }
 }
