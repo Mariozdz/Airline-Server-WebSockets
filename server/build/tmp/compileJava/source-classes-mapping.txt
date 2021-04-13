@@ -4,8 +4,8 @@ Logic/Schedule.java
  Logic.Schedule
 Controller/TypePlaneEndPoint.java
  Controller.TypePlaneEndPoint
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Logic/Ticket.java
+ Logic.Ticket
 Datos/CountryDao.java
  Datos.CountryDao
 Datos/InterfaceDao.java
@@ -76,13 +76,13 @@ Datos/ConnectionSQL.java
  Datos.ConnectionSQL
 Model/FlightModel.java
  Model.FlightModel
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
-Logic/Ticket.java
- Logic.Ticket
 Datos/TicketDao.java
  Datos.TicketDao
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
 Model/TicketModel.java
  Model.TicketModel
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
 Model/PurchaseModel.java
  Model.PurchaseModel

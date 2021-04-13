@@ -68,7 +68,7 @@ begin
 	select sum(Tickets)
 	into Vcant
 	from Purchase
-	where FlightId =  pid;
+	where FlightId =  pid or ReturnFlightId = pid;
 	return Vcant;
   
 end fn_cantida_espacios;
@@ -124,3 +124,21 @@ BEGIN
 RETURN ticket_cursor;
 END;
 /
+
+create or replace view rep_campos as 
+select t.Scolum ccolumn, t.Srow rrow, f.ID flightid
+from Ticket t, Purchase p, Flight f 
+where t.isreturn = 0 and t.PurchaseId = p.ID and p.FlightId = f.ID or t.isreturn = 1 and t.PurchaseId = p.ID and p.ReturnFlightId = f.ID;
+
+CREATE OR REPLACE FUNCTION fn_campos_ocupados(Pid in number)
+RETURN SYS_REFCURSOR
+AS
+    get_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN get_cursor FOR
+        SELECT * from rep_campos where flightId = Pid;
+RETURN get_cursor;
+END;
+/
+
+

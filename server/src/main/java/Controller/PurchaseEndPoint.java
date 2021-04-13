@@ -103,7 +103,6 @@ public class PurchaseEndPoint {
                 }else {
                     p.setReturnflightid(0);
                 }
-                System.out.println("VA ENTRAR");
                 PurchaseModel.getInstance().Insert(p);
                 session.getBasicRemote().sendObject(new JSONObject("{ state: \"ok\" }"));
                 break;
@@ -128,6 +127,11 @@ public class PurchaseEndPoint {
             case "GET_BY_USER":
             {
                 session.getBasicRemote().sendObject(PurchaseModel.getInstance().getbyuser(message.getString("userid")));
+                break;
+            }
+            case "GET_TICKETS_BYPURCHASE":
+            {
+                session.getBasicRemote().sendObject(new JSONArray(TicketModel.getInstance().search()));
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT");

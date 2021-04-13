@@ -6,8 +6,10 @@ import Auxiliar.EncoderArrayJson;
 import Auxiliar.EnconderJson;
 import Logic.Country;
 import Logic.Flight;
+import Logic.Ticket;
 import Model.CountryModel;
 import Model.FlightModel;
+import Model.TicketModel;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
 import org.json.JSONArray;
@@ -105,6 +107,11 @@ public class FlightEndPoint {
                 m.setPlaneid(message.getInt("planeid"));
                 FlightModel.getInstance().Insert(m);
                 broadcast(new JSONObject("{action: \"update\"}")); /*Año - mes - dia formato 24h*/
+                break;
+            }
+            case "GET_ACQUIRED_FIELDS":
+            {
+                session.getBasicRemote().sendObject(TicketModel.getInstance().getacquiredfields(message.getInt("flightid")));
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT");

@@ -4,6 +4,7 @@ package Model;
 
 import Datos.TicketDao;
 import Logic.Ticket;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -39,11 +40,20 @@ public class TicketModel {
         return entity.get(id);
     }
     public List<Ticket> search() throws Throwable {
+        System.out.println("la wea prueba");
+        System.out.println(entity.search().size());
         return entity.search();
     }
 
     public List<Ticket> getbypurchase(int id) throws Throwable {
         return entity.getbypurchase(id);
+    }
+
+    public JSONArray getacquiredfields(int id) throws Throwable {
+
+        System.out.println(entity.getacquiredfields(id).length());
+        return entity.getacquiredfields(id);
+
     }
 
 }

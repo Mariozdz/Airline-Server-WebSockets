@@ -2,6 +2,8 @@ package Datos;
 
 import Logic.Ticket;
 import oracle.jdbc.OracleTypes;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -119,6 +121,27 @@ public class TicketDao extends InterfaceDao<Ticket, Integer>{
             ResultSet rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
                 result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
+
+    public JSONArray getacquiredfields(int id) throws Throwable {
+        JSONArray result = new JSONArray();
+        try {
+            String sp = "{? = call fn_campos_ocupados(?)}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setInt(2,id);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                JSONObject temp = new JSONObject();
+                temp.put("column",rs.getInt("ccolumn"));
+                temp.put("row",rs.getInt("rrow"));
+                temp.put("flightid", rs.getInt("flightid"));
+                result.put(temp);
             }
         } finally {
             return result;
