@@ -30,7 +30,7 @@ client.onmessage = function (event) {
             if (message.action === "update") {
                 setTimeout(() => client.send("{Action:'get_all'}"), 100)
             } else if (message !== null) {
-                sessionStorage.setItem("flights", JSON.stringify(JSON.parse(event.data).sort((x,y)=>x.id-y.id)));
+                sessionStorage.setItem("fflights", JSON.stringify(JSON.parse(event.data).filter(x=>x.disponibles>0).sort((x,y)=>x.id-y.id)));
                 if (document.getElementById("flightTable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("flightTable"));
                     ReactDOM.render(renderFlights(selectRow,options), document.getElementById("flightTable"));
@@ -93,13 +93,16 @@ const selectRow = {
 function handleRowSelect(row) {
     if(document.getElementById("origen").checked){
         document.getElementById("origenField").value=row.id+" "+row.origen+" -> "+row.destino
+        sessionStorage.setItem("origen",row.disponibles)
+        sessionStorage.setItem("destiny",row.disponibles)
     }else{
         document.getElementById("destinyField").value=row.id+" "+row.origen+" -> "+row.destino
+        sessionStorage.setItem("destiny",row.disponibles)
     }
 }
 
 function renderFlights(selectRow,options){
-    let data=JSON.parse(sessionStorage.flights);
+    let data=JSON.parse(sessionStorage.fflights);
     data.forEach(x=>x.stime=Week.find(y=>y.day===x.stime).name);
     return( <BootstrapTable data={data} hover={true} search={ true } pagination={ true } options={ options } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
@@ -109,6 +112,7 @@ function renderFlights(selectRow,options){
         <TableHeaderColumn dataField="sdate" >Departure time</TableHeaderColumn>
         <TableHeaderColumn dataField="arrivetime" >Arrive Time</TableHeaderColumn>
         <TableHeaderColumn dataField="outbounddate">Outbound date</TableHeaderColumn>
+        <TableHeaderColumn dataField="price">Ticket Price</TableHeaderColumn>
         <TableHeaderColumn dataField="disponibles" >Available seats</TableHeaderColumn>
     </BootstrapTable>);
 }
@@ -122,20 +126,31 @@ function purchase(){
         }
         if (document.getElementById("destinyField").value!=="")
             message.returnflightid=document.getElementById("destinyField").value[0]
-        let purchase = new WebSocket("ws://localhost:8089/server/purchase");
-        purchase.onerror = function (event) {
-            onError(event)
-        };
-        purchase.onopen = function (event){
-            setTimeout( ()=> purchase.send(JSON.stringify(message)),100)
+        if(sessionStorage.origen-message.tickets>=0 &&  sessionStorage.destiny-message.tickets>=0){
+            let purchase = new WebSocket("ws://localhost:8089/server/purchase");
+            purchase.onerror = function (event) {
+                onError(event)
+            };
+            purchase.onopen = function (event){
+                setTimeout( ()=> purchase.send(JSON.stringify(message)),100)
+            }
+            purchase.onmessage= function (event){
+                let state=JSON.parse(event.data)
+                if(state.state==="ok"){
+                    swal("Successful","Your purchase has been processed","success")
+                }else{
+                    swal("Fail","Your purchase can't be processed","error")
+                }
+                setTimeout( ()=> client.send("{Action:'get_all'}"),100)
+                document.getElementById("origenField").value=""
+                document.getElementById("destinyField").value=""
+                document.getElementById("origen").checked=true
+                document.getElementById("passengers").innerText="1"
+                purchase.close();
+            }
+        }else{
+            swal("Fail","Your purchase has more passengers than seat of each flights","error")
         }
-        purchase.onmessage= function (event){
-            let state=JSON.parse(event.data)
-            if(state.state==="ok")
-                swal("Successful","Your purchase has been processed","success").then(()=> window.location="/")
-            purchase.close();
-        }
-
     }else{
         swal("Select a Origen Trip","","info")
     }
