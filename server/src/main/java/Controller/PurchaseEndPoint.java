@@ -114,7 +114,7 @@ public class PurchaseEndPoint {
 
                     JSONObject asientos = new JSONObject("{action: \"update\",}");
                     asientos.put("asientos", message.getJSONArray("asientos"));
-
+                    session.getBasicRemote().sendObject(new JSONObject("{ state: \"ok\" }"));
                     broadcast(asientos);
                 }
                 else

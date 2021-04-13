@@ -87,8 +87,8 @@ public class PurchaseModel {
             Ticket t = new Ticket();
 
             t.setPurchaseid(id);
-            t.setSrow(ticket.getInt("x"));
-            t.setScolum(ticket.getInt("y"));
+            t.setSrow(ticket.getInt("column"));
+            t.setScolum(ticket.getInt("row"));
             t.setIsreturn(ticket.getInt("isreturn"));
             TicketModel.getInstance().Insert(t);
             System.out.print(ticket);
