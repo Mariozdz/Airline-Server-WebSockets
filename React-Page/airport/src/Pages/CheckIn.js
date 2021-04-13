@@ -8,9 +8,9 @@ import PlaneRows from "../Components/planeRows";
 const client = new WebSocket("ws://localhost:8089/server/purchase");
 sessionStorage.setItem("tickets",JSON.stringify([]))
 sessionStorage.setItem("numberTickets","0")
+sessionStorage.setItem("numberRTickets","0")
 
 client.onopen = function (event){
-
 }
 
 client.onerror = function (event) {
@@ -19,6 +19,23 @@ client.onerror = function (event) {
 
 function onError(event){
     swal("Connection Error:"+event.data);
+}
+
+client.onmessage = function (event){
+    let message= JSON.parse(event.data)
+    if(message.none==="none"){
+        swal("fail","somthing fails","error")
+    }else if(message.action==="update"){
+
+
+    }else if(message.id===undefined){
+        sessionStorage.setItem("ticketsSold",event.data)
+    }else if(message.state==="ok"){
+        swal("Purchase complete","","success").then(()=>window.location="http://localhost:3000/Customer/MyPurchase")
+    }else{
+
+    }
+
 }
 
 function* iterNumber(num){
@@ -30,41 +47,79 @@ function* iterNumber(num){
 }
 function renderTickets(){
     let tickets=JSON.parse(sessionStorage.tickets)
-    return tickets.map(x=> <Button onClick={()=>remove(x.column,x.row)} variant="primary">{x.row}-{x.column}</Button>)
+    return tickets.map(x=> x.isreturn==="1"? <Button onClick={()=>remove(x.column,x.row)} variant="secondary">{x.row}-{x.column}</Button> : <Button onClick={()=>remove(x.column,x.row)} variant="primary">{x.row}-{x.column}</Button>)
 }
 
-function addTicket(column,row){
-    if(JSON.parse(sessionStorage.purchase).tickets>sessionStorage.numberTickets){
-        let list= JSON.parse(sessionStorage.tickets)
-        list.push({column:column,row:row})
-        sessionStorage.setItem("tickets",JSON.stringify(list))
-        sessionStorage.setItem("numberTickets",`${parseInt(sessionStorage.numberTickets)+1}`)
-        showPlane("O")
+function addTicket(column,row,isrt){
+
+    if(isrt==="0"){
+        if(JSON.parse(sessionStorage.purchase).tickets>sessionStorage.numberTickets){
+            let list= JSON.parse(sessionStorage.tickets)
+            list.push({column:column,row:row,isreturn:isrt})
+            sessionStorage.setItem("tickets",JSON.stringify(list))
+            sessionStorage.setItem("numberTickets",`${parseInt(sessionStorage.numberTickets)+1}`)
+
+            showPlane(isrt)
+        }else{
+            swal("Max departure ticket","You select all your tickets","info")
+        }
     }else{
-        swal("Max ticket","You select all your tickets","info")
+        if(JSON.parse(sessionStorage.purchase).tickets>sessionStorage.numberRTickets){
+            let list= JSON.parse(sessionStorage.tickets)
+            list.push({column:column,row:row,isreturn:isrt})
+            sessionStorage.setItem("tickets",JSON.stringify(list))
+            sessionStorage.setItem("numberRTickets",`${parseInt(sessionStorage.numberRTickets)+1}`)
+
+            showPlane(isrt)
+        }else{
+            swal("Max Return ticket","You select all your tickets","info")
+        }
     }
+
 }
-function remove(C,R){
+function remove(C,R,rt){
     let list =JSON.parse(sessionStorage.tickets)
-    list=list.filter(x=>x.column!==C || x.row!==R)
+    list=list.filter(x=>x.column!==C || x.row!==R ||x.isreturn!==rt)
     sessionStorage.setItem("tickets",JSON.stringify(list))
-    sessionStorage.setItem("numberTickets",`${parseInt(sessionStorage.numberTickets)-1}`)
-    showPlane('O')
+    if (rt==="0"){
+        sessionStorage.setItem("numberTickets",`${parseInt(sessionStorage.numberTickets)-1}`)
+    }else{
+        sessionStorage.setItem("numberRTickets",`${parseInt(sessionStorage.numberRTickets)-1}`)
+    }
+
+    showPlane(rt)
 }
 
 function showPlane(rep){
     let purchase=JSON.parse(sessionStorage.purchase)
+    client.send(`{ Action:'GET_TICKETS_BYPURCHASE', purchaseid:${purchase.id} }`)
     ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
-    if (rep==='O'){
+    if (rep==='0'){
         purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.flightid[0])
         purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
         purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
-        ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} title="Origen" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
+        ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Origen" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
     }else{
-
+        if(purchase.returnflightid!=="There is not"){
+            purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.returnflightid[0])
+            purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
+            purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
+            ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Return" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
+        }else{
+            swal("Not return trip","There is not a return trip","info")
+        }
     }
     renderConfirm()
 
+}
+
+function SelectTickets(){
+    let message={
+        Action:"create_tickets",
+        asientos:JSON.parse(sessionStorage.tickets),
+        purchaseid:JSON.parse(sessionStorage.purchase).id
+    }
+    client.send(JSON.stringify(message))
 }
 
 function renderConfirm(){
@@ -74,7 +129,7 @@ function renderConfirm(){
             Tickets: {renderTickets()}
         </div>
         <div className="col">
-            <Button variant="success">Confirm tickets</Button>
+            <Button onClick={SelectTickets} variant="success">Confirm tickets</Button>
         </div>
     </div>,document.getElementById("confirm"))
 }
@@ -86,8 +141,8 @@ class CheckIn extends Component{
             <Card className="mx-auto" style={{width: '100%'}}>
                 <Card.Title className="text-center">CheckIn</Card.Title>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                <button type="button" onClick={()=>showPlane('O')} className="btn btn-secondary">Origen Trip</button>
-                <button type="button" onClick={()=>showPlane('D')} className="btn btn-secondary">Return Trip</button>
+                <button type="button" onClick={()=>showPlane('0')} className="btn btn-secondary">Origen Trip</button>
+                <button type="button" onClick={()=>showPlane('1')} className="btn btn-secondary">Return Trip</button>
                 </div>
                 <div id="plane">
 
