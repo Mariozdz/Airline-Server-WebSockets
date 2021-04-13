@@ -84,6 +84,7 @@ function renderConsultFligths(options){
         <TableHeaderColumn dataField="sdate" >Departure time</TableHeaderColumn>
         <TableHeaderColumn dataField="arrivetime" >Arrive Time</TableHeaderColumn>
         <TableHeaderColumn dataField="outbounddate">Outbound date</TableHeaderColumn>
+        <TableHeaderColumn dataField="price">Ticket Price</TableHeaderColumn>
         <TableHeaderColumn dataField="disponibles" >Available seats</TableHeaderColumn>
     </BootstrapTable>);
 }

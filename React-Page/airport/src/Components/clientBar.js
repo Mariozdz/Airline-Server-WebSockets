@@ -27,7 +27,7 @@ class ClientBar extends Component{
                     <Nav className="mr-auto ml-auto">
                         <Nav.Link href="/Customer/Purchase">Purchase</Nav.Link>
                         <Nav.Link href="/Customer/Flights">Flights</Nav.Link>
-                        <Nav.Link href="#ss">My purchases</Nav.Link>
+                        <Nav.Link href="/Customer/MyPurchase">My purchases</Nav.Link>
                     </Nav>
                     <Nav>
                         <NavDropdown title={getUser().id} id="collasible-nav-dropdown">

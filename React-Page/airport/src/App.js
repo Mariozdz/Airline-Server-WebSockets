@@ -20,6 +20,9 @@ import ScheduleManage from "./Pages/ScheduleManage";
 import RouteManage from "./Pages/RouteManage";
 import ConsultFlights from "./Pages/ConsultFlights";
 import Purchase from "./Pages/Purchase";
+import MyPurchase from "./Pages/myPurchase";
+import CheckIn from "./Pages/CheckIn";
+
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
 }
@@ -37,6 +40,8 @@ class App extends Component{
             <Route exact path='/customer'  component={getUser()===null?Login:CMenu} />
             <Route exact path="/Customer/Flights" component={getUser()===null?Login: ConsultFlights}/>
             <Route exact path="/Customer/Purchase" component={getUser()===null?Login: Purchase}/>
+            <Route exact path="/Customer/MyPurchase" component={getUser()===null?Login: MyPurchase}/>
+            <Route exact path="/Customer/MyPurchase/CheckIn" component={getUser()===null?Login:CheckIn}/>
             <Route exact path="/CProfile" component={getUser()===null?Login: Cprofile}/>
             <Route exact path="/AProfile" component={ getUser()===null?Login:getUser().usertype===0? AProfile: NotAccess }/>
             <Route exact path="/CeditProfile" component={getUser()===null?Login:CeditProfile}/>
