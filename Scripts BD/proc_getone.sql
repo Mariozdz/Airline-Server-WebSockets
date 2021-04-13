@@ -8,6 +8,7 @@ BEGIN
     OPEN user_cursor FOR
         SELECT ID, Password, Name, Surnames, Latitud, Longitud , Cellphone, UserType FROM AUser where ID = Pid;
 RETURN user_cursor;
+CLOSE user_cursor;
 END;
 /
 
@@ -19,6 +20,7 @@ BEGIN
     OPEN typeplane_cursor FOR
         SELECT ID, model, brand, NumberRow, NumberColums FROM TypePlane where ID = Pid;
 RETURN typeplane_cursor;
+CLOSE typeplane_cursor;
 END;
 /
 
@@ -30,6 +32,7 @@ BEGIN
     OPEN plane_cursor FOR
         SELECT ID, TypePlaneId FROM Plane where ID = Pid;
 RETURN plane_cursor;
+CLOSE plane_cursor;
 END;
 /
 
@@ -41,6 +44,7 @@ BEGIN
     OPEN route_cursor FOR
         SELECT ID, Duration, OrigenId, DestinoId, Price, Discount FROM Route where ID = Pid;
 RETURN route_cursor;
+CLOSE route_cursor;
 END;
 /
 
@@ -52,6 +56,7 @@ BEGIN
     OPEN schedule_cursor FOR
         SELECT ID, RouteId,Stime,Sdate FROM Schedule where ID = Pid;
 RETURN schedule_cursor;
+CLOSE schedule_cursor;
 END;
 /
 
@@ -63,6 +68,7 @@ BEGIN
     OPEN flight_cursor FOR
         SELECT ID, Outbound, OutboundDate, PlaneId, ArriveTime FROM Flight where ID = Pid;
 RETURN flight_cursor;
+CLOSE flight_cursor;
 END;
 /
 
@@ -74,6 +80,7 @@ BEGIN
     OPEN purchase_cursor FOR
         SELECT ID ,FlightId, UserId, TotalPrice, Tickets, ReturnFlightId FROM Purchase where ID = Pid;
 RETURN purchase_cursor;
+CLOSE purchase_cursor;
 END;
 /
 
@@ -85,6 +92,7 @@ BEGIN
     OPEN ticket_cursor FOR
         SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket where ID = Pid;
 RETURN ticket_cursor;
+CLOSE ticket_cursor;
 END;
 /
 
@@ -96,6 +104,7 @@ BEGIN
     OPEN country_cursor FOR
         SELECT ID, Name FROM Country where ID = Pid;
 RETURN country_cursor;
+CLOSE country_cursor;
 END;
 /
 
@@ -107,5 +116,6 @@ BEGIN
     OPEN purchase_cursor FOR
         SELECT * FROM Purchase where FlightId = Pid;
 RETURN purchase_cursor;
+CLOSE purchase_cursor;
 END;
 /

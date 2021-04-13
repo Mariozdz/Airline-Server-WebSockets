@@ -23,6 +23,7 @@ BEGIN
     OPEN login_cursor FOR
         SELECT ID, Password, Name, Surnames, Latitud, Longitud, Cellphone FROM AUser where ID = Pid and Password = Ppassword;
 RETURN login_cursor;
+CLOSE login_cursor;
 END;
 /
 
@@ -41,6 +42,7 @@ BEGIN
     OPEN get_cursor FOR
         SELECT * from rep_country;
 RETURN get_cursor;
+CLOSE get_cursor;
 END;
 /
 
@@ -58,6 +60,7 @@ BEGIN
     OPEN get_cursor FOR
         SELECT * from rep_flight;
 RETURN get_cursor;
+CLOSE get_cursor;
 END;
 /
 
@@ -89,6 +92,7 @@ BEGIN
     OPEN get_cursor FOR
         SELECT * from rep_schedule;
 RETURN get_cursor;
+CLOSE get_cursor;
 END;
 /
 
@@ -100,6 +104,7 @@ BEGIN
     OPEN purchase_cursor FOR
         SELECT ID ,FlightId, UserId, TotalPrice, Tickets, ReturnFlightId FROM Purchase where UserId = Pid;
 RETURN purchase_cursor;
+CLOSE purchase_cursor;
 END;
 /
 
@@ -111,6 +116,7 @@ BEGIN
     OPEN ticket_cursor FOR
         SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket where PurchaseId = Pid;
 RETURN ticket_cursor;
+CLOSE ticket_cursor;
 END;
 /
 
@@ -122,6 +128,7 @@ BEGIN
     OPEN ticket_cursor FOR
         SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket where PurchaseId = Pid;
 RETURN ticket_cursor;
+CLOSE ticket_cursor;
 END;
 /
 
@@ -138,6 +145,7 @@ BEGIN
     OPEN get_cursor FOR
         SELECT * from rep_campos where flightId = Pid;
 RETURN get_cursor;
+CLOSE get_cursor;
 END;
 /
 

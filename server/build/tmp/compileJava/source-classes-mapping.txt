@@ -78,11 +78,11 @@ Model/FlightModel.java
  Model.FlightModel
 Datos/TicketDao.java
  Datos.TicketDao
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Model/PurchaseModel.java
+ Model.PurchaseModel
 Model/TicketModel.java
  Model.TicketModel
 Controller/FlightEndPoint.java
  Controller.FlightEndPoint
-Model/PurchaseModel.java
- Model.PurchaseModel
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
