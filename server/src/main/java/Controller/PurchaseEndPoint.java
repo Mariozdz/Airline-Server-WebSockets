@@ -131,7 +131,7 @@ public class PurchaseEndPoint {
             }
             case "GET_TICKETS_BYPURCHASE":
             {
-                session.getBasicRemote().sendObject(new JSONArray(TicketModel.getInstance().search()));
+                session.getBasicRemote().sendObject(new JSONArray(TicketModel.getInstance().getbypurchase(message.getInt("purchaseid"))));
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT");
