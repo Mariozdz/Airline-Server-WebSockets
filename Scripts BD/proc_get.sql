@@ -82,7 +82,7 @@ AS
     ticket_cursor SYS_REFCURSOR;
 BEGIN
     OPEN ticket_cursor FOR
-        SELECT ID, Scolum, Srow, PurchaseId FROM Ticket;
+        SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket;
 RETURN ticket_cursor;
 END;
 /

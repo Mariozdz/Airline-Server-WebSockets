@@ -84,9 +84,10 @@ show error
 
 create or replace procedure prc_insert_ticket(Pscolum in number,
  Psrow in number,
- Ppurchaseid in number)
+ Ppurchaseid in number,
+ Pisreturn in number)
  is begin
-  insert into Ticket (ID, Scolum, Srow, PurchaseId) values(Ticket_sec.nextval, Pscolum,Psrow,Ppurchaseid);
+  insert into Ticket (ID, Scolum, Srow, PurchaseId, IsReturn) values(Ticket_sec.nextval, Pscolum,Psrow,Ppurchaseid, Pisreturn);
   commit;
 end prc_insert_ticket;
 /

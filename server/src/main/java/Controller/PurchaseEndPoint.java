@@ -110,6 +110,7 @@ public class PurchaseEndPoint {
             }
             case "CREATE_TICKETS":
             {
+                /* alter table Ticket add IsReturn default 0;*/
                 if (PurchaseModel.getInstance().createTickets(message)) {
 
                     JSONObject asientos = new JSONObject("{action: \"update\",}");
@@ -127,6 +128,7 @@ public class PurchaseEndPoint {
             case "GET_BY_USER":
             {
                 session.getBasicRemote().sendObject(PurchaseModel.getInstance().getbyuser(message.getString("userid")));
+                break;
             }
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(nullobj);

@@ -109,7 +109,18 @@ AS
     ticket_cursor SYS_REFCURSOR;
 BEGIN
     OPEN ticket_cursor FOR
-        SELECT ID, Scolum, Srow, PurchaseId FROM Ticket where PurchaseId = Pid;
+        SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket where PurchaseId = Pid;
+RETURN ticket_cursor;
+END;
+/
+
+CREATE OR REPLACE FUNCTION fn_getbypurchase_ticket(Pid in number)
+RETURN SYS_REFCURSOR
+AS
+    ticket_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN ticket_cursor FOR
+        SELECT ID, Scolum, Srow, PurchaseId, IsReturn FROM Ticket where PurchaseId = Pid;
 RETURN ticket_cursor;
 END;
 /
