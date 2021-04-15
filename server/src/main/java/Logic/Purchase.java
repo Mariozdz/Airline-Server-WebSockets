@@ -48,7 +48,7 @@ public class Purchase {
 
 
   public int getTickets() {
-    return tickets;
+    return this.returnflightid!=0?2*tickets :tickets;
   }
 
   public void setTickets(int tickets) {

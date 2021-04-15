@@ -1,7 +1,6 @@
 import React,{Component} from "react";
 import Bar from "../Components/clientBar";
-import {Button, Card, Container} from "react-bootstrap";
-import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
+import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
 import PlaneRows from "../Components/planeRows";
@@ -24,14 +23,16 @@ function onError(event){
 client.onmessage = function (event){
     let message= JSON.parse(event.data)
     if(message.none==="none"){
-        swal("fail","somthing fails","error")
+        swal("fail","something fails","error")
     }else if(message.action==="update"){
 
-
-    }else if(message.id===undefined){
-        sessionStorage.setItem("ticketsSold",event.data)
     }else if(message.state==="ok"){
         swal("Purchase complete","","success").then(()=>window.location="http://localhost:3000/Customer/MyPurchase")
+
+    }else if(message.id===undefined){
+        alert(event.data)
+        sessionStorage.setItem("ticketsSold",event.data)
+
     }else{
 
     }
@@ -92,24 +93,42 @@ function remove(C,R,rt){
 
 function showPlane(rep){
     let purchase=JSON.parse(sessionStorage.purchase)
-    client.send(`{ Action:'GET_TICKETS_BYPURCHASE', purchaseid:${purchase.id} }`)
-    ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
-    if (rep==='0'){
-        purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.flightid[0])
-        purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
-        purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
-        ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Origen" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
-    }else{
-        if(purchase.returnflightid!=="There is not"){
-            purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.returnflightid[0])
-            purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
-            purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
-            ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Return" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
+    const tickets= new WebSocket("ws://localhost:8089/server/flight")
+    tickets.onopen = function (event) {
+        let purchase=JSON.parse(sessionStorage.purchase)
+        let flight= JSON.parse(sessionStorage.flights).find(x=>rep==="0"?x.id==purchase.flightid.split(" ")[0]:x.id==purchase.returnflightid.split(" ")[0])
+        if(flight!=undefined){
+            let message=`{Action:"GET_ACQUIRED_FIELDS",flightid:"${flight.id}"}`
+            tickets.send(message);
         }else{
             swal("Not return trip","There is not a return trip","info")
         }
+
     }
-    renderConfirm()
+    tickets.onmessage= function (event){
+        sessionStorage.setItem("ticketsSold",event.data)
+        ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
+        if (rep==='0'){
+            purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.flightid[0])
+            purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
+            purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
+            ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Origen" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
+        }else{
+            if(purchase.returnflightid!=="There is not"){
+                purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.returnflightid[0])
+                purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
+                purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
+                ReactDOM.render( <PlaneRows rm={remove} ok={addTicket} type={rep} title="Return" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
+            }
+        }
+        renderConfirm()
+
+    }
+    tickets.onerror= function (event){
+        swal("error","Cant connect to flights","error");
+    }
+
+
 
 }
 
