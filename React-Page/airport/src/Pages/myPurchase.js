@@ -53,9 +53,13 @@ const options = {
 
 
 function ManageRep(resp,row){
+    sessionStorage.setItem("purchase",JSON.stringify(row))
     if (resp){
-        sessionStorage.setItem("purchase",JSON.stringify(row))
-        window.location="/Customer/MyPurchase/CheckIn";
+        if(row.isselected==="Yes"){
+            window.location="/Customer/MyPurchase/ShowSeats";
+        }else{
+            window.location="/Customer/MyPurchase/CheckIn";
+        }
     }
 }
 

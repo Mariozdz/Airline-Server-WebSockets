@@ -48,7 +48,7 @@ function* iterNumber(num){
 }
 function renderTickets(){
     let tickets=JSON.parse(sessionStorage.tickets)
-    return tickets.map(x=> x.isreturn==="1"? <Button onClick={()=>remove(x.column,x.row)} variant="secondary">{x.row}-{x.column}</Button> : <Button onClick={()=>remove(x.column,x.row)} variant="primary">{x.row}-{x.column}</Button>)
+    return tickets.map(x=> x.isreturn==="1"? <Button onClick={()=>remove(x.column,x.row,x.isreturn)} variant="secondary">{x.row}-{x.column}</Button> : <Button onClick={()=>remove(x.column,x.row,x.isreturn)} variant="primary">{x.row}-{x.column}</Button>)
 }
 
 function addTicket(column,row,isrt){
@@ -80,7 +80,7 @@ function addTicket(column,row,isrt){
 }
 function remove(C,R,rt){
     let list =JSON.parse(sessionStorage.tickets)
-    list=list.filter(x=>x.column!==C || x.row!==R ||x.isreturn!==rt)
+    list=list.filter(x=>x.column!==C || x.row!==R || x.isreturn!==rt)
     sessionStorage.setItem("tickets",JSON.stringify(list))
     if (rt==="0"){
         sessionStorage.setItem("numberTickets",`${parseInt(sessionStorage.numberTickets)-1}`)
