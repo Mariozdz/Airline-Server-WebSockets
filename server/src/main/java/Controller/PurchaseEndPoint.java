@@ -109,7 +109,7 @@ public class PurchaseEndPoint {
             }
             case "CREATE_TICKETS":
             {
-                /* alter table Ticket add IsReturn default 0;*/
+                /* alter table Ticket add IsReturn number default 0;*/
                 if (PurchaseModel.getInstance().createTickets(message)) {
 
                     JSONObject asientos = new JSONObject("{action: \"update\",}");

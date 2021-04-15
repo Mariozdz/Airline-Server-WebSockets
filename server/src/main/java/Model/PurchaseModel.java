@@ -76,7 +76,7 @@ public class PurchaseModel {
 
         Purchase ptemp = this.Get(id);
 
-        if (temp.length() > ptemp.getTickets())
+        if (temp.length() > ptemp.getRealsTickets())
         {
             return false;
         }
@@ -87,8 +87,8 @@ public class PurchaseModel {
             Ticket t = new Ticket();
 
             t.setPurchaseid(id);
-            t.setSrow(ticket.getInt("column"));
-            t.setScolum(ticket.getInt("row"));
+            t.setSrow(ticket.getInt("row"));
+            t.setScolum(ticket.getInt("column"));
             t.setIsreturn(ticket.getInt("isreturn"));
             TicketModel.getInstance().Insert(t);
             System.out.print(ticket);
