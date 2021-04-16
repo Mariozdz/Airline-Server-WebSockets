@@ -5,7 +5,7 @@ import Login from "./Pages/login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 import CMenu from "./Components/clientBar";
-import AMenu from "./Components/adminBar";
+import Dashboard from "./Pages/Dashboard";
 import NotAccess from "./Pages/acceso";
 import Cprofile from "./Pages/Cprofile";
 import AProfile from "./Pages/AProfile";
@@ -34,7 +34,7 @@ class App extends Component{
     return(
         <Router>
           <Switch>
-            <Route exact path="/" component={  getUser()===null? Login : getUser().usertype===0? AMenu : CMenu } />
+            <Route exact path="/" component={  getUser()===null? Login : getUser().usertype===0? Dashboard : CMenu } />
             <Route exact path="/Register" component={ getUser()===null? signIn : CMenu } />
             <Route exact path='/Admin'  render={ ()=> getUser()===null? (<Redirect to="/"/>): getUser().usertype === 0? (<Redirect to="/" />):(<Redirect to="/NotAccess" />) } />
             <Route exact path='/customer'  component={getUser()===null?Login:CMenu} />

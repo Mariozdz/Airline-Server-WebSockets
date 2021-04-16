@@ -7,9 +7,13 @@ import PlaneRows from "../Components/planeRows";
 const client = new WebSocket("ws://localhost:8089/server/purchase");
 
 client.onopen = function (event){
-    let purchase1= JSON.parse(sessionStorage.purchase)
-    let message=`{Action:"GET_TICKETS_BYPURCHASE",purchaseid:"${purchase1.id}"}`
-    client.send(message);
+    if(sessionStorage.purchase!==undefined){
+        let purchase1= JSON.parse(sessionStorage.purchase)
+        if(purchase1!==undefined){
+            let message=`{Action:"GET_TICKETS_BYPURCHASE",purchaseid:"${purchase1.id}"}`
+            client.send(message);
+        }
+    }
 }
 
 client.onerror = function (event) {
