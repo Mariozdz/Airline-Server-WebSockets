@@ -125,12 +125,11 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
                 JSONObject temp = new JSONObject();
                 System.out.println("pasa por aqui");
 
-                temp.put("routeid",rs.getInt("routeId"));
-                temp.put("total",rs.getDouble("total"));
-                temp.put("origin",rs.getString("origin"));
-                temp.put("destination",rs.getString("destination"));
-                /*temp.put("originid", rs.getInt("OriginId"));*/
-                System.out.println("y llega  aqui");
+                temp.put("routeid", rs.getInt("routeId"));
+                temp.put("total", rs.getDouble("total"));
+                temp.put("origin", rs.getString("origin"));
+                temp.put("destination", rs.getString("destination"));
+
                 result.put(temp);
             }
         } finally {
