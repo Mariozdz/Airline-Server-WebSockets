@@ -166,4 +166,20 @@ begin
 end fn_total_purchase;
 /
 
+create or replace function fn_total_anno return float as
+Vcant float;
+begin
+	select sum(TotalPrice)
+	into Vcant
+	from Purchase
+	where PurchaseDate  > ADD_MONTHS(SYSDATE,-12);
+	
+  if Vcant > 0 then
+	return Vcant;
+  else 
+	return (0);
+  end if;
+end fn_total_anno;
+/
+
 

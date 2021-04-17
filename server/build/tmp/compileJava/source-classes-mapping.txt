@@ -62,8 +62,8 @@ Logic/Plane.java
  Logic.Plane
 Auxiliar/ConvertDate.java
  Auxiliar.ConvertDate
-Logic/Purchase.java
- Logic.Purchase
+Datos/TicketDao.java
+ Datos.TicketDao
 Model/UserModel.java
  Model.UserModel
 Datos/FlightDao.java
@@ -76,13 +76,13 @@ Datos/ConnectionSQL.java
  Datos.ConnectionSQL
 Controller/FlightEndPoint.java
  Controller.FlightEndPoint
-Datos/TicketDao.java
- Datos.TicketDao
-Datos/PurchaseDao.java
- Datos.PurchaseDao
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
-Model/FlightModel.java
- Model.FlightModel
 Model/PurchaseModel.java
  Model.PurchaseModel
+Model/FlightModel.java
+ Model.FlightModel
+Datos/PurchaseDao.java
+ Datos.PurchaseDao
+Logic/Purchase.java
+ Logic.Purchase
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint

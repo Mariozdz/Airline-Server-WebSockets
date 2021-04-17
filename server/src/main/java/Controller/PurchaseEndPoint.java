@@ -142,6 +142,13 @@ public class PurchaseEndPoint {
                 session.getBasicRemote().sendObject(PurchaseModel.getInstance().getTotal());
                 break;
             }
+            case "GET_PURCHASE_BY_YEAR":
+            {
+                JSONObject temp = new JSONObject();
+                temp.put("earnings",PurchaseModel.getInstance().getbyyear());
+                session.getBasicRemote().sendObject(temp);
+                break;
+            }
             default: System.out.println("LLEGA AL DEFAULT ni idea oir que XDXDXD");
                 session.getBasicRemote().sendObject(nullobj);
                 break;

@@ -167,5 +167,13 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
         return pstmt.getInt(1);
     }
 
+    public Double getbyyear() throws Exception {
+        String sp = "{? = call fn_total_anno()}";
+        CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.INTEGER);
+        pstmt.execute();
+        return pstmt.getDouble(1);
+    }
+
 
 }

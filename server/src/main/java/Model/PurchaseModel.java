@@ -161,4 +161,8 @@ public class PurchaseModel {
         return new Pair<>("nada","#FFD700");
     }
 
+    public Double getbyyear() throws Exception {
+        return entity.getbyyear();
+    }
+
 }
