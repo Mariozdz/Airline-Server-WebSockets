@@ -183,3 +183,30 @@ end fn_total_anno;
 /
 
 
+
+create or replace view rep_five as 
+select r.ID, sum(p.Tickets) total
+from Purchase p, Flight f, Schedule s, Route r 
+where p.FlightId = f.ID and f.Outbound = s.ID and s.RouteId = r.ID or p.ReturnFlightId = f.ID and f.Outbound = s.ID and s.RouteId = r.ID group by r.ID order by total desc;
+
+
+
+
+create or replace view rep_flight_users as 
+select unique u.ID userid, u.Name, u.Surnames, f.ID flightid
+from AUser u, Purchase p, Flight f 
+where p.userid = u.ID and p.FlightId = f.ID or p.userid = u.ID and p.ReturnFlightId = f.ID;
+
+
+CREATE OR REPLACE FUNCTION fn_get_five
+RETURN SYS_REFCURSOR
+AS
+    five_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN five_cursor FOR
+        SELECT * from rep_five where rownum < 6;
+RETURN five_cursor;
+CLOSE five_cursor;
+END;
+/
+

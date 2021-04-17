@@ -7,6 +7,7 @@ import Logic.Country;
 import Logic.Purchase;
 import Logic.Ticket;
 import Model.PurchaseModel;
+import Model.RouteModel;
 import Model.TicketModel;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
@@ -149,11 +150,18 @@ public class PurchaseEndPoint {
                 session.getBasicRemote().sendObject(temp);
                 break;
             }
+            case "GET_FIRST_FIVE":
+            {
+                session.getBasicRemote().sendObject(RouteModel.getInstance().getfirstfive());
+                break;
+            }
             default: System.out.println("LLEGA AL DEFAULT ni idea oir que XDXDXD");
                 session.getBasicRemote().sendObject(nullobj);
                 break;
         }
 
     }
+
+
 
 }

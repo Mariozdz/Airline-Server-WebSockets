@@ -2,6 +2,8 @@ package Datos;
 
 import Logic.Route;
 import oracle.jdbc.OracleTypes;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -105,6 +107,31 @@ public class RouteDao extends InterfaceDao<Route,Integer>{
             ResultSet rs = (ResultSet) pstmt.getObject(1);
             while (rs.next()) {
                 result.add(instance(rs));
+            }
+        } finally {
+            return result;
+        }
+    }
+
+    public JSONArray getfisrtfive() throws Throwable {
+        JSONArray result = new JSONArray();
+        try {
+            String sp = "{? = call fn_get_five()}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                JSONObject temp = new JSONObject();
+                System.out.println("pasa por aqui");
+
+                temp.put("routeid",rs.getInt("routeId"));
+                temp.put("total",rs.getDouble("total"));
+                temp.put("origin",rs.getString("origin"));
+                temp.put("destination",rs.getString("destination"));
+                /*temp.put("originid", rs.getInt("OriginId"));*/
+                System.out.println("y llega  aqui");
+                result.put(temp);
             }
         } finally {
             return result;

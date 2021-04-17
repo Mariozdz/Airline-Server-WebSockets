@@ -2,6 +2,7 @@ package Model;
 
 import Datos.RouteDao;
 import Logic.Route;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -38,5 +39,9 @@ public class RouteModel {
     }
     public List<Route> search() throws Throwable {
         return entity.search();
+    }
+
+    public JSONArray getfirstfive() throws Throwable {
+       return entity.getfisrtfive();
     }
 }
