@@ -110,6 +110,7 @@ public class PurchaseEndPoint {
             case "CREATE_TICKETS":
             {
                 /* alter table Ticket add IsReturn default 0;*/
+                /* alter table Purchase add PurchaseDate DATE default to_date('10-01-21','DD-MM-yy')*/
                 if (PurchaseModel.getInstance().createTickets(message)) {
 
                     JSONObject asientos = new JSONObject("{action: \"update\",}");
@@ -134,7 +135,12 @@ public class PurchaseEndPoint {
                 session.getBasicRemote().sendObject(new JSONArray(TicketModel.getInstance().getbypurchase(message.getInt("purchaseid"))));
                 break;
             }
-            default: System.out.println("LLEGA AL DEFAULT");
+            case "GET_PURCHASE_BY_MONTH":
+            {
+                session.getBasicRemote().sendObject(PurchaseModel.getInstance().getTotal());
+                break;
+            }
+            default: System.out.println("LLEGA AL DEFAULT ni idea oir que XDXDXD");
                 session.getBasicRemote().sendObject(nullobj);
                 break;
         }

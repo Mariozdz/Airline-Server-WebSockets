@@ -76,7 +76,7 @@ create or replace procedure prc_insert_purchase(Pflightid in number,
  Ptickets in number,
  PreturnFlightid in number)
  is begin
-  insert into Purchase (ID, FlightId, UserId,TotalPrice, Tickets, ReturnFlightId) values(Purchase_sec.nextval,Pflightid,Puserid,Ptotalprice,Ptickets,PreturnFlightid);
+  insert into Purchase (ID, FlightId, UserId,TotalPrice, Tickets, ReturnFlightId, PurchaseDate) values(Purchase_sec.nextval,Pflightid,Puserid,Ptotalprice,Ptickets,PreturnFlightid, sysdate);
   commit;
 end prc_insert_purchase;
 /

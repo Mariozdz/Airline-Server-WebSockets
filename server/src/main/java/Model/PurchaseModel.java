@@ -4,6 +4,8 @@ package Model;
 import Datos.PurchaseDao;
 import Logic.*;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+
+import com.sun.tools.javac.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -120,6 +122,43 @@ public class PurchaseModel {
         }
 
         return result;
+    }
+
+    public JSONArray getTotal() throws Exception {
+        JSONArray result = new JSONArray();
+
+        for (int i = 1; i <= 12; i++)
+        {
+            Pair<String,String> pair =  getMonth(i);
+            JSONObject temp = new JSONObject();
+            temp.put("name", pair.fst);
+            temp.put("y",entity.getTotal(i));
+            temp.put("color",pair.snd);
+
+            result.put(temp);
+        }
+
+        return result;
+    }
+
+    public Pair<String,String> getMonth(int id)
+    {
+        switch (id)
+        {
+            case 1: return new Pair<>("January", "#0000FF");
+            case 2: return new Pair<>("February", "#FF00FF");
+            case 3: return new Pair<>("March","#FF0000");
+            case 4: return new Pair<>("April","#FFFF00");
+            case 5: return new Pair<>("May","#00FF00");
+            case 6: return new Pair<>("June","#00FFFF");
+            case 7: return new Pair<>("July","#8A2BE2");
+            case 8: return new Pair<>("August","#FF7F50");
+            case 9: return new Pair<>("September","#FF1493");
+            case 10: return new Pair<>("October","#C0C0C0");
+            case 11: return new Pair<>("November","#006400");
+            case 12: return new Pair<>("December","#FFD700");
+        }
+        return new Pair<>("nada","#FFD700");
     }
 
 }

@@ -2,6 +2,7 @@ package Datos;
 
 import Logic.Purchase;
 import oracle.jdbc.OracleTypes;
+import org.json.JSONObject;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -156,5 +157,15 @@ public class PurchaseDao extends InterfaceDao<Purchase, Integer> {
             return result;
         }
     }
+
+    public int getTotal(int id) throws Exception {
+        String sp = "{? = call fn_total_purchase(?)}";
+        CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+        pstmt.registerOutParameter(1,OracleTypes.INTEGER);
+        pstmt.setInt(2, id);
+        pstmt.execute();
+        return pstmt.getInt(1);
+    }
+
 
 }

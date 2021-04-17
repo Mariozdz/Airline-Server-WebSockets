@@ -150,3 +150,20 @@ END;
 /
 
 
+create or replace function fn_total_purchase(Pid number) return number as
+Vcant number;
+begin
+	select sum(TotalPrice)
+	into Vcant
+	from Purchase
+	where extract(MONTH from PurchaseDate) = Pid;
+	
+  if Vcant > 0 then
+	return Vcant;
+  else 
+	return (0);
+  end if;
+end fn_total_purchase;
+/
+
+
