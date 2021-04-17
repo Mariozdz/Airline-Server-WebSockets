@@ -5,7 +5,7 @@ import Login from "./Pages/login";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-bootstrap-table/dist/react-bootstrap-table-all.min.css";
 import CMenu from "./Components/clientBar";
-import AMenu from "./Components/adminBar";
+import Dashboard from "./Pages/Dashboard";
 import NotAccess from "./Pages/acceso";
 import Cprofile from "./Pages/Cprofile";
 import AProfile from "./Pages/AProfile";
@@ -22,7 +22,7 @@ import ConsultFlights from "./Pages/ConsultFlights";
 import Purchase from "./Pages/Purchase";
 import MyPurchase from "./Pages/myPurchase";
 import CheckIn from "./Pages/CheckIn";
-
+import showSeats from "./Pages/ShowSeats";
 function getUser(){
     return JSON.parse(sessionStorage.getItem("user"));
 }
@@ -34,7 +34,7 @@ class App extends Component{
     return(
         <Router>
           <Switch>
-            <Route exact path="/" component={  getUser()===null? Login : getUser().usertype===0? AMenu : CMenu } />
+            <Route exact path="/" component={  getUser()===null? Login : getUser().usertype===0? Dashboard : CMenu } />
             <Route exact path="/Register" component={ getUser()===null? signIn : CMenu } />
             <Route exact path='/Admin'  render={ ()=> getUser()===null? (<Redirect to="/"/>): getUser().usertype === 0? (<Redirect to="/" />):(<Redirect to="/NotAccess" />) } />
             <Route exact path='/customer'  component={getUser()===null?Login:CMenu} />
@@ -42,6 +42,7 @@ class App extends Component{
             <Route exact path="/Customer/Purchase" component={getUser()===null?Login: Purchase}/>
             <Route exact path="/Customer/MyPurchase" component={getUser()===null?Login: MyPurchase}/>
             <Route exact path="/Customer/MyPurchase/CheckIn" component={getUser()===null?Login:CheckIn}/>
+            <Route exact path="/Customer/MyPurchase/ShowSeats" component={getUser()===null?Login:showSeats}/>
             <Route exact path="/CProfile" component={getUser()===null?Login: Cprofile}/>
             <Route exact path="/AProfile" component={ getUser()===null?Login:getUser().usertype===0? AProfile: NotAccess }/>
             <Route exact path="/CeditProfile" component={getUser()===null?Login:CeditProfile}/>
