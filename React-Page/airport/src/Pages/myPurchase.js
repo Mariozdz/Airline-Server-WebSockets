@@ -118,7 +118,7 @@ function renderPurchases(selectRow,options){
     let data=JSON.parse(sessionStorage.purchases)
     parsePurchase(data)
     data.forEach(x=> x.isselected= x.isselected===false?"No":"Yes")
-    return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } selectRow={ selectRow }>
+    return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } search={ true } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="flightid" >Origin trip</TableHeaderColumn>
         <TableHeaderColumn dataField="returnflightid">Return trip</TableHeaderColumn>
