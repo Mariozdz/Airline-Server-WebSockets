@@ -124,3 +124,6 @@ create table Ticket(
  PurchaseId number not null
 );
 alter table Ticket add constraint fk_Purchase foreign key(PurchaseID) REFERENCES Purchase(ID);
+
+alter table Ticket add IsReturn Number default 0;
+alter table Purchase add PurchaseDate DATE default to_date('10-01-21','DD-MM-yy');
