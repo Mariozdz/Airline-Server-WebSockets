@@ -6,6 +6,7 @@ import Auxiliar.EnconderJson;
 import Logic.Country;
 import Logic.Purchase;
 import Logic.Ticket;
+import Model.FlightModel;
 import Model.PurchaseModel;
 import Model.RouteModel;
 import Model.TicketModel;
@@ -153,6 +154,11 @@ public class PurchaseEndPoint {
             case "GET_FIRST_FIVE":
             {
                 session.getBasicRemote().sendObject(RouteModel.getInstance().getfirstfive());
+                break;
+            }
+            case "GET_FLIGHT_USERS":
+            {
+                session.getBasicRemote().sendObject(FlightModel.getInstance().getflightusers(message.getInt("flightid")));
                 break;
             }
             default: System.out.println("LLEGA AL DEFAULT ni idea oir que XDXDXD");

@@ -147,4 +147,26 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
         }
     }
 
+    public JSONArray getFlightUsers(int flightid) throws Throwable {
+        JSONArray result = new JSONArray();
+        try {
+            String sp = "{? = call fn_flight_users(?)}";
+            CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
+            pstmt.registerOutParameter(1, OracleTypes.CURSOR);
+            pstmt.setInt(2, flightid);
+            pstmt.execute();
+            ResultSet rs = (ResultSet) pstmt.getObject(1);
+            while (rs.next()) {
+                JSONObject temp = new JSONObject();
+                temp.put("flightid",rs.getInt("flightid"));
+                temp.put("userid",rs.getString("Userid"));
+                temp.put("surnames", rs.getString("Surnames"));
+                temp.put("name", rs.getString("Name"));
+                result.put(temp);
+            }
+        } finally {
+            return result;
+        }
+    }
+
 }

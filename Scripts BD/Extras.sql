@@ -197,7 +197,17 @@ select unique u.ID userid, u.Name, u.Surnames, f.ID flightid
 from AUser u, Purchase p, Flight f 
 where p.userid = u.ID and p.FlightId = f.ID or p.userid = u.ID and p.ReturnFlightId = f.ID;
 
-
+CREATE OR REPLACE FUNCTION fn_flight_users(Pid in number)
+RETURN SYS_REFCURSOR
+AS
+    get_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN get_cursor FOR
+        SELECT * from rep_flight_users where FlightId = Pid;
+RETURN get_cursor;
+CLOSE get_cursor;
+END;
+/
 
 
 

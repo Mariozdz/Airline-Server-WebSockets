@@ -88,6 +88,7 @@ insert into Schedule(ID,RouteId,STime,Sdate)
  insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
  insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
  insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets) values (Purchase_sec.nextval, 1, 'User3',60000.0,10 );
+ insert into Purchase(ID, FlightId, UserId,TotalPrice,Tickets, PurchaseDate) values (Purchase_sec.nextval, 3, 'User4',60000.0,10, sysdate );
 
 
 
@@ -98,6 +99,16 @@ insert into Schedule(ID,RouteId,STime,Sdate)
  insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,5, 11,1);
  insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,6, 11,1);
  insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,7, 11,1);
+
+insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,1, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,2, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,3, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,4, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,5, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,6, 12,0);
+ insert into Ticket(ID, Scolum,Srow,PurchaseId,Isreturn) values (Ticket_sec.nextval, 1,7, 12,0);
+
+
 commit;
 
 Update Purchase set ReturnflightId = 4 where ID = 11;

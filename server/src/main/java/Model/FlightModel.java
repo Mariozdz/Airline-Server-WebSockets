@@ -79,4 +79,8 @@ public class FlightModel {
         return response;
     }
 
+    public JSONArray getflightusers(int flightid) throws Throwable {
+        return entity.getFlightUsers(flightid);
+    }
+
 }
