@@ -107,6 +107,7 @@ public class PurchaseEndPoint {
                 }
                 PurchaseModel.getInstance().Insert(p);
                 session.getBasicRemote().sendObject(new JSONObject("{ state: \"ok\" }"));
+                broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
             case "CREATE_TICKETS":
