@@ -198,15 +198,25 @@ from AUser u, Purchase p, Flight f
 where p.userid = u.ID and p.FlightId = f.ID or p.userid = u.ID and p.ReturnFlightId = f.ID;
 
 
+
+
+
 CREATE OR REPLACE FUNCTION fn_get_five
 RETURN SYS_REFCURSOR
 AS
     five_cursor SYS_REFCURSOR;
 BEGIN
     OPEN five_cursor FOR
-        SELECT * from rep_five where rownum < 6;
+        SELECT r.ID routeId, r.total total, c.Name origin, c2.Name destination, p.OrigenId 
+		from rep_five r, Country c,Country c2, Route p 
+		where rownum < 6 
+		and r.ID = p.ID 
+		and p.OrigenId = c.ID 
+		and p.DestinoId = c2.ID;
 RETURN five_cursor;
 CLOSE five_cursor;
 END;
 /
+
+
 
