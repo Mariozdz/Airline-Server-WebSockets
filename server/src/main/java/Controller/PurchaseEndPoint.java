@@ -64,6 +64,8 @@ public class PurchaseEndPoint {
         {
 
             s.getBasicRemote().sendObject(message);
+
+            System.out.println("Enviado a" + s.getId());
         }
     }
 
@@ -107,6 +109,7 @@ public class PurchaseEndPoint {
                 }
                 PurchaseModel.getInstance().Insert(p);
                 session.getBasicRemote().sendObject(new JSONObject("{ state: \"ok\" }"));
+                broadcast(new JSONObject("{action: \"update\"}"));
                 break;
             }
             case "CREATE_TICKETS":

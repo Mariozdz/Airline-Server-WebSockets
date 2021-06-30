@@ -121,6 +121,8 @@ public class UserEndPoint {
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(nullobj);
                 break;
+
+
         }
 
     }
