@@ -64,6 +64,8 @@ public class PurchaseEndPoint {
         {
 
             s.getBasicRemote().sendObject(message);
+
+            System.out.println("Enviado a" + s.getId());
         }
     }
 

@@ -48,8 +48,8 @@ Logic/Route.java
  Logic.Route
 Auxiliar/EncoderArrayJson.java
  Auxiliar.EncoderArrayJson
-Controller/UserEndPoint.java
- Controller.UserEndPoint
+Model/TicketModel.java
+ Model.TicketModel
 Auxiliar/ConvertDate.java
  Auxiliar.ConvertDate
 Controller/CountryEndPoint.java
@@ -66,8 +66,8 @@ Logic/Purchase.java
  Logic.Purchase
 Controller/ScheduleEndPoint.java
  Controller.ScheduleEndPoint
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Controller/UserEndPoint.java
+ Controller.UserEndPoint
 Logic/Auser.java
  Logic.Auser
 Datos/PlaneDao.java
@@ -84,5 +84,5 @@ org/una/server/HelloServlet.java
  org.una.server.HelloServlet
 Model/PlaneModel.java
  Model.PlaneModel
-Model/TicketModel.java
- Model.TicketModel
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
