@@ -56,12 +56,11 @@ const table = {
     //other options
 };
 
-function renderPassengers(){
-    return( <BootstrapTable data={[]}  pagination={ true } options={ table }  search={ true }>
-        <TableHeaderColumn dataField="id" isKey>Fligth ID</TableHeaderColumn>
-        <TableHeaderColumn dataField="user" >User</TableHeaderColumn>
-        <TableHeaderColumn dataField="name">Full Name</TableHeaderColumn>
-        <TableHeaderColumn dataField="tickets">Tickets</TableHeaderColumn>
+function renderPassengers(data){
+    return( <BootstrapTable data={data}  pagination={ true } options={ table }  search={ true }>
+        <TableHeaderColumn dataField="userid" isKey>ID</TableHeaderColumn>
+        <TableHeaderColumn dataField="name" >Name</TableHeaderColumn>
+        <TableHeaderColumn dataField="surnames">Surname</TableHeaderColumn>
     </BootstrapTable>);
 }
 
@@ -69,9 +68,13 @@ function renderPassengers(){
 client.onmessage = function (event) {
     let options={}
     let html=""
-    //alert(event.data)
     let message= JSON.parse(event.data)
-
+    if(message.action=="update"){
+        client.send("{Action:'GET_PURCHASE_BY_MONTH'}")
+        client.send("{Action:'GET_PURCHASE_BY_YEAR'}")
+        client.send("{Action:'GET_FIRST_FIVE'}")
+        return;
+    }
     if(document.getElementById("year")){
         if(message.length){
             if(message[0].routeid){
@@ -84,9 +87,10 @@ client.onmessage = function (event) {
                 html="month"
                 options.title={text:'Month Billed'}
                 options.series=[{type:'column',data:message}]
-            }else{
-                html="passengersTable"
-                //tabla
+            }else if(message[0].userid){
+                ReactDOM.unmountComponentAtNode(document.getElementById("passengersTable"))
+                ReactDOM.render(renderPassengers(JSON.parse(event.data)),document.getElementById("passengersTable"))
+                return;
             }
         }else if(message.earnings!==undefined){
             html="year"
@@ -97,6 +101,11 @@ client.onmessage = function (event) {
         ReactDOM.render(<HighchartsReact highcharts={Highcharts} options={options}/>,document.getElementById(html))
     }
 
+}
+
+function findFlight(id){
+    let message=`{Action:'GET_FLIGHT_USERS',flightid:'${id}'}`
+    client.send(message);
 }
 
 
@@ -124,12 +133,12 @@ class Dashboard extends Component{
                             <div className="container">
                                 <div className="row">
                                     <div className="col"><label>Digit Flight id:</label></div>
-                                    <div className="col"><input type="text" placeholder="Flight id"/></div>
-                                    <div className="col"><Button variant="outline-success">Get Passengers List</Button> </div>
+                                    <div className="col"><input id='flightID' type="text" placeholder="Flight id"/></div>
+                                    <div className="col"><Button onClick={()=>findFlight(document.getElementById("flightID").value)} variant="outline-success">Get Passengers List</Button> </div>
                                 </div>
                             </div>
                             <div id="passengersTable">
-                                {renderPassengers()}
+
                             </div>
                         </Card>
                     </div>
