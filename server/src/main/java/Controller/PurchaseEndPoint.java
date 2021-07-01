@@ -31,6 +31,7 @@ public class PurchaseEndPoint {
     @OnOpen
     public void onOpen(Session session) {
         System.out.println("WebSocket opened: " + session.getId());
+
         sessions.add(session);
     }
 
@@ -64,8 +65,6 @@ public class PurchaseEndPoint {
         {
 
             s.getBasicRemote().sendObject(message);
-
-            System.out.println("Enviado a" + s.getId());
         }
     }
 

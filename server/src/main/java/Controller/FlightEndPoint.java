@@ -115,6 +115,10 @@ public class FlightEndPoint {
                 session.getBasicRemote().sendObject(TicketModel.getInstance().getacquiredfields(message.getInt("flightid")));
                 break;
             }
+            case "actu":
+            {
+                broadcast(new JSONObject("{action: \"update\"}"));
+            }
             default: System.out.println("LLEGA AL DEFAULT");
                 session.getBasicRemote().sendObject(nullobj);
                 break;

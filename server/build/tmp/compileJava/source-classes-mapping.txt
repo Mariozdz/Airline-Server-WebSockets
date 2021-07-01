@@ -18,8 +18,8 @@ Model/UserModel.java
  Model.UserModel
 Logic/Country.java
  Logic.Country
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Model/PurchaseModel.java
+ Model.PurchaseModel
 Auxiliar/EnconderJson.java
  Auxiliar.EnconderJson
 Logic/Planetype.java
@@ -82,7 +82,7 @@ Model/FlightModel.java
  Model.FlightModel
 Logic/Flight.java
  Logic.Flight
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
 Controller/FlightEndPoint.java
  Controller.FlightEndPoint
-Model/PurchaseModel.java
- Model.PurchaseModel
