@@ -118,10 +118,11 @@ function renderPurchases(selectRow,options){
     let data=JSON.parse(sessionStorage.purchases)
     parsePurchase(data)
     data.forEach(x=> x.isselected= x.isselected===false?"No":"Yes")
+    data.forEach(x=>x.isreturned==1?x.isreturned="Yes":x.isreturned="No")
     return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } search={ true } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="flightid" >Origin trip</TableHeaderColumn>
-        <TableHeaderColumn dataField="returnflightid">Return trip</TableHeaderColumn>
+        <TableHeaderColumn dataField="isreturned">Has Return</TableHeaderColumn>
         <TableHeaderColumn dataField="tickets">Tickets</TableHeaderColumn>
         <TableHeaderColumn dataField="totalprice" >Total cost</TableHeaderColumn>
         <TableHeaderColumn dataField="isselected">are seats selected</TableHeaderColumn>

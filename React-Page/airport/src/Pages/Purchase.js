@@ -104,10 +104,12 @@ function handleRowSelect(row) {
 function renderFlights(selectRow,options){
     let data=JSON.parse(sessionStorage.fflights);
     data.forEach(x=>x.stime=Week.find(y=>y.day===x.stime).name);
+    data.forEach(x=>x.isreturned==1?x.isreturned="Yes":x.isreturned="No")
     return( <BootstrapTable data={data} hover={true} search={ true } pagination={ true } options={ options } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="origen" >Origen</TableHeaderColumn>
         <TableHeaderColumn dataField="destino" >Destination</TableHeaderColumn>
+        <TableHeaderColumn dataField="isreturned" >Has Return</TableHeaderColumn>
         <TableHeaderColumn dataField="stime" >week's day</TableHeaderColumn>
         <TableHeaderColumn dataField="sdate" >Departure time</TableHeaderColumn>
         <TableHeaderColumn dataField="arrivetime" >Arrive Time</TableHeaderColumn>
@@ -166,7 +168,7 @@ class Purchase extends Component{
                         <Card>
                             <Card.Title className="text-center">Flights Information</Card.Title>
                             <label><input id="origen" name="trip" type="radio" checked/> Origen Trip <input id="origenField" type="text" readOnly/></label>
-                            <label><input name="trip" type="radio"/> Return Trip <input id="destinyField" type="text" readOnly/></label>
+                            <label><input name="trip" type="radio" hidden/>  <input id="destinyField" type="text" hidden readOnly/></label>
                             <Card.Title className="text-center">Passengers</Card.Title>
                             <label>Number:<span id="passengers" className="input-group-text">1</span> </label>
                             <div className="btn-group" role="group" aria-label="Basic example">

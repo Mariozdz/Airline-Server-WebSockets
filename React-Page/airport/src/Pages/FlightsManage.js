@@ -113,11 +113,13 @@ function renderShowsTotal(start, to, total) {
 function renderflightsTable(selectRow,options){
     let data=JSON.parse(sessionStorage.flights);
     data.forEach(x=>x.stime=Week.find(y=>y.day===x.stime).name);
+    data.forEach(x=>x.isreturned==1?x.isreturned="Yes":x.isreturned="No")
     return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="outbound" >Schedule ID</TableHeaderColumn>
         <TableHeaderColumn dataField="origen" filter={ { type: 'TextFilter', delay: 500 }}>Origen</TableHeaderColumn>
         <TableHeaderColumn dataField="destino" filter={ { type: 'TextFilter', delay: 500 }}>Destination</TableHeaderColumn>
+        <TableHeaderColumn dataField="isreturned" >Has Return</TableHeaderColumn>
         <TableHeaderColumn dataField="stime" filter={ { type: 'TextFilter', delay: 500 }}>week's day</TableHeaderColumn>
         <TableHeaderColumn dataField="sdate" filter={ { type: 'TextFilter', delay: 500 }}>Departure time</TableHeaderColumn>
         <TableHeaderColumn dataField="arrivetime" filter={ { type: 'TextFilter', delay: 500 }}>Arrive Time</TableHeaderColumn>
@@ -176,6 +178,7 @@ function Action(){
                 id:document.getElementById("idflight").innerText,
                 outboundid: document.getElementById("schduleid").value,
                 outbounddate:time,
+                isreturned:document.getElementById("schduleid").checked?1:0,
                 planeid:document.getElementById("planesid").value
             }
             if(document.getElementById("actionflight").innerText==="ADD"){
@@ -217,6 +220,9 @@ class FlightsManage extends Component{
                      </div>
                      <div className="col">
                          <label>Outbound date: <input id="arrivetime" type="text" placeholder="YYYY-MM-DD"/></label>
+                     </div>
+                     <div className="col">
+                         <label>is origin and return: <input id="oir" type="checkbox"/></label>
                      </div>
                      <div className="col"><Button onClick={Action} id="actionflight" variant="outline-success">ADD</Button></div>
                  </div>
