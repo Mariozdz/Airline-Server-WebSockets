@@ -1,7 +1,7 @@
 Model/PlaneTypeModel.java
  Model.PlaneTypeModel
-Model/FlightModel.java
- Model.FlightModel
+Model/PlaneModel.java
+ Model.PlaneModel
 Controller/TypePlaneEndPoint.java
  Controller.TypePlaneEndPoint
 Datos/PurchaseDao.java
@@ -10,16 +10,16 @@ Datos/CountryDao.java
  Datos.CountryDao
 Datos/InterfaceDao.java
  Datos.InterfaceDao
-Controller/FlightEndPoint.java
- Controller.FlightEndPoint
+Logic/Plane.java
+ Logic.Plane
 Model/CountryModel.java
  Model.CountryModel
-Model/PurchaseModel.java
- Model.PurchaseModel
+Model/UserModel.java
+ Model.UserModel
 Logic/Country.java
  Logic.Country
-Datos/FlightDao.java
- Datos.FlightDao
+Controller/PurchaseEndPoint.java
+ Controller.PurchaseEndPoint
 Auxiliar/EnconderJson.java
  Auxiliar.EnconderJson
 Logic/Planetype.java
@@ -74,15 +74,15 @@ Datos/PlaneDao.java
  Datos.PlaneDao
 Datos/ConnectionSQL.java
  Datos.ConnectionSQL
-Logic/Flight.java
- Logic.Flight
-Model/UserModel.java
- Model.UserModel
-Logic/Plane.java
- Logic.Plane
 org/una/server/HelloServlet.java
  org.una.server.HelloServlet
-Model/PlaneModel.java
- Model.PlaneModel
-Controller/PurchaseEndPoint.java
- Controller.PurchaseEndPoint
+Datos/FlightDao.java
+ Datos.FlightDao
+Model/FlightModel.java
+ Model.FlightModel
+Logic/Flight.java
+ Logic.Flight
+Controller/FlightEndPoint.java
+ Controller.FlightEndPoint
+Model/PurchaseModel.java
+ Model.PurchaseModel

@@ -22,12 +22,13 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
 
     @Override
     public void insert(Flight f) throws Throwable {
-        String sp = "{CALL prc_insert_flight(?,?,?,?)}";
+        String sp = "{CALL prc_insert_flight(?,?,?,?,?)}";
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.setInt(1, f.getOutbound());
         pstmt.setDate(2, (Date) f.getOutbounddate());
         pstmt.setInt(3, f.getPlaneid());
         pstmt.setDate(4, (Date) f.getArrivetime());
+        pstmt.setInt(5,f.getIsreturned());
 
 
 
@@ -92,6 +93,10 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
             f.setPlaneid(rs.getInt("PlaneId"));
             f.setArrivetime(rs.getDate("ArriveTime"));
 
+            //new
+
+            f.setIsreturned(rs.getInt("isreturned"));
+
 
             return f;
         } catch (SQLException ex) {
@@ -128,6 +133,7 @@ public class FlightDao extends InterfaceDao<Flight,Integer> {
             while (rs.next()) {
                 JSONObject temp = new JSONObject();
                 temp.put("id",rs.getInt("ID"));
+                temp.put("isreturned",rs.getInt("isreturned"));
                 temp.put("planeid",rs.getInt("PlaneId"));
                 temp.put("outbound", rs.getInt("Outbound"));
                 temp.put("stime",rs.getInt("Stime"));

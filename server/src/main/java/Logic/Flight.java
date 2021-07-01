@@ -10,7 +10,15 @@ public class Flight {
   private java.sql.Date outbounddate;
   private int planeid;
   private java.sql.Date arrivetime;
+  private int isreturned;
 
+  public int getIsreturned() {
+    return isreturned;
+  }
+
+  public void setIsreturned(int isreturned) {
+    this.isreturned = isreturned;
+  }
 
   public int getId() {
     return id;
