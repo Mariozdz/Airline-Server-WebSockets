@@ -65,7 +65,7 @@ AS
     flight_cursor SYS_REFCURSOR;
 BEGIN
     OPEN flight_cursor FOR
-        SELECT ID, Outbound, OutBoundDate, PlaneID, ArriveTime FROM Flight;
+        SELECT ID, Outbound, OutBoundDate, PlaneID, ArriveTime, isreturned FROM Flight;
 RETURN flight_cursor;
 CLOSE flight_cursor;
 END;

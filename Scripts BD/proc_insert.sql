@@ -62,9 +62,10 @@ show error
 create or replace procedure prc_insert_flight(Poutbound in number,
  Poutbounddate in DATE,
  PplaneId in number,
- Parrivetime in date)
+ Parrivetime in date,
+ Pisreturned in number)
  is begin
-  insert into Flight (ID,Outbound,OutboundDate, PlaneId,ArriveTime) values(Flight_sec.nextval,Poutbound,Poutbounddate,PplaneId,Parrivetime);
+  insert into Flight (ID,Outbound,OutboundDate, PlaneId,ArriveTime,isreturned) values(Flight_sec.nextval,Poutbound,Poutbounddate,PplaneId,Parrivetime,Pisreturned);
   commit;
 end prc_insert_flight;
 /

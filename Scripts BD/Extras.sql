@@ -47,7 +47,7 @@ END;
 /
 
 create or replace view rep_flight as 
-select f.ID, f.PlaneId, f.Outbound, s.Stime,f.OutboundDate,  to_char(s.Sdate,'hh24:mi') Sdate,to_char(f.ArriveTime,'hh24:mi') arrivetime, r.Duration,r.price,r.Discount, c1.name origen, c2.name destino, (t.NumberRow * t.NumberColums) cantidadasientos
+select f.ID, f.PlaneId, f.Outbound, s.Stime,f.OutboundDate,  to_char(s.Sdate,'hh24:mi') Sdate,to_char(f.ArriveTime,'hh24:mi') arrivetime, r.Duration,r.price,r.Discount, c1.name origen, c2.name destino, (t.NumberRow * t.NumberColums) cantidadasientos, f.isreturned
 from Flight f, Schedule s, Route r, Country c1, Country c2, Plane p, TypePlane t
 where f.outbound = s.ID and s.RouteId = r.ID and r.OrigenId = c1.ID and r.DestinoId = c2.ID and f.PlaneId = p.ID and p.TypePlaneId = t.ID;
 

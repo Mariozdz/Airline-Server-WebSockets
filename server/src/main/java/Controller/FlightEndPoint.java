@@ -105,6 +105,7 @@ public class FlightEndPoint {
                 m.setOutbound(message.getInt("outboundid"));
                 m.setOutbounddate(java.sql.Date.valueOf(message.getString("outbounddate")));
                 m.setPlaneid(message.getInt("planeid"));
+                m.setIsreturned(message.getInt("isreturned"));
                 FlightModel.getInstance().Insert(m);
                 broadcast(new JSONObject("{action: \"update\"}")); /*Año - mes - dia formato 24h*/
                 break;
