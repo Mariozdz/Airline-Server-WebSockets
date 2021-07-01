@@ -4,6 +4,7 @@ import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
 import PlaneRows from "../Components/planeRows";
+import {setUpSocketIOPing} from "react-use-websocket/dist/lib/socket-io";
 const client = new WebSocket("ws://localhost:8089/server/purchase");
 sessionStorage.setItem("tickets",JSON.stringify([]))
 sessionStorage.setItem("numberTickets","0")
@@ -106,6 +107,7 @@ function showPlane(rep){
 
     }
     tickets.onmessage= function (event){
+        alert(event.data)
         sessionStorage.setItem("ticketsSold",event.data)
         ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
         if (rep==='0'){
@@ -133,12 +135,16 @@ function showPlane(rep){
 }
 
 function SelectTickets(){
-    let message={
-        Action:"create_tickets",
-        asientos:JSON.parse(sessionStorage.tickets),
-        purchaseid:JSON.parse(sessionStorage.purchase).id
+    if(sessionStorage.numberTickets==JSON.parse(sessionStorage.tickets).length) {
+        let message = {
+            Action: "create_tickets",
+            asientos: JSON.parse(sessionStorage.tickets),
+            purchaseid: JSON.parse(sessionStorage.purchase).id
+        }
+        client.send(JSON.stringify(message))
+    }else{
+        swal("Different number of tickets","please select all your tickets","error")
     }
-    client.send(JSON.stringify(message))
 }
 
 function renderConfirm(){
@@ -160,7 +166,7 @@ class CheckIn extends Component{
             <Card className="mx-auto" style={{width: '100%'}}>
                 <Card.Title className="text-center">CheckIn</Card.Title>
                 <div className="btn-group" role="group" aria-label="Basic example">
-                <button type="button" onClick={showPlane('0')} className="btn btn-secondary">Seats</button>
+                <button type="button" onClick={()=>showPlane('0')} className="btn btn-secondary">Seats</button>
                 <button type="button" onClick={()=>showPlane('1')} className="btn btn-secondary" hidden>Return Trip</button>
                 </div>
                 <div id="plane">

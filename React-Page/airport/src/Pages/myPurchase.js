@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import Bar from "../Components/clientBar";
-import {Button, Card} from "react-bootstrap";
+import { Card} from "react-bootstrap";
 import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
@@ -98,7 +98,7 @@ client.onmessage = function (event) {
 }
 
 function parseFlight(id){
-    let flight =JSON.parse( sessionStorage.flights ).find(x=>x.id==id);
+    let flight =JSON.parse( sessionStorage.flights ).find(x=>x.id===id);
     if(id!=="0" && flight!==undefined){
         return `${flight.id} ${flight.origen} -> ${flight.destino}`
     }else{
@@ -118,7 +118,7 @@ function renderPurchases(selectRow,options){
     let data=JSON.parse(sessionStorage.purchases)
     parsePurchase(data)
     data.forEach(x=> x.isselected= x.isselected===false?"No":"Yes")
-    data.forEach(x=>x.isreturned==1?x.isreturned="Yes":x.isreturned="No")
+    data.forEach(x=>x.isreturned===1?x.isreturned="Yes":x.isreturned="No")
     return( <BootstrapTable data={data} hover={true}  pagination={ true } options={ options } search={ true } selectRow={ selectRow }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="flightid" >Origin trip</TableHeaderColumn>
