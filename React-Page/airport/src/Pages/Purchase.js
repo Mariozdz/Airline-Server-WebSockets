@@ -21,14 +21,14 @@ Cpurchase.onmessage= function (event){
     if(state.state==="ok"){
         swal("Successful","Your purchase has been processed","success")
     }else{
-        swal("Fail","Your purchase can't be processed","error")
+       /* swal("Fail","Your purchase can't be processed","error")*/
     }
     setTimeout( ()=> client.send("{Action:'get_all'}"),100)
     document.getElementById("origenField").value=""
     document.getElementById("destinyField").value=""
     document.getElementById("origen").checked=true
     document.getElementById("passengers").innerText="1"
-    purchase.close();
+
 }
 
 client.onopen = function (event){
@@ -52,11 +52,13 @@ client.onmessage = function (event) {
             if (message.action === "update") {
                 setTimeout(() => client.send("{Action:'get_all'}"), 100)
             } else if (message !== null) {
+                alert(event.data)
                 sessionStorage.setItem("fflights", JSON.stringify(JSON.parse(event.data).filter(x=>x.disponibles>0).sort((x,y)=>x.id-y.id)));
                 if (document.getElementById("flightTable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("flightTable"));
                     ReactDOM.render(renderFlights(selectRow,options), document.getElementById("flightTable"));
                 }
+
             }
         }
 

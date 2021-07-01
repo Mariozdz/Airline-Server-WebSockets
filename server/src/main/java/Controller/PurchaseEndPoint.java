@@ -3,13 +3,8 @@ package Controller;
 import Auxiliar.DecoderJson;
 import Auxiliar.EncoderArrayJson;
 import Auxiliar.EnconderJson;
-import Logic.Country;
-import Logic.Purchase;
-import Logic.Ticket;
-import Model.FlightModel;
-import Model.PurchaseModel;
-import Model.RouteModel;
-import Model.TicketModel;
+import Logic.*;
+import Model.*;
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
 import org.json.JSONArray;
@@ -162,6 +157,25 @@ public class PurchaseEndPoint {
             {
                 session.getBasicRemote().sendObject(FlightModel.getInstance().getflightusers(message.getInt("flightid")));
                 break;
+            }
+            case "GET_DIMENSIONES":
+            {
+                Integer idvuelo = message.getInt("flightid");
+
+
+                Flight vuelo = FlightModel.getInstance().Get(idvuelo);
+
+                Plane plane = PlaneModel.getInstance().Get(vuelo.getPlaneid());
+
+                Planetype tipo = PlaneTypeModel.getInstance().Get(plane.getTypeplaneid());
+
+                JSONObject obj = new JSONObject(tipo);
+                obj.put("dimension","dimensions");
+
+                session.getBasicRemote().sendObject(obj);
+                break;
+
+
             }
             default: System.out.println("LLEGA AL DEFAULT ni idea oir que XDXDXD");
                 session.getBasicRemote().sendObject(nullobj);

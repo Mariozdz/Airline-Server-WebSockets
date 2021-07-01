@@ -59,7 +59,8 @@ public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
 
     @Override
     public Planetype get(Integer id) throws Throwable {
-        String sp = "{? call fn_getone_typeplane(?)}";
+        String sp = "{? = call fn_getone_typeplane(?)}";
+
         CallableStatement pstmt = this.db.getConnection().prepareCall(sp);
         pstmt.registerOutParameter(1,OracleTypes.CURSOR);
         pstmt.setInt(2, id);
@@ -70,6 +71,7 @@ public class PlaneTypeDao extends InterfaceDao<Planetype, Integer>{
         ResultSet rs = (ResultSet) pstmt.getObject(1);
         if (rs.next()) {
             return instance(rs);
+
         }
         return null;
     }
