@@ -76,10 +76,12 @@ function renderShowsTotal(start, to, total) {
 function renderConsultFligths(options){
     let data=JSON.parse(sessionStorage.flights);
     data.forEach(x=>x.stime=Week.find(y=>y.day===x.stime).name);
+    data.forEach(x=>x.isreturned==1?x.isreturned="Yes":x.isreturned="No")
     return( <BootstrapTable data={data} hover={true} search={ true } pagination={ true } options={ options }>
         <TableHeaderColumn dataField="id" isKey>ID</TableHeaderColumn>
         <TableHeaderColumn dataField="origen" >Origen</TableHeaderColumn>
         <TableHeaderColumn dataField="destino" >Destination</TableHeaderColumn>
+        <TableHeaderColumn dataField="isreturned" >Has Returned</TableHeaderColumn>
         <TableHeaderColumn dataField="stime" >week's day</TableHeaderColumn>
         <TableHeaderColumn dataField="sdate" >Departure time</TableHeaderColumn>
         <TableHeaderColumn dataField="arrivetime" >Arrive Time</TableHeaderColumn>
