@@ -9,6 +9,28 @@ const Week=[{day:1,name:"Monday"},{day:2,name:"Tuesday"},{day:3,name:"Wednesday"
 
 const client = new WebSocket("ws://localhost:8089/server/flight");
 
+const Cpurchase = new WebSocket("ws://localhost:8089/server/purchase");
+purchase.onerror = function (event) {
+    onError(event)
+};
+Cpurchase.onopen = function (event){
+
+}
+Cpurchase.onmessage= function (event){
+    let state=JSON.parse(event.data)
+    if(state.state==="ok"){
+        swal("Successful","Your purchase has been processed","success")
+    }else{
+        swal("Fail","Your purchase can't be processed","error")
+    }
+    setTimeout( ()=> client.send("{Action:'get_all'}"),100)
+    document.getElementById("origenField").value=""
+    document.getElementById("destinyField").value=""
+    document.getElementById("origen").checked=true
+    document.getElementById("passengers").innerText="1"
+    purchase.close();
+}
+
 client.onopen = function (event){
     setTimeout( ()=> client.send("{Action:'get_all'}"),100)
 }
@@ -122,34 +144,14 @@ function purchase(){
     if(document.getElementById("origenField").value!==""){
         let message={
             Action:"create",
-            flightid: document.getElementById("origenField").value[0],
+            flightid: document.getElementById("origenField").value.split(" ")[0],
             userid: JSON.parse(sessionStorage.user).id,
             tickets: document.getElementById("passengers").innerText
         }
         if (document.getElementById("destinyField").value!=="")
-            message.returnflightid=document.getElementById("destinyField").value[0]
+            message.returnflightid=document.getElementById("destinyField").value.split(" ")[0]
         if(sessionStorage.origen-message.tickets>=0 &&  sessionStorage.destiny-message.tickets>=0){
-            let purchase = new WebSocket("ws://localhost:8089/server/purchase");
-            purchase.onerror = function (event) {
-                onError(event)
-            };
-            purchase.onopen = function (event){
-                setTimeout( ()=> purchase.send(JSON.stringify(message)),100)
-            }
-            purchase.onmessage= function (event){
-                let state=JSON.parse(event.data)
-                if(state.state==="ok"){
-                    swal("Successful","Your purchase has been processed","success")
-                }else{
-                    swal("Fail","Your purchase can't be processed","error")
-                }
-                setTimeout( ()=> client.send("{Action:'get_all'}"),100)
-                document.getElementById("origenField").value=""
-                document.getElementById("destinyField").value=""
-                document.getElementById("origen").checked=true
-                document.getElementById("passengers").innerText="1"
-                purchase.close();
-            }
+            setTimeout( ()=> Cpurchase.send(JSON.stringify(message)),100)
         }else{
             swal("Fail","Your purchase has more passengers than seat of each flights","error")
         }
