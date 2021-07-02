@@ -63,7 +63,7 @@ function showPlane(rep){
         sessionStorage.setItem("ticketsSold",event.data)
         ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
         if (rep==='0'){
-            purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.flightid[0])
+            purchase=JSON.parse(sessionStorage.flights).find(x=>x.id==purchase.flightid.split(" ")[0])
             purchase=JSON.parse(sessionStorage.planes).find(x=>x.id===purchase.planeid)
             purchase=JSON.parse(sessionStorage.typeplanes).find(x=>x.id===purchase.typeplaneid)
             ReactDOM.render( <PlaneRows type={rep} title="Origen" Columns={[...iterNumber(purchase.numberrow)]} Rows={[...iterNumber(purchase.numbercolums)]} />,document.getElementById("plane"))
