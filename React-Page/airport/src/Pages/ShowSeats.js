@@ -100,7 +100,7 @@ class showSeats extends Component{
                 <Card.Title className="text-center">Show seat</Card.Title>
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" onClick={()=>showPlane('0')} className="btn btn-secondary">Origen Trip</button>
-                    <button type="button" onClick={()=>showPlane('1')} className="btn btn-secondary">Return Trip</button>
+                    <button type="button" onClick={()=>showPlane('1')} className="btn btn-secondary" hidden>Return Trip</button>
                 </div>
                 <div id="plane">
 
