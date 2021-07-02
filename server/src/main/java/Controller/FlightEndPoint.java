@@ -123,6 +123,5 @@ public class FlightEndPoint {
                 session.getBasicRemote().sendObject(nullobj);
                 break;
         }
-
     }
 }

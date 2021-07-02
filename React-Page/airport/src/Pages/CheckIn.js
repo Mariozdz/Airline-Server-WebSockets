@@ -133,12 +133,16 @@ function showPlane(rep){
 }
 
 function SelectTickets(){
-    let message={
-        Action:"create_tickets",
-        asientos:JSON.parse(sessionStorage.tickets),
-        purchaseid:JSON.parse(sessionStorage.purchase).id
+    if(sessionStorage.numberTickets==JSON.parse(sessionStorage.tickets).length) {
+        let message = {
+            Action: "create_tickets",
+            asientos: JSON.parse(sessionStorage.tickets),
+            purchaseid: JSON.parse(sessionStorage.purchase).id
+        }
+        client.send(JSON.stringify(message))
+    }else{
+        swal("Different number of tickets","please select all your tickets","error")
     }
-    client.send(JSON.stringify(message))
 }
 
 function renderConfirm(){

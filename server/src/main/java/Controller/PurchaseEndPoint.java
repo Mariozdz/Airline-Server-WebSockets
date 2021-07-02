@@ -112,6 +112,8 @@ public class PurchaseEndPoint {
                 /* alter table Ticket add IsReturn Number default 0;*/
                 /* alter table Purchase add PurchaseDate DATE default to_date('10-01-21','DD-MM-yy')*/
 
+                System.out.println(message);
+
                 if (PurchaseModel.getInstance().createTickets(message)) {
 
                     JSONObject asientos = new JSONObject("{action: \"update\",}");
