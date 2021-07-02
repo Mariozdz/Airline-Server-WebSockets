@@ -4,7 +4,6 @@ import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
 import PlaneRows from "../Components/planeRows";
-import {setUpSocketIOPing} from "react-use-websocket/dist/lib/socket-io";
 const client = new WebSocket("ws://localhost:8089/server/purchase");
 sessionStorage.setItem("tickets",JSON.stringify([]))
 sessionStorage.setItem("numberTickets","0")
@@ -107,7 +106,6 @@ function showPlane(rep){
 
     }
     tickets.onmessage= function (event){
-        alert(event.data)
         sessionStorage.setItem("ticketsSold",event.data)
         ReactDOM.unmountComponentAtNode(document.getElementById("plane"));
         if (rep==='0'){

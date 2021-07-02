@@ -107,6 +107,7 @@ public class FlightEndPoint {
                 m.setPlaneid(message.getInt("planeid"));
                 m.setIsreturned(message.getInt("isreturned"));
                 FlightModel.getInstance().Insert(m);
+                session.getBasicRemote().sendObject(new JSONObject("{action: \"ok\"}"));
                 broadcast(new JSONObject("{action: \"update\"}")); /*Año - mes - dia formato 24h*/
                 break;
             }

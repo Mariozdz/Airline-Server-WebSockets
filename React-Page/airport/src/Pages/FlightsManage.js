@@ -28,11 +28,11 @@ client.onmessage = function (event) {
             swal("Error", "Something fails", "error");
         } else {
             if (message.action === "update") {
-
                 setTimeout(() => client.send("{Action:'get_all'}"), 100)
+            }else if(message.action==="ok"){
+                swal("Action Successful","Flight has been created","success");
             } else if (message !== null) {
-                sessionStorage.setItem("flights",JSON.stringify(JSON.parse(event.data).sort((x,y)=>x.id-y.id)));
-
+                sessionStorage.setItem("flights",JSON.stringify(JSON.parse(event.data).sort((x,y)=>x.id-y.id)))
                 if (document.getElementById("update flightTable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("update flightTable"));
                     ReactDOM.render(renderflightsTable(selectRow, options), document.getElementById("update flightTable"));
@@ -178,7 +178,7 @@ function Action(){
                 id:document.getElementById("idflight").innerText,
                 outboundid: document.getElementById("schduleid").value,
                 outbounddate:time,
-                isreturned:document.getElementById("schduleid").checked?1:0,
+                isreturned:document.getElementById("oir").checked?1:0,
                 planeid:document.getElementById("planesid").value
             }
             if(document.getElementById("actionflight").innerText==="ADD"){
