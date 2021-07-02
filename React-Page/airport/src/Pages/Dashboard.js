@@ -92,13 +92,16 @@ client.onmessage = function (event) {
                 ReactDOM.render(renderPassengers(JSON.parse(event.data)),document.getElementById("passengersTable"))
                 return;
             }
+            ReactDOM.unmountComponentAtNode(document.getElementById(html))
+            ReactDOM.render(<HighchartsReact highcharts={Highcharts} options={options}/>,document.getElementById(html))
         }else if(message.earnings!==undefined){
             html="year"
             options.title={text:'Years Earning'}
             options.series=[{type:'pie',data:[{name:`${new Date().getFullYear()}`,y:message.earnings,color:"#17b385"}]}]
+            ReactDOM.unmountComponentAtNode(document.getElementById(html))
+            ReactDOM.render(<HighchartsReact highcharts={Highcharts} options={options}/>,document.getElementById(html))
         }
-        ReactDOM.unmountComponentAtNode(document.getElementById(html))
-        ReactDOM.render(<HighchartsReact highcharts={Highcharts} options={options}/>,document.getElementById(html))
+
     }
 
 }

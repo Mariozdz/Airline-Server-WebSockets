@@ -55,7 +55,6 @@ client.onmessage = function (event) {
             if (message.action === "update") {
                 setTimeout(() => client.send("{Action:'get_all'}"), 100)
             } else if (message !== null) {
-                alert(event.data)
                 sessionStorage.setItem("fflights", JSON.stringify(JSON.parse(event.data).filter(x=>x.disponibles>0).sort((x,y)=>x.id-y.id)));
                 if (document.getElementById("flightTable") !== null) {
                     ReactDOM.unmountComponentAtNode(document.getElementById("flightTable"));
