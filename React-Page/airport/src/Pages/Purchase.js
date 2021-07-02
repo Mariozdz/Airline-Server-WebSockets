@@ -24,10 +24,13 @@ Cpurchase.onmessage= function (event){
        /* swal("Fail","Your purchase can't be processed","error")*/
     }
     setTimeout( ()=> client.send("{Action:'get_all'}"),100)
-    document.getElementById("origenField").value=""
-    document.getElementById("destinyField").value=""
-    document.getElementById("origen").checked=true
-    document.getElementById("passengers").innerText="1"
+    if(document.getElementById("origenField")){
+        document.getElementById("origenField").value=""
+        document.getElementById("destinyField").value=""
+        document.getElementById("origen").checked=true
+        document.getElementById("passengers").innerText="1"
+    }
+
 
 }
 

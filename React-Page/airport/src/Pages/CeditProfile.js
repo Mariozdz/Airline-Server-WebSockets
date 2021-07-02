@@ -3,18 +3,9 @@ import Bar from "../Components/clientBar";
 import "../css/card.css"
 import {Button, Card} from "react-bootstrap";
 import swal from "sweetalert";
-import {w3cwebsocket as W3CWebSocket} from "websocket/lib/websocket";
+var newpass=""
 
 
-function onMessage(event) {
-    let message= JSON.parse(event.data)
-    if(message.estado==="Correcto"){
-        swal("User updated","Your user has been updated","info").then(()=> window.location="/");
-    }else if(message.none==="none"){
-        swal("error","User can't be updated","error");
-    }
-
-}
 
 function onError(event) {
     swal("Error",'An error occurred:' + JSON.stringify(event));
@@ -27,7 +18,7 @@ function exitEditProfile(){
     swal("you want cancel the current changes?",{buttons:["No","Yes"]}).then(x=>x===true? window.location="/":true);
 }
 
-function update(){
+async function update(){
     if(document.getElementById("name").value!==""&&
         document.getElementById("password").value!==""&&
         document.getElementById("surname").value!==""&&
@@ -38,7 +29,24 @@ function update(){
         if(document.getElementById("password").value===getUser().password){
             if(document.getElementById("npassword").value===document.getElementById("npassword2").value){
 
-                let client = new W3CWebSocket('ws://localhost:8089/server/user');
+                let client= await new WebSocket('ws://localhost:8089/server/user');
+
+                function onMessage(event) {
+                    let message= JSON.parse(event.data)
+                    if(message.estado==="Correcto") {
+                        let message= `{Action:login,id:'${getUser().id}',password:'${newpass}'}`;
+                        alert(JSON.stringify(message))
+                        swal("User updated", "Your user has been updated", "info").then(() => setTimeout( ()=>client.send(message),100));
+                    }else if (message.state=="update"){
+                        let message= `{Action:login,id:'${getUser().id}',password:'${getUser().password}'}`;
+                        setTimeout( ()=>client.send(message),100);
+                    }else if(message.none==="none"){
+                        swal("error","User can't be updated","error");
+                    }else{
+                        sessionStorage.setItem("user",event.data)
+                        window.location.reload()
+                    }
+                }
 
                 client.onerror = function (event) {
                     onError(event)
@@ -58,7 +66,8 @@ function update(){
                     latitud:33.1,
                     usertype: getUser().usertype
                 }
-
+                newpass=message.password;
+                alert(JSON.stringify(message))
                 setTimeout( ()=> client.send(JSON.stringify(message)),1000);
 
             }else{
@@ -83,9 +92,9 @@ class CeditProfile extends Component{
                 <Card className="mx-auto" style={{width: '18rem'}}>
                     <Card.Body>
                         <Card.Title> {getUser().id}'s Profile</Card.Title>
-                        <label>Name: <input id="name" value={getUser().name} type="text" /></label>
-                        <label>Surname:<input id="surname" value={getUser().surnames} type="text" /></label>
-                        <label>Cellphone:<input id="cell" value={getUser().cellphone}  type="text" /></label>
+                        <label>Name: <input  id="name" defaultValue={getUser().name} type="text"/></label>
+                        <label>Surname:<input id="surname" defaultValue={getUser().surnames}  type="text" /></label>
+                        <label>Cellphone:<input id="cell"   type="text" defaultValue={getUser().cellphone}/></label>
                         <label>Current password:<input id="password" type="password" /></label>
                         <label> New password: <input id="npassword" type="password" /></label>
                         <label> Confirm new password: <input id="npassword2" type="password"/></label>
